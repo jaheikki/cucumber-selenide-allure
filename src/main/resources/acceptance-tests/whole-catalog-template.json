@@ -1,0 +1,21 @@
+{
+  "_embedded": {
+    "catalog": [
+      {
+        "id": "1",
+        "name": "iPod",
+        "price": "42"
+      },
+      {
+        "id": "2",
+        "name": "iPod touch",
+        "price": "21"
+      },
+      {
+        "id": "3",
+        "name": "iPod nano",
+        "price": "1"
+      }
+    ]
+  }
+}

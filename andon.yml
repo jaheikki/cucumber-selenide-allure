@@ -1,0 +1,52 @@
+general:
+  whitelist: true
+  pipeline_base_name: Minun Microservice Acceptance
+#  dependency:
+#   - Catalog [Compile]
+
+pre_stage:
+  go_cd_agent_props:
+    - java:8
+    - maven
+  custom_cmd:
+    - mvn --version
+
+acceptance_testing:
+  compose_file_path: /src/test/resources
+  compose_file_name: docker-compose.yml
+
+  tests:
+    go_cd_agent_props:
+      - java:8
+      - maven
+    type: parallel
+    test_services:
+      owasp_zap: false
+      selenium_grid: true
+      service_virtualization: false
+      robot_framework: false
+      cucumber: true
+    commands:
+      - test_commands:
+        - cmd: mvn clean install -Dcucumber.options="--tags @all" -Dselenide.browser=chrome -Denv=remote -Dremote=http://hub:4444/wd/hub
+#        - cmd: mvn clean install -Dcucumber.options="--tags @catalog" -Denv=localnodocker
+        - cmd: mvn site
+        - cmd: src/main/resources/test.sh
+          run_if_conditions: any
+#      - test_commands:
+#        - cmd: mvn clean -Probot -Drobot.http_proxy_port=8000 -Drobot.http_proxy_host=zap -Drobot.browser=firefox -Drobot.remote_url=http://hub:4444/wd/hub -Drobot.order.url=http://zuul:8080/order/ -Drobot.main.url=http://zuul:8080 -Drobot.catalog_rest_url=http://catalog:8080 -Drobot.customer_rest_url=http://customer:8080 clean install
+  selenium_grid_browsers:
+    - name: chrome
+      amount: 1
+      version: "latest"
+    - name: firefox
+      amount: 1
+      version: "latest"
+
+post_stage:
+  go_cd_agent_props:
+    - java:8
+    - maven
+  custom_cmd:
+    - ssh -o StrictHostKeyChecking=no -i /etc/andon/ssh_keys/host-pk jaheikki@10.4.0.4 pkill -9 -f /home/jaheikki/jars/microservice-demo-eureka-server-0.0.1-SNAPSHOT.jar
+    - ssh -o StrictHostKeyChecking=no -i /etc/andon/ssh_keys/host-pk jaheikki@10.4.0.4 pkill -9 -f /home/jaheikki/jars/microservice-demo-catalog-0.0.1-SNAPSHOT.jar

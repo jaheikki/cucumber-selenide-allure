@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<groupId>microservice-test-java</groupId>
+	<artifactId>microservice</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Microservice Acceptance Java</name>
+	<description>microservice java tests</description>
+
+  <properties>
+      <aspectj.version>1.8.12</aspectj.version>
+   </properties>
+
+ <dependencies>
+	 <dependency>
+		 <groupId>com.codeborne</groupId>
+		 <artifactId>selenide</artifactId>
+		 <version>4.8</version>
+	 </dependency>
+	 <dependency>
+		 <groupId>junit</groupId>
+		 <artifactId>junit</artifactId>
+		 <version>4.11</version>
+	 </dependency>
+	 <dependency>
+		 <groupId>joda-time</groupId>
+		 <artifactId>joda-time</artifactId>
+		 <version>2.4</version>
+	 </dependency>
+	 <dependency>
+		 <groupId>org.tmatesoft.svnkit</groupId>
+		 <artifactId>trilead-ssh2</artifactId>
+		 <version>build213-svnkit-1.3-patch</version>
+	 </dependency>
+	 <dependency>
+		 <groupId>com.sun.jersey</groupId>
+		 <artifactId>jersey-client</artifactId>
+		 <version>1.18.1</version>
+	 </dependency>
+	 <dependency>
+		 <groupId>com.sun.jersey</groupId>
+		 <artifactId>jersey-bundle</artifactId>
+		 <version>1.18.1</version>
+	 </dependency>
+	 <dependency>
+		 <groupId>com.fasterxml.jackson.jaxrs</groupId>
+		 <artifactId>jackson-jaxrs-json-provider</artifactId>
+		 <version>2.4.2</version>
+	 </dependency>
+	 <dependency>
+		 <groupId>com.typesafe</groupId>
+		 <artifactId>config</artifactId>
+		 <version>1.2.0</version>
+	 </dependency>
+     <dependency>
+         <groupId>io.qameta.allure</groupId>
+         <artifactId>allure-cucumber-jvm</artifactId>
+         <version>2.0-BETA19</version>
+     </dependency>
+
+         <dependency>
+             <groupId>io.qameta.allure</groupId>
+             <artifactId>allure-junit4</artifactId>
+             <version>2.0-BETA19</version>
+             <scope>test</scope>
+         </dependency>
+
+
+ </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+					<compilerArgument>-Werror</compilerArgument>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                         <!-- -Dcucumber.options="&#45;&#45;plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"-->
+                    </argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>target/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <reportVersion>2.3.1</reportVersion>
+                    <resultsDirectory>allure-results</resultsDirectory>
+                    <propertiesFilePath>/Users/heikmjar/git/tietoallas/citest/src/test/resources/allure.properties</propertiesFilePath>
+                    <!--<properties>-->
+                    <!--<allure.issues.tracker.pattern>http://www.is.fi</allure.issues.tracker.pattern>-->
+                    <!--</properties>-->
+
+                </configuration>
+            </plugin>
+
+            <!--Needed only to show reports locally. Run jetty:run and
+            open localhost:8080 to show the report-->
+            <!--<plugin>-->
+                <!--<groupId>org.eclipse.jetty</groupId>-->
+                <!--<artifactId>jetty-maven-plugin</artifactId>-->
+                <!--<version>9.2.10.v20150310</version>-->
+                <!--<configuration>-->
+                    <!--<httpConnector>-->
+                        <!--<port>9899</port>-->
+                    <!--</httpConnector>-->
+                    <!--<webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>-->
+                    <!--<stopKey>stop</stopKey>-->
+                    <!--<stopPort>1234</stopPort>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
+        </plugins>
+    </build>
+  
+    <profiles>
+    </profiles>
+
+
+    <repositories>
+        <repository>
+            <id>mvnrepository</id>
+            <name>mvnrepository</name>
+            <url>http://www.mvnrepository.com</url>
+        </repository>
+        <repository>
+            <id>Maven Central</id>
+            <url>http://search.maven.org/</url>
+        </repository>
+        <repository>
+            <id>Maven Central 2</id>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
+
+</project>

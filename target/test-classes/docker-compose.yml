@@ -1,0 +1,32 @@
+version: '2'
+services:
+  busybox:
+    image: busybox
+  eureka:
+    image: eekamak/eureka:latest
+    expose:
+      - "8761"
+  customer:
+    image: eekamak/customer:latest
+    expose:
+      - "8080"
+    links:
+     - eureka
+  catalog:
+    image: eekamak/catalog:latest
+    expose:
+      - "8080"
+    links:
+     - eureka
+  order:
+    image: eekamak/order:latest
+    expose:
+      - "8080"
+    links:
+     - eureka
+  zuul:
+    image: eekamak/zuul:latest
+    links:
+     - eureka
+    expose:
+      - "8080"
