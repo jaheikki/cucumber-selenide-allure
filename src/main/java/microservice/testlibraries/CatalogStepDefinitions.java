@@ -1,4 +1,4 @@
-package microservice.pages;
+package microservice.testlibraries;
 
 import com.codeborne.selenide.Selenide;
 import com.fasterxml.jackson.databind.JsonNode;

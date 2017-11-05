@@ -1,5 +1,6 @@
 @order
-@JOUMÄN
+@all
+@ISTHISGOOD...
 Feature: Microservice acceptance tests
 
   Scenario: Order a product from a catalog
@@ -11,8 +12,8 @@ Feature: Microservice acceptance tests
     When I order product Torspo as customer Teemu Selanne
     Then I can verify my order of Torspo with price 119.0 by customer Teemu Selanne
 
-#  Scenario: get catalog item
-#    Given catalog item exists at the database
-#    When i get the catalog item from rest
-#    Then catalog item name should be iPod touch
-#    And catalog item price should be 21.0
+  Scenario: get catalog item
+    Given catalog item exists at the database
+    When i get the catalog item from rest
+    Then catalog item name should be iPod touch
+    And catalog item price should be 21.0
