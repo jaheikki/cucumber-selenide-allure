@@ -1,4 +1,4 @@
-package microservice.testlibraries;
+package microservice.pages;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.After;

@@ -233,7 +233,8 @@ public class MsCommon {
     public static void navigateBackToMsMainPage() {
         printMethodName();
 
-        waitForElementClick("//a[contains(text(),'Home')]","");
+        $(By.cssSelector("#tab-products")).shouldBe(visible).shouldBe(enabled).click();
+        $(By.xpath("//span[contains(text(),'Products')]")).shouldBe(visible).shouldBe(enabled).click();
 
     }
 

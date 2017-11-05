@@ -17,4 +17,6 @@ buildNumber.properties
 *.class
 *.iml
 *.idea
+.allure
+build
 

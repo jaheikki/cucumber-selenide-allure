@@ -23,14 +23,13 @@ public class MsCustomerPage {
             customerDataMap = getTeemuSelanneData();
         }
 
-        MsCommon.waitForElementClick("//a[contains(text(),'Add Customer')]","//h1[contains(text(),'Customer : Edit')]");
         $(By.id("name")).shouldBe(Condition.visible).val(customerDataMap.get("name"));
         $(By.id("firstname")).shouldBe(Condition.visible).val(customerDataMap.get("firstname"));
         $(By.id("email")).shouldBe(Condition.visible).val(customerDataMap.get("email"));
         $(By.id("street")).shouldBe(Condition.visible).val(customerDataMap.get("street"));
         $(By.id("city")).shouldBe(Condition.visible).val(customerDataMap.get("city"));
 
-        $(By.xpath("//button[contains(text(),'Submit')]")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
+        $(By.xpath("//button[contains(text(),'Save')]")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
         $(By.xpath("//h1[contains(text(),'Success')]")).shouldBe(Condition.visible);
 
         System.out.println("Successfully added customer: "+customer);

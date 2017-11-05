@@ -1,77 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
 
-	<groupId>microservice-test-java</groupId>
-	<artifactId>microservice</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
 
-	<name>Microservice Acceptance Java</name>
-	<description>microservice java tests</description>
+    <groupId>fi.microservice-test-java-new</groupId>
+    <artifactId>microservice-new</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <properties>
-      <aspectj.version>1.8.12</aspectj.version>
-   </properties>
+    <name>Microservice Acceptance Java New</name>
+    <description>microservice java tests</description>
 
- <dependencies>
-	 <dependency>
-		 <groupId>com.codeborne</groupId>
-		 <artifactId>selenide</artifactId>
-		 <version>4.8</version>
-	 </dependency>
-	 <dependency>
-		 <groupId>junit</groupId>
-		 <artifactId>junit</artifactId>
-		 <version>4.11</version>
-	 </dependency>
-	 <dependency>
-		 <groupId>joda-time</groupId>
-		 <artifactId>joda-time</artifactId>
-		 <version>2.4</version>
-	 </dependency>
-	 <dependency>
-		 <groupId>org.tmatesoft.svnkit</groupId>
-		 <artifactId>trilead-ssh2</artifactId>
-		 <version>build213-svnkit-1.3-patch</version>
-	 </dependency>
-	 <dependency>
-		 <groupId>com.sun.jersey</groupId>
-		 <artifactId>jersey-client</artifactId>
-		 <version>1.18.1</version>
-	 </dependency>
-	 <dependency>
-		 <groupId>com.sun.jersey</groupId>
-		 <artifactId>jersey-bundle</artifactId>
-		 <version>1.18.1</version>
-	 </dependency>
-	 <dependency>
-		 <groupId>com.fasterxml.jackson.jaxrs</groupId>
-		 <artifactId>jackson-jaxrs-json-provider</artifactId>
-		 <version>2.4.2</version>
-	 </dependency>
-	 <dependency>
-		 <groupId>com.typesafe</groupId>
-		 <artifactId>config</artifactId>
-		 <version>1.2.0</version>
-	 </dependency>
-     <dependency>
-         <groupId>io.qameta.allure</groupId>
-         <artifactId>allure-cucumber-jvm</artifactId>
-         <version>2.0-BETA19</version>
-     </dependency>
+    <properties>
+        <aspectj.version>1.8.12</aspectj.version>
+    </properties>
 
-         <dependency>
-             <groupId>io.qameta.allure</groupId>
-             <artifactId>allure-junit4</artifactId>
-             <version>2.0-BETA19</version>
-             <scope>test</scope>
-         </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>4.8</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tmatesoft.svnkit</groupId>
+            <artifactId>trilead-ssh2</artifactId>
+            <version>build213-svnkit-1.3-patch</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.18.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-bundle</artifactId>
+            <version>1.18.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber-jvm</artifactId>
+            <version>2.0-BETA19</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>2.0-BETA19</version>
+            <scope>test</scope>
+        </dependency>
 
 
- </dependencies>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -82,7 +83,7 @@
                     <encoding>UTF-8</encoding>
                     <source>1.8</source>
                     <target>1.8</target>
-					<compilerArgument>-Werror</compilerArgument>
+                    <compilerArgument>-Werror</compilerArgument>
                 </configuration>
             </plugin>
 
@@ -93,16 +94,16 @@
                 <configuration>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                         <!-- -Dcucumber.options="&#45;&#45;plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"-->
+                        -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
                     </argLine>
                     <systemPropertyVariables>
-                        <allure.results.directory>target/allure-results</allure.results.directory>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
                     <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>io.qameta.allure.junit4.AllureJunit4</value>
-                        </property>
+                        <!--<property>-->
+                        <!--<name>listener</name>-->
+                        <!--<value>io.qameta.allure.junit4.AllureJunit4</value>-->
+                        <!--</property>-->
                     </properties>
                 </configuration>
                 <dependencies>
@@ -120,8 +121,8 @@
                 <version>2.8</version>
                 <configuration>
                     <reportVersion>2.3.1</reportVersion>
-                    <resultsDirectory>allure-results</resultsDirectory>
-                    <propertiesFilePath>/Users/heikmjar/git/tietoallas/citest/src/test/resources/allure.properties</propertiesFilePath>
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    <propertiesFilePath>src/test/resources/allure.properties</propertiesFilePath>
                     <!--<properties>-->
                     <!--<allure.issues.tracker.pattern>http://www.is.fi</allure.issues.tracker.pattern>-->
                     <!--</properties>-->
@@ -132,22 +133,22 @@
             <!--Needed only to show reports locally. Run jetty:run and
             open localhost:8080 to show the report-->
             <!--<plugin>-->
-                <!--<groupId>org.eclipse.jetty</groupId>-->
-                <!--<artifactId>jetty-maven-plugin</artifactId>-->
-                <!--<version>9.2.10.v20150310</version>-->
-                <!--<configuration>-->
-                    <!--<httpConnector>-->
-                        <!--<port>9899</port>-->
-                    <!--</httpConnector>-->
-                    <!--<webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>-->
-                    <!--<stopKey>stop</stopKey>-->
-                    <!--<stopPort>1234</stopPort>-->
-                <!--</configuration>-->
+            <!--<groupId>org.eclipse.jetty</groupId>-->
+            <!--<artifactId>jetty-maven-plugin</artifactId>-->
+            <!--<version>9.2.10.v20150310</version>-->
+            <!--<configuration>-->
+            <!--<httpConnector>-->
+            <!--<port>9899</port>-->
+            <!--</httpConnector>-->
+            <!--<webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>-->
+            <!--<stopKey>stop</stopKey>-->
+            <!--<stopPort>1234</stopPort>-->
+            <!--</configuration>-->
             <!--</plugin>-->
 
         </plugins>
     </build>
-  
+
     <profiles>
     </profiles>
 

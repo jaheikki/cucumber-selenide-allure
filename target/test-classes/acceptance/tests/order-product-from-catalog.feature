@@ -1,4 +1,5 @@
-@order @all
+@order
+@JOUMÄN
 Feature: Microservice acceptance tests
 
   Scenario: Order a product from a catalog

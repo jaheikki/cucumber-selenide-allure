@@ -1,6 +1,0 @@
-# Created on 2017-11-03T09:55:45.755
-objc[4940]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/jre/bin/java (0x10f08b4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10f1854e0). One of the two will be used. Which one is undefined.
-
-# Created on 2017-11-03T09:55:47.644
-[AppClassLoader@18b4aac2] warning javax.* types are not being woven because the weaver option '-Xset:weaveJavaxPackages=true' has not been specified
-

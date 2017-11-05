@@ -9,7 +9,6 @@ microservice/browser/ChromeDriverProvider.class
 microservice/common/MsCommon$2.class
 microservice/testlibraries/AcceptanceTestsStepDefinitions.class
 microservice/browser/ChromeRemoteDriverProvider.class
-microservice/testlibraries/CatalogStepDefinitions.class
 microservice/browser/IE10Win7RemoteDriverProvider.class
 microservice/browser/ChromeSamsungGalaxyNoteDriverProvider.class
 microservice/common/MsCommon$1.class
@@ -17,9 +16,10 @@ microservice/browser/ChromeAppleIphone5DriverProvider.class
 microservice/pages/MsCustomerPage.class
 microservice/browser/ChromeAppleIphone5RemoteDriverProvider.class
 microservice/browser/IEDriverProvider.class
+microservice/pages/Stepdefs.class
+microservice/pages/CatalogStepDefinitions.class
 microservice/common/MsCommon.class
 microservice/helper/RESTService.class
-microservice/testlibraries/Stepdefs.class
 microservice/browser/ChromeIpad3DriverProvider.class
 microservice/msrest/MsCatalogRest.class
 microservice/pages/MsOrderPage.class

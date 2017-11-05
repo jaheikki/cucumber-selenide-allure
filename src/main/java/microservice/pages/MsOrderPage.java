@@ -32,7 +32,7 @@ public class MsOrderPage {
     public MsOrderPage addOrderByCustomer(String catalogItem,String customer) {
         printMethodName();
 
-        MsCommon.waitForElementClick("//a[contains(text(),'Add Order')]","//h1[contains(text(),'Order : Add')]");
+        $(By.cssSelector("#addOrder")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
         $(By.id("customerId")).shouldBe(Condition.visible).selectOption(customer);
         $(By.xpath("//button[contains(@name,'addLine')]")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
         $(By.id("orderLine0.count")).shouldBe(Condition.visible).val("1");
@@ -50,8 +50,7 @@ public class MsOrderPage {
 
         $(By.xpath("//table/tbody/tr[last()]/td[contains(text(),'"+customer+"')]/..//td[1]/a")).shouldBe(Condition.visible).click();
         $(By.xpath("//div[contains(text(),'"+customer+"')]")).shouldBe(Condition.visible);
-        $(By.xpath("//div[contains(text(),'"+catalogItem+"')]")).shouldBe(Condition.visible);
-        $(By.xpath("//div[contains(text(),'"+price+"')]")).shouldBe(Condition.visible);
+        $(By.xpath("//tr/td/span[contains(text(),'"+price+"')]/../..//td[contains(text(),'"+catalogItem+"')]")).shouldBe(Condition.visible);
 
         System.out.println("Correct order found: "+ customer +","+catalogItem + "," + price);
 

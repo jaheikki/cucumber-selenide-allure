@@ -1,9 +1,11 @@
 package microservice.pages;
 
 
+import com.codeborne.selenide.Condition;
 import microservice.common.MsCommon;
 import microservice.common.MsConstants;
 import microservice.helper.SeleniumHelper;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
@@ -15,15 +17,8 @@ public class MsMainPage {
     public MsCatalogPage navigateToCatalogPage() {
         printMethodName();
 
-        int buttonPressTimeoutOld = MsConstants.elementClickTimeoutMs;
-        elementClickTimeoutMs = 120000;
-        MsConstants.doRefreshOnFailure = true;
-
-        MsCommon.waitForElementClick("//div[contains(text(),'List / add / remove items')]/..//a[contains(text(),'Catalog')]",MsCatalogPage.addItemXpath);
-
-        elementClickTimeoutMs = buttonPressTimeoutOld;
-        MsConstants.doRefreshOnFailure = false;
-        SeleniumHelper.myDontHurryTooMuch();
+        $(By.cssSelector("#addItem")).shouldBe(Condition.visible).click();
+        $(By.xpath("//span[contains(text(),'Add Product')]")).shouldBe(Condition.visible);
 
         return page(MsCatalogPage.class);
     }
@@ -31,15 +26,10 @@ public class MsMainPage {
     public MsCustomerPage navigateToCustomerPage() {
         printMethodName();
 
-        int buttonPressTimeoutOld = MsConstants.elementClickTimeoutMs;
-        elementClickTimeoutMs = 120000;
-        MsConstants.doRefreshOnFailure = true;
-
-        MsCommon.waitForElementClick("//a[contains(text(),'Customer')]","//h1[contains(text(),'Customer : View all')]");
-
-        elementClickTimeoutMs = buttonPressTimeoutOld;
-        MsConstants.doRefreshOnFailure = false;
-        SeleniumHelper.myDontHurryTooMuch();
+        $(By.cssSelector("#tab-customers")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
+        $(By.xpath("//span[contains(text(),'Customers')]")).shouldBe(Condition.visible);
+        $(By.cssSelector("#addCustomer")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
+        $(By.xpath("//span[contains(text(),'Add Customer')]")).shouldBe(Condition.visible);
 
         return page(MsCustomerPage.class);
     }

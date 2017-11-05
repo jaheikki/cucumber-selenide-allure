@@ -74,7 +74,7 @@ public class AcceptanceTestsStepDefinitions {
         printMethodName();
 
         //Remove this, just to get UI test to fail for a allure report and selenide screenshot
-        $(By.xpath("//h1[contains(text(),'Success')]")).shouldBe(Condition.visible);
+        //$(By.xpath("//h1[contains(text(),'Success')]")).shouldBe(Condition.visible);
 
         msMainPage.navigateToOrderPage()
                 .addOrderByCustomer(catalogItem, customer)
