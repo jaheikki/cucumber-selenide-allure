@@ -1,4 +1,4 @@
-#Usage (for Mac OS X):
+#Cucumber & Selenide demo usage (for Mac OS X):
 ---------
 1. Install docker for Mac: https://docs.docker.com/docker-for-mac/install/ 
 
