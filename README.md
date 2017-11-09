@@ -10,7 +10,7 @@ Preconditions:
 - Install docker for Mac: https://docs.docker.com/docker-for-mac/install/ 
 - or install docker for Windows 10 Pro: https://docs.docker.com/docker-for-windows/install/
   - Note: only Windows 10 Pro with latest updates work. Use only PowerShell for docker commands.
-- or install Vagrant box e.g. with Ubuntu 16.04 (https://app.vagrantup.com/ubuntu/boxes/xenial64) and install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1) and docker-compose (https://docs.docker.com/compose/install/) in it .
+- or install Vagrant box e.g. with Ubuntu 16.04 (https://app.vagrantup.com/ubuntu/boxes/xenial64) and install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1) and docker-compose (https://docs.docker.com/compose/install/) in it. See also: https://github.com/jaheikki/ansible
 - Install JDK8, Maven3 and Git.
 - Optional: Download free IntelliJ IDEA IDE Community Edition (https://www.jetbrains.com/idea) and install 'Cucumber For Java' plugin in IDE. This allows you to develop and debug Cucumber/Java tests easily (works fully in both Mac and Windows).
 
