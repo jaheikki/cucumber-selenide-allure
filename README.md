@@ -1,6 +1,8 @@
 # Cucumber & Selenide & Allure demo
 
-This is fully working example how run Web UI tests easily with Java with Selenide library (http://selenide.org/). In this example the demo application is set up by docker and docker-compose. The tests will be run by CucumberJVM framework to be able Gherkin (BDD) style testcase descriptions (https://cucumber.io/docs/reference/jvm). And as cherry on top of a cake we use here Allure2 framework for producing world class test report (https://github.com/allure-framework/allure2). (Notice that 'allure-cucumber-jvm' Maven dependency brings the CucumberJVM dependencies included, see pom.xml).
+This is fully working example how run Web UI tests easily with Java with Selenide library (http://selenide.org/). In this example the demo application is set up by docker and docker-compose. The tests will be run by CucumberJVM framework to be able to use Gherkin (BDD) style as testcase descriptions (https://cucumber.io/docs/reference/jvm). And as cherry on top of a cake we use here Allure2 framework for producing world class test report (https://github.com/allure-framework/allure2). 
+
+(Notice that 'allure-cucumber-jvm' Maven dependency brings the CucumberJVM dependencies included, see pom.xml).
 
 
 
@@ -27,7 +29,7 @@ Preconditions:
    - Web UI should appear in localhost:8080
    - Note: Use CMD-R(CTRL-R in Windows) + SHIFT to refresh page until demo application visible.
 
-   <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/demo-application.png" width="500" height="500">
+   <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/demo-application.png" width="400" height="500">
     
 6. Run CucumberJVM tests:
     
@@ -37,10 +39,11 @@ Preconditions:
      - Run 'order' tests by chrome browser:
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
 
-     - Run 'all' tests (catalog&order) and generate Allure test report:
+     - Run 'all' tests (catalog&order) and generate Allure test report files:
        - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
-       
-       <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/allure-report.png" width="1000" height="1000">
+       - Generate the HTML report by: mvn allure:report
+       - Open the test report (e.g. in IntelliJ IDEA IDE) from microservice-test-java-new/target/site/allure-maven-plugin/index.html
+       <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/allure-report.png" width="800" height="300">
   
 7. Stop and remove application docker containers: 'docker-compose -f docker-compose-dev.yml down -v --remove-orphans' 
    Note: Sometimes demo application hangs and it is needed to be shut it down and restart (up -d).
