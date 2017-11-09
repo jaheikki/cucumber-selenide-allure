@@ -26,7 +26,9 @@ Preconditions:
 5. Wait for demo application start a few minutes:
    - Web UI should appear in localhost:8080
    - Note: Use CMD-R(CTRL-R in Windows) + SHIFT to refresh page until demo application visible.
-   
+
+   <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/demo-application.png" width="300" height="300">
+    
 6. Run CucumberJVM tests:
     
      - Run 'catalog' tests by default browser (Firefox may not work properly):
@@ -37,6 +39,8 @@ Preconditions:
 
      - Run 'all' tests (catalog&order) and generate Allure test report:
        - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
+       
+       <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/allure-report.png" width="300" height="300">
   
 7. Stop and remove application docker containers: 'docker-compose -f docker-compose-dev.yml down -v --remove-orphans' 
    Note: Sometimes demo application hangs and it is needed to be shut it down and restart (up -d).
