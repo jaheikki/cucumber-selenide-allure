@@ -12,6 +12,7 @@ Preconditions:
   - Note: only Windows 10 Pro with latest updates work. Use only PowerShell for docker commands.
 - or install Vagrant box e.g. with Ubuntu 16.04 and install docker and docker compose in it.
 - Install JDK8, Maven3 and Git.
+- Optional: Download IntelliJ IDEA IDE (https://www.jetbrains.com/idea) and install 'Cucumber For Java' plugin in IDE. This allows you to develop and debug Cucumber/Java tests easily (works fully in both Mac and Windows).
 
 
 1. Clone this repository (e.g. in ~/git dir): 
@@ -42,7 +43,7 @@ Preconditions:
      - Run 'all' tests (catalog&order) and generate Allure test report files:
        - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
        - Generate the HTML report by: mvn allure:report
-       - Open the test report (e.g. in IntelliJ IDEA IDE) from microservice-test-java-new/target/site/allure-maven-plugin/index.html
+       - Open the test report (e.g. in IntelliJ IDEA IDE) from <project_dir>/target/site/allure-maven-plugin/index.html
        <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/allure-report.png" width="800" height="300">
   
 7. Stop and remove application docker containers: 'docker-compose -f docker-compose-dev.yml down -v --remove-orphans' 
