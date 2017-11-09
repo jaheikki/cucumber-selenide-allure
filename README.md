@@ -1,6 +1,8 @@
-#Cucumber & Selenide demo usage (for Mac OS X):
----------
-1. Install docker for Mac: https://docs.docker.com/docker-for-mac/install/ 
+#Cucumber & Selenide & Allure demo:
+--------- 
+Preconditions:
+- Install docker for Mac: https://docs.docker.com/docker-for-mac/install/ 
+- Install docker for Windows 10 Pro: https://docs.docker.com/docker-for-windows/install/
 
 2. Clone this repository (e.g. in ~/git dir): git clone https://github.com/jaheikki/microservice-test-java-new.git 
 
