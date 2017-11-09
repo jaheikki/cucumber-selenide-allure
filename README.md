@@ -27,14 +27,14 @@ Preconditions:
    
 6. Run CucumberJVM tests:
     
-  - Run 'catalog' tests by default browser (Firefox may not work properly):
-     * mvn clean install -Dcucumber.options="--tags @catalog"
+     - Run 'catalog' tests by default browser (Firefox may not work properly):
+       - mvn clean install -Dcucumber.options="--tags @catalog"
 
-  - Run 'order' tests by chrome browser:
-    * mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
+     - Run 'order' tests by chrome browser:
+       - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
 
-  - Run 'all' tests (catalog&order) and generate Allure test report:
-    * mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
+     - Run 'all' tests (catalog&order) and generate Allure test report:
+       - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
   
 7. Stop and remove application docker containers: 'docker-compose -f docker-compose-dev.yml down -v --remove-orphans' 
    Note: Sometimes demo application hangs and it is needed to be shut it down and restart (up -d).
