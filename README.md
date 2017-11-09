@@ -43,7 +43,7 @@ Preconditions:
      - Run 'all' tests (catalog&order) and generate Allure test report files:
        - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
        - Generate the HTML report by: mvn allure:report
-       - Open the test report (e.g. in IntelliJ IDEA IDE) from <project_dir>/target/site/allure-maven-plugin/index.html
+       - Open the test report ('Open in Browswer' in IntelliJ IDEA IDE project) from <project_dir>/target/site/allure-maven-plugin/index.html
        <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/allure-report.png" width="800" height="300">
   
 7. Stop and remove application docker containers: 'docker-compose -f docker-compose-dev.yml down -v --remove-orphans' 
