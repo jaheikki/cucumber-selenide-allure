@@ -1,6 +1,8 @@
 # Cucumber & Selenide & Allure demo
 
-This is fully working example how run Web UI tests easily with Java with Selenide library (http://selenide.org/). In this example the demo application is set up by docker and docker-compose. The tests will be run by CucumberJVM framework to be able Gherkin (BDD) style testcase descriptions (https://cucumber.io/docs/reference/jvm). And as cherry on top of a cake we use here Allure2 framework for producing world class test report (https://github.com/allure-framework/allure2). (Notice that 'allure-cucumber-jvm' Maven dependency brings the CucumberJVM dependencies included, see pom.xml).
+This is fully working example how run Web UI tests easily with Java with Selenide library (http://selenide.org/). In this example the demo application is set up by docker and docker-compose. The tests will be run by CucumberJVM framework to be able to use Gherkin (BDD) style as testcase descriptions (https://cucumber.io/docs/reference/jvm). And as cherry on top of a cake we use here Allure2 framework for producing world class test report (https://github.com/allure-framework/allure2). 
+
+(Notice that 'allure-cucumber-jvm' Maven dependency brings the CucumberJVM dependencies included, see pom.xml).
 
 
 
@@ -8,8 +10,9 @@ Preconditions:
 - Install docker for Mac: https://docs.docker.com/docker-for-mac/install/ 
 - or install docker for Windows 10 Pro: https://docs.docker.com/docker-for-windows/install/
   - Note: only Windows 10 Pro with latest updates work. Use only PowerShell for docker commands.
-- or install Vagrant box e.g. with Ubuntu 16.04 and install docker and docker compose in it.
+- or install Vagrant box e.g. with Ubuntu 16.04 (https://app.vagrantup.com/ubuntu/boxes/xenial64) and install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1) and docker-compose (https://docs.docker.com/compose/install/) in it. See also: https://github.com/jaheikki/ansible
 - Install JDK8, Maven3 and Git.
+- Optional: Download free IntelliJ IDEA IDE Community Edition (https://www.jetbrains.com/idea) and install 'Cucumber For Java' plugin in IDE. This allows you to develop and debug Cucumber/Java tests easily (works fully in both Mac and Windows).
 
 
 1. Clone this repository (e.g. in ~/git dir): 
@@ -27,7 +30,7 @@ Preconditions:
    - Web UI should appear in localhost:8080
    - Note: Use CMD-R(CTRL-R in Windows) + SHIFT to refresh page until demo application visible.
 
-   <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/demo-application.png" width="300" height="300">
+   <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/demo-application.png" width="400" height="500">
     
 6. Run CucumberJVM tests:
     
@@ -37,10 +40,11 @@ Preconditions:
      - Run 'order' tests by chrome browser:
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
 
-     - Run 'all' tests (catalog&order) and generate Allure test report:
+     - Run 'all' tests (catalog&order) and generate Allure test report files:
        - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
-       
-       <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/allure-report.png" width="300" height="300">
+       - Generate the HTML report by: mvn allure:report
+       - Open the test report ('Open in Browswer' in IntelliJ IDEA IDE project) from <project_dir>/target/site/allure-maven-plugin/index.html
+       <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/images/allure-report.png" width="800" height="300">
   
 7. Stop and remove application docker containers: 'docker-compose -f docker-compose-dev.yml down -v --remove-orphans' 
    Note: Sometimes demo application hangs and it is needed to be shut it down and restart (up -d).
