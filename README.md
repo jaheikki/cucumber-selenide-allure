@@ -20,7 +20,7 @@ Preconditions:
 
 2. Get dependended Git repositories cloned and build needed java applications:
    - cd ~/git/microservice-test-java-new
-   - chmod 755 clone_and_build_ms_demo_apps.sh && ./clone_and_build_ms_demo_apps.sh
+   - ./clone_and_build_ms_demo_apps.sh
 
 4. Start demo application docker containers: 
    - cd ~/git/microservice-demo-acceptance-tests-copy/src/test/resources
