@@ -33,12 +33,12 @@ public class AcceptanceTestsStepDefinitions {
         //Selenide.sleep(120000);
 
         //Enable this if "Whitelabel Error Page" caused by order service down, will stop and start Microservice
-        try {
-            HashMap<String, ArrayList<String>> out = MsCommon.executeSystemCommandAndReturnStdOutAndStdErr("docker-compose -f /Users/heikmjar/git/microservice-demo-acceptance-tests-copy/src/test/resources/docker-compose-dev.yml down -v --remove-orphans", true);
-            MsCommon.executeSystemCommandAndReturnStdOutAndStdErr("docker-compose -f /Users/heikmjar/git/microservice-demo-acceptance-tests-copy/src/test/resources/docker-compose-dev.yml up -d",true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            HashMap<String, ArrayList<String>> out1 = MsCommon.executeSystemCommandAndReturnStdOutAndStdErr("docker-compose -f /Users/heikmjar/git/microservice-demo-acceptance-tests-copy/src/test/resources/docker-compose-dev.yml down -v --remove-orphans", true);
+//            HashMap<String, ArrayList<String>> out2 = MsCommon.executeSystemCommandAndReturnStdOutAndStdErr("docker-compose -f /Users/heikmjar/git/microservice-demo-acceptance-tests-copy/src/test/resources/docker-compose-dev.yml up -d",true);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         msMainPage = Selenide.open(MsConstants.microserviceHost, ProductsPage.class);
         msMainPage.navigateToOrdersPage()
