@@ -10,6 +10,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -235,6 +241,47 @@ public class MsCommon {
 
         $(By.cssSelector("#tab-products")).shouldBe(visible).shouldBe(enabled).click();
         $(By.xpath("//span[contains(text(),'Products')]")).shouldBe(visible).shouldBe(enabled).click();
+
+    }
+
+    /*User of this method needs to 'grep' success of executed command from returned map entries stdout and stderr*/
+    public static HashMap<String, ArrayList<String>> executeSystemCommandAndReturnStdOutAndStdErr(String command, boolean debug) throws IOException {
+        printMethodName();
+
+        System.out.println("Executing command: "+command);
+        ArrayList<String> stdOut = new ArrayList<String>();
+        ArrayList<String> stdErr = new ArrayList<String>();
+
+        Runtime rt = Runtime.getRuntime();
+        Process proc = rt.exec(command);
+
+        BufferedReader stdInput = new BufferedReader(new
+                InputStreamReader(proc.getInputStream()));
+
+        BufferedReader stdError = new BufferedReader(new
+                InputStreamReader(proc.getErrorStream()));
+
+        // read the output from the command
+        if (debug) System.out.println("Here is the standard output of the command:\n");
+        String s = null;
+        while ((s = stdInput.readLine()) != null) {
+            if (debug) System.out.println(s);
+            stdOut.add(s);
+
+        }
+
+        // read any errors from the attempted command
+        if (debug) System.out.println("Here is the standard error of the command (if any):\n");
+        while ((s = stdError.readLine()) != null) {
+            if (debug) System.out.println(s);
+            stdErr.add(s);
+        }
+
+        HashMap<String, ArrayList<String>> stdOutErrMap = new HashMap<>();
+        stdOutErrMap.put("stdout",stdOut);
+        stdOutErrMap.put("stderr",stdErr);
+
+        return stdOutErrMap;
 
     }
 

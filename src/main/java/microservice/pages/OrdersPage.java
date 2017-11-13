@@ -10,11 +10,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
-public class MsOrderPage {
+public class OrdersPage {
 
-    public static final String addOrderXpath = "//a[contains(text(),'Add Order')]";
-
-    public MsOrderPage deleteOrderByCustomer (String customer) {
+    public OrdersPage deleteOrderByCustomer (String customer) {
         printMethodName();
 
         if ($(By.xpath("//td[contains(text(),'" + customer + "')]")).isDisplayed()) {
@@ -25,11 +23,11 @@ public class MsOrderPage {
             System.out.println("No orders for customer: "+ customer);
         }
 
-        return page(MsOrderPage.class);
+        return page(OrdersPage.class);
     }
 
 
-    public MsOrderPage addOrderByCustomer(String catalogItem,String customer) {
+    public OrdersPage addOrderByCustomer(String catalogItem, String customer) {
         printMethodName();
 
         $(By.cssSelector("#addOrder")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
@@ -42,10 +40,10 @@ public class MsOrderPage {
 
         System.out.println("Order made successfully: "+ customer +","+catalogItem);
 
-        return page(MsOrderPage.class);
+        return page(OrdersPage.class);
     }
 
-    public MsOrderPage verifyOrderByCustomer (String customer, String catalogItem, String price) {
+    public OrdersPage verifyOrderByCustomer (String customer, String catalogItem, String price) {
         printMethodName();
 
         $(By.xpath("//table/tbody/tr[last()]/td[contains(text(),'"+customer+"')]/..//td[1]/a")).shouldBe(Condition.visible).click();
@@ -54,15 +52,15 @@ public class MsOrderPage {
 
         System.out.println("Correct order found: "+ customer +","+catalogItem + "," + price);
 
-        return page(MsOrderPage.class);
+        return page(OrdersPage.class);
     }
 
-    public MsMainPage navigateBackToMainPage() {
+    public ProductsPage navigateBackToProductsPage() {
         printMethodName();
 
         MsCommon.navigateBackToMsMainPage();
         SeleniumHelper.myDontHurryTooMuch();
 
-        return page(MsMainPage.class);
+        return page(ProductsPage.class);
     }
 }

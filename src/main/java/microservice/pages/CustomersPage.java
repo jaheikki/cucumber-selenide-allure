@@ -12,9 +12,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
-public class MsCustomerPage {
+public class CustomersPage {
 
-    public MsCustomerPage addCustomer(String customer) {
+    public CustomersPage addCustomer(String customer) {
         printMethodName();
 
         HashMap<String,String> customerDataMap = null;
@@ -34,16 +34,16 @@ public class MsCustomerPage {
 
         System.out.println("Successfully added customer: "+customer);
 
-        return page(MsCustomerPage.class);
+        return page(CustomersPage.class);
     }
 
-    public MsOrderPage navigateBackToMainPage() {
+    public OrdersPage navigateBackToProductsPage() {
         printMethodName();
 
         MsCommon.navigateBackToMsMainPage();
         SeleniumHelper.myDontHurryTooMuch();
 
-        return page(MsOrderPage.class);
+        return page(OrdersPage.class);
     }
 
     private HashMap<String, String> getTeemuSelanneData() {

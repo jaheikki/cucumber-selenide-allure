@@ -9,10 +9,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
-public class MsCatalogPage {
+public class AddProductPage {
 
 
-    public MsCatalogPage addCatalogItem(String catalogItemName, String catalogItemPrice) {
+    public AddProductPage addCatalogItem(String catalogItemName, String catalogItemPrice) {
         printMethodName();
 
         $(By.id("name")).shouldBe(Condition.visible).val(catalogItemName);
@@ -22,15 +22,15 @@ public class MsCatalogPage {
 
         System.out.println("Successfully added catalog item: "+catalogItemName);
 
-        return page(MsCatalogPage.class);
+        return page(AddProductPage.class);
     }
 
-    public MsMainPage navigateBackToMainPage() {
+    public ProductsPage navigateBackToProductsPage() {
         printMethodName();
 
         MsCommon.navigateBackToMsMainPage();
         SeleniumHelper.myDontHurryTooMuch();
 
-        return page(MsMainPage.class);
+        return page(ProductsPage.class);
     }
 }
