@@ -4,14 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-
-    <groupId>fi.microservice-test-java-new</groupId>
-    <artifactId>microservice-new</artifactId>
+    <groupId>fi.cucumber-selenide-allure</groupId>
+    <artifactId>cucumber-selenide-allure-tests</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Microservice Acceptance Java New</name>
-    <description>microservice java tests</description>
+    <name>Cucumber selenide allure</name>
+    <description>Cucumber selenide allure tests</description>
 
     <properties>
         <aspectj.version>1.8.12</aspectj.version>
