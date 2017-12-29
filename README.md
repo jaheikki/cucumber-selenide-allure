@@ -34,8 +34,8 @@ Preconditions:
     
 6. Run CucumberJVM tests:
     
-     - Run 'catalog' tests by default browser (Firefox may not work properly):
-       - mvn clean install -Dcucumber.options="--tags @catalog"
+     - Run 'catalog' tests by default browser (Firefox may not work properly, so you need to use 'marionette'):
+       - mvn clean install -Dcucumber.options="--tags @catalog -Dbrowser=marionette"
 
      - Run 'order' tests by chrome browser:
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
