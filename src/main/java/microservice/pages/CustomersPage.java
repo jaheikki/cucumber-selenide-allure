@@ -33,7 +33,7 @@ public class CustomersPage {
         String email = SQLCommon.sqlQueryForString(customerJDBCTemplate, "SELECT email FROM customerdb.customer WHERE lastname='"+lastname+"' AND firstname='"+firstname+"';");
         String street = SQLCommon.sqlQueryForString(customerJDBCTemplate, "SELECT street FROM customerdb.customer WHERE lastname='"+lastname+"' AND firstname='"+firstname+"';");
         String city = SQLCommon.sqlQueryForString(customerJDBCTemplate, "SELECT city FROM customerdb.customer WHERE lastname='"+lastname+"' AND firstname='"+firstname+"';");
-        
+
         $(By.id("name")).shouldBe(Condition.visible).val(lastname);
         $(By.id("firstname")).shouldBe(Condition.visible).val(firstname);
         $(By.id("email")).shouldBe(Condition.visible).val(email);
@@ -57,17 +57,4 @@ public class CustomersPage {
         return page(OrdersPage.class);
     }
 
-    private HashMap<String, String> getTeemuSelanneData() {
-        printMethodName();
-
-        HashMap<String, String> map = new HashMap<String, String>();
-
-        map.put("name", "Selanne");
-        map.put("firstname", "Teemu");
-        map.put("email", "Teemu@com");
-        map.put("street", "Manhattan");
-        map.put("city", "NY");
-
-        return map;
-    }
 }
