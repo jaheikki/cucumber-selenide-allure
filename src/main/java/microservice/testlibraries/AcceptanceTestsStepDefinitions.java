@@ -5,15 +5,12 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import microservice.common.MsCommon;
-import microservice.common.MsConstants;
+import microservice.common.MsVariables;
 import microservice.pages.ProductsPage;
 import microservice.msrest.MsCatalogRest;
 import microservice.msrest.MsCustomerRest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import static com.codeborne.selenide.Selenide.$;
 import static microservice.helper.SeleniumHelper.printMethodName;
@@ -22,6 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class AcceptanceTestsStepDefinitions {
+
 
     private ProductsPage msMainPage;
 
@@ -40,7 +38,7 @@ public class AcceptanceTestsStepDefinitions {
 //            e.printStackTrace();
 //        }
 
-        msMainPage = Selenide.open(MsConstants.microserviceHost, ProductsPage.class);
+        msMainPage = Selenide.open(MsVariables.microserviceHost, ProductsPage.class);
         msMainPage.navigateToOrdersPage()
                 .deleteOrderByCustomer(customer)
                 .navigateBackToProductsPage();
@@ -50,7 +48,7 @@ public class AcceptanceTestsStepDefinitions {
     public void productShouldNotBeInTheCatalogThroughRESTAPI( String catalogItemName) {
         printMethodName();
 
-        MsCatalogRest.deleteCatalogItemByName(MsConstants.catalogServiceUrl,MsConstants.catalogURI,catalogItemName);
+        MsCatalogRest.deleteCatalogItemByName(MsVariables.catalogServiceUrl, MsVariables.catalogURI,catalogItemName);
 
     }
 
@@ -58,7 +56,7 @@ public class AcceptanceTestsStepDefinitions {
     public void customerShouldNotExistThroughRESTAPI(String customer) {
         printMethodName();
 
-        MsCustomerRest.deleteCustomerByName(MsConstants.customerServiceUrl,MsConstants.customerURI,customer);
+        MsCustomerRest.deleteCustomerByName(MsVariables.customerServiceUrl, MsVariables.customerURI,customer);
 
     }
 
@@ -71,12 +69,12 @@ public class AcceptanceTestsStepDefinitions {
                 .navigateBackToProductsPage();
     }
 
-    @And("customer (.*) is added")
-    public void customerIsAdded(String customer) {
+    @And("customer (.*) (.*) is added")
+    public void customerIsAdded(String firstname, String lastname) {
         printMethodName();
 
         msMainPage.navigateToCustomersPage()
-                .addCustomer(customer)
+                .addCustomer(firstname,lastname)
                 .navigateBackToProductsPage();
     }
 

@@ -1,6 +1,6 @@
 package microservice.browser;
 
-import microservice.common.MsConstants;
+import microservice.common.MsVariables;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -18,7 +18,7 @@ public class IE10Win7RemoteDriverProvider extends BrowserBase{
 
     @Override
     public WebDriver createDriver(DesiredCapabilities desiredCapabilities) {
-       return createSeleniumGridRemoteDriver("ie", "10.0", Platform.WINDOWS, MsConstants.seleniumGridHubAddress);
+       return createSeleniumGridRemoteDriver("ie", "10.0", Platform.WINDOWS, MsVariables.seleniumGridHubAddress);
     }
 }
 

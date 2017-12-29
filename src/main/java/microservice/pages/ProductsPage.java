@@ -2,19 +2,14 @@ package microservice.pages;
 
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import microservice.common.MsCommon;
-import microservice.common.MsConstants;
+import microservice.common.MsVariables;
 import microservice.helper.SeleniumHelper;
 import org.openqa.selenium.By;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
-import static microservice.common.MsConstants.elementClickTimeoutMs;
+import static microservice.common.MsVariables.elementClickTimeoutMs;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 
@@ -48,14 +43,14 @@ public class ProductsPage {
         //$(By.xpath("//a[contains(text(),'Add Order')]")).shouldBe(Condition.visible);
 
         //Works in any case:
-        int buttonPressTimeoutOld = MsConstants.elementClickTimeoutMs;
+        int buttonPressTimeoutOld = MsVariables.elementClickTimeoutMs;
         elementClickTimeoutMs = 180000;
-        MsConstants.doRefreshOnFailure = true;
+        MsVariables.doRefreshOnFailure = true;
 
         MsCommon.waitForElementClick("//a[contains(text(),'Order')]", "//a[contains(text(),'Add Order')]");
 
         elementClickTimeoutMs = buttonPressTimeoutOld;
-        MsConstants.doRefreshOnFailure = false;
+        MsVariables.doRefreshOnFailure = false;
         SeleniumHelper.myDontHurryTooMuch();
 
         return page(OrdersPage.class);

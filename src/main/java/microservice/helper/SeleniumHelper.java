@@ -2,7 +2,7 @@ package microservice.helper;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import microservice.common.MsConstants;
+import microservice.common.MsVariables;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -103,7 +103,7 @@ public class SeleniumHelper {
 
     public static void myDontHurryTooMuch()  {
         try {
-            sleep(MsConstants.doNotHurryTooMuchDelayMs);
+            sleep(MsVariables.doNotHurryTooMuchDelayMs);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

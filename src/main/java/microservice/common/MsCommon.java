@@ -22,7 +22,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static microservice.common.MsConstants.*;
+import static microservice.common.MsVariables.*;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class MsCommon {
@@ -33,7 +33,7 @@ public class MsCommon {
         //Configuration.reportsFolder = OnlinefirstConstants.onlinefirstSelenideReportsFolder;
 
         // default timeout (env might be very slow)
-        //Configuration.timeout = MsConstants.commonSelenideTimeout;
+        //Configuration.timeout = MsVariables.commonSelenideTimeout;
 
         //If true, Selenide uses Javascript to click element -> can be used as temporary workaround if bugs related clicking (especially in Chrome)
         //Configuration.clickViaJs = selenideClickElementByJavascript;
@@ -121,7 +121,7 @@ public class MsCommon {
                 if (doRefreshOnFailure) Selenide.refresh();
             } finally {
                 System.out.println(new DateTime());
-                Configuration.timeout = MsConstants.commonSelenideTimeout; //force return original configuration timeout
+                Configuration.timeout = MsVariables.commonSelenideTimeout; //force return original configuration timeout
             }
         }
         throw new RuntimeException("Element click failed after " + timeoutMs + " milliseconds.");

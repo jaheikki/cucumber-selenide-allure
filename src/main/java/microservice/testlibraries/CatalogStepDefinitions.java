@@ -1,16 +1,12 @@
 package microservice.testlibraries;
 
-import com.codeborne.selenide.Selenide;
 import com.fasterxml.jackson.databind.JsonNode;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import microservice.common.MsConstants;
-import microservice.helper.SSHService;
+import microservice.common.MsVariables;
 import microservice.msrest.MsCatalogRest;
-
-import java.io.File;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -72,8 +68,8 @@ public class CatalogStepDefinitions {
 
         //System.out.println("Sleeping due to check if services are up...");
         //Selenide.sleep(30000);
-        //catalogItem = MsCatalogRest.getSingleCatalogItemWithId(MsConstants.catalogServiceUrl, MsConstants.catalogURI, "2");
-        catalogItem = MsCatalogRest.waitForGetSingleCatalogItemWithId(60,5,MsConstants.catalogServiceUrl, MsConstants.catalogURI, "2");
+        //catalogItem = MsCatalogRest.getSingleCatalogItemWithId(MsVariables.catalogServiceUrl, MsVariables.catalogURI, "2");
+        catalogItem = MsCatalogRest.waitForGetSingleCatalogItemWithId(60,5, MsVariables.catalogServiceUrl, MsVariables.catalogURI, "2");
     }
 
     @Then("catalog item name should be (.*)")

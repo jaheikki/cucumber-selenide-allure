@@ -3,7 +3,7 @@ package cucumbertest.runner;
 import com.codeborne.selenide.Configuration;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import microservice.common.MsConstants;
+import microservice.common.MsVariables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -26,13 +26,13 @@ public class AcceptanceRunnerTest {
         printMethodName();
 
         // default folder not good
-        Configuration.reportsFolder = MsConstants.selenideScreenshotsFolder;
+        Configuration.reportsFolder = MsVariables.selenideScreenshotsFolder;
 
         //default timeout (env might be very slow)
-        Configuration.timeout = MsConstants.commonSelenideTimeout;
+        Configuration.timeout = MsVariables.commonSelenideTimeout;
 
         //If true, Selenide uses Javascript to click element -> can be used as temporary workaround if bugs related clicking (especially in Chrome)
-        Configuration.clickViaJs = MsConstants.selenideClickElementByJavascript;
+        Configuration.clickViaJs = MsVariables.selenideClickElementByJavascript;
 
 
     }
