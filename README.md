@@ -16,10 +16,10 @@ Preconditions:
 
 
 1. Clone this repository (e.g. in ~/git dir): 
-   - git clone https://github.com/jaheikki/microservice-test-java-new.git 
+   - git clone https://github.com/jaheikki/cucumber-selenide-allure.git
 
 2. Get dependended Git repositories cloned and build needed java applications:
-   - cd ~/git/microservice-test-java-new
+   - cd ~/git/cucumber-selenide-allure
    - ./clone_and_build_ms_demo_apps.sh
 
 4. Start demo application docker containers: 
@@ -30,7 +30,7 @@ Preconditions:
    - Web UI should appear in localhost:8080
    - Note: Use CMD-R(CTRL-R in Windows) + SHIFT to refresh page until demo application visible.
 
-   <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/readme_images/demo-application.png" width="400" height="500">
+   <img src="https://raw.githubusercontent.com/jaheikki/cucumber-selenide-allure/master/readme_images/demo-application.png" width="400" height="500">
     
 6. Run CucumberJVM tests:
     
@@ -44,7 +44,7 @@ Preconditions:
        - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
        - Generate the HTML report by: mvn allure:report
        - Open the test report ('Open in Browswer' in IntelliJ IDEA IDE project) from <project_dir>/target/site/allure-maven-plugin/index.html
-       <img src="https://raw.githubusercontent.com/jaheikki/microservice-test-java-new/master/readme_images/allure-report.png" width="800" height="300">
+       <img src="https://raw.githubusercontent.com/jaheikki/cucumber-selenide-allure/master/readme_images/allure-report.png" width="800" height="300">
   
 7. Stop and remove application docker containers: 'docker-compose -f docker-compose-dev.yml down -v --remove-orphans' 
    Note: Sometimes demo application hangs and it is needed to be shut it down and restart (up -d).
