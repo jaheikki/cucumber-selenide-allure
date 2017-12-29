@@ -40,7 +40,7 @@ public class CustomersPage {
     public OrdersPage navigateBackToProductsPage() {
         printMethodName();
 
-        MsCommon.navigateBackToMsMainPage();
+        MsCommon.navigateBackToProductsPage();
         SeleniumHelper.myDontHurryTooMuch();
 
         return page(OrdersPage.class);

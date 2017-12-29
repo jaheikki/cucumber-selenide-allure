@@ -28,7 +28,7 @@ public class AddProductPage {
     public ProductsPage navigateBackToProductsPage() {
         printMethodName();
 
-        MsCommon.navigateBackToMsMainPage();
+        MsCommon.navigateBackToProductsPage();
         SeleniumHelper.myDontHurryTooMuch();
 
         return page(ProductsPage.class);

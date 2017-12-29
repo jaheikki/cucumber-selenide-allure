@@ -236,7 +236,7 @@ public class MsCommon {
 
     }
 
-    public static void navigateBackToMsMainPage() {
+    public static void navigateBackToProductsPage() {
         printMethodName();
 
         $(By.cssSelector("#tab-products")).shouldBe(visible).shouldBe(enabled).click();
