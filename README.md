@@ -36,10 +36,10 @@ Preconditions:
     
      - Run 'catalog' tests by default browser (Firefox may not work properly, so you need to use 'marionette'):
        - mvn clean install -Dcucumber.options="--tags @catalog -Dbrowser=marionette"
-
      - Run 'order' tests by chrome browser:
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
-
+     - Run 'order' tests by chrome browser with mobile size (Apple iPhone 6 size) :  
+       - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=chrome -Dselenide.browser-size=375x667
      - Run 'all' tests (catalog&order) and generate Allure test report files:
        - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
        - Generate the HTML report by: mvn allure:report
