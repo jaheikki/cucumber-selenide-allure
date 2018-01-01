@@ -51,6 +51,6 @@ Preconditions:
        <img src="https://raw.githubusercontent.com/jaheikki/cucumber-selenide-allure/master/readme_images/allure-report.png" width="800" height="300">
   
 7. Stop and remove application docker containers: 'docker-compose -f docker-compose-dev.yml down -v --remove-orphans' 
-   Note: Sometimes demo application hangs and it is needed to be shut it down and restart (up -d, see step 3).
+   Note: Sometimes demo application hangs and it is needed to be shut it down and restart (up -d, see step 3). Or use restart: 'docker-compose -f docker-compose-dev.yml restart'
 
 
