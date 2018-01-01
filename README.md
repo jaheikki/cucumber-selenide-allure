@@ -38,10 +38,10 @@ Preconditions:
        - mvn clean install -Dcucumber.options="--tags @catalog -Dbrowser=marionette"
      - Run 'order' tests by chrome browser:
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
-     - Run 'order' tests by chrome browser with mobile size (Apple iPhone 6 size) :  
+     - Run 'order' tests by chrome browser with mobile size (Apple iPhone 6 size):  
        - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=chrome -Dselenide.browser-size=375x667
-      - Run 'order' tests by custom chrome browser (from local page) in BrowserStack:   
-       - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=microservice.browser.Chrome61MacRemoteDriverProvider -Dlocal
+     - Run 'order' tests by custom firefox browser (from local page) in BrowserStack:   
+       - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider -Dlocal
      - Run 'order' tests by custom mobile browser (from local page)  in BrowserStack:   
        - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=microservice.browser.SamsungGalaxyS7_V6_0_RemoteDriverProvider -            Dlocal
      - Run 'all' tests (catalog&order) and generate Allure test report files:
