@@ -1,5 +1,6 @@
 package microservice.browser;
 
+import com.browserstack.local.Local;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverProvider;
 import org.openqa.selenium.*;
@@ -17,34 +18,71 @@ import java.util.Map;
 
 public abstract class BrowserBase implements WebDriverProvider{
 
-    public static WebDriver createMobileChromeDriver(final String deviceName, DesiredCapabilities desiredCapabilities) {
-        Map<String, String> mobileEmulation = new HashMap<String, String>();
-        mobileEmulation.put("deviceName", deviceName);
-        Map<String, Object> chromeOptions = new HashMap<String, Object>();
-        chromeOptions.put("mobileEmulation", mobileEmulation);
-        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
-        return new ChromeDriver(desiredCapabilities);
 
-    }
+    public static WebDriver createBSRemoteDriver(String browser, String browserVersion, Platform platform, String bsHubServer)
+    {
+        Local l;
 
-    public static WebDriver createMobileChromeRemoteDriver(final String deviceName,String hubUrl,DesiredCapabilities desiredCapabilities) {
-        Map<String, String> mobileEmulation = new HashMap<String, String>();
-        mobileEmulation.put("deviceName", deviceName);
-        Map<String, Object> chromeOptions = new HashMap<String, Object>();
-        chromeOptions.put("mobileEmulation", mobileEmulation);
-        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        desiredCapabilities.setCapability("browserName","chrome");
-        desiredCapabilities.setCapability("version","");
-        desiredCapabilities.setCapability("platform","ANY");
-        desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
+        String ACCESS_KEY = System.getenv("BROWSERSTACK_ACCESS_KEY");
+
+        String hubUrl = "https://"+System.getenv("BROWSERSTACK_USERNAME")+":"+System.getenv("BROWSERSTACK_ACCESS_KEY")+"@"+bsHubServer;
+
+        DesiredCapabilities capability = new DesiredCapabilities(browser, browserVersion, platform);
+        capability.setCapability("browserstack.debug", true);
+        capability.setCapability("acceptSslCerts", true);
+
+        if (System.getProperty("local") != null && System.getProperty("local").equals("true")) {
+            capability.setCapability("browserstack.local", "true");
+            l = new Local();
+            Map<String, String> options = new HashMap<String, String>();
+            options.put("key", ACCESS_KEY);
+            try {
+                l.start(options);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         try {
-            return new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
+            return new RemoteWebDriver(new URL(hubUrl), capability);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public static WebDriver createBSRemoteMobileDriver(String mobile, String mobileOsVersion, String bsHubServer)
+    {
+        Local l;
+
+        String ACCESS_KEY = System.getenv("BROWSERSTACK_ACCESS_KEY");
+
+        String hubUrl = "https://"+System.getenv("BROWSERSTACK_USERNAME")+":"+System.getenv("BROWSERSTACK_ACCESS_KEY")+"@"+bsHubServer;
+
+        DesiredCapabilities capability = new DesiredCapabilities();
+
+        capability.setCapability("realMobile", true);
+        capability.setCapability("device", mobile);
+        capability.setCapability("os_version", mobileOsVersion);
+        capability.setCapability("browserstack.debug", true);
+        capability.setCapability("acceptSslCerts", true);
+
+        if (System.getProperty("local") != null && System.getProperty("local").equals("true")) {
+            capability.setCapability("browserstack.local", "true");
+            l = new Local();
+            Map<String, String> options = new HashMap<String, String>();
+            options.put("key", ACCESS_KEY);
+            try {
+                l.start(options);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            return new RemoteWebDriver(new URL(hubUrl), capability);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static WebDriver createSeleniumGridRemoteDriver(String browser, String browserVersion, Platform platform, String hubUrl)
@@ -57,27 +95,4 @@ public abstract class BrowserBase implements WebDriverProvider{
             throw new RuntimeException(e);
         }
     }
-
-    public static WebDriver setCustomWindowSize(WebDriver webDriver, int windowWidth, int windowHeight) {
-
-        if (windowWidth == 0 || windowHeight == 0) {
-
-//            java.awt.Point targetPosition = new java.awt.Point(0, 0);
-//            webDriver.manage().window().setPosition(targetPosition);
-//
-//            java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//            windowWidth = (int)screenSize.getWidth();
-//            windowHeight = (int)screenSize.getHeight();
-//
-//            java.awt.Dimension targetSize = new java.awt.Dimension(windowWidth, windowHeight); //your screen resolution here
-//            webDriver.manage().window().setSize(targetSize);
-
-        } else {
-
-            webDriver.manage().window().setPosition(new Point(0,0));
-            webDriver.manage().window().setSize(new Dimension(windowWidth,windowHeight));
-        }
-        return webDriver;
-    }
-
 }

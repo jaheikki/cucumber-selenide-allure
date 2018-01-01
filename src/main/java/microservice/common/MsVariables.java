@@ -18,6 +18,7 @@ public class MsVariables {
 
     //SELENIUM GRID
     public static final String seleniumGridHubAddress = config.getString("selenium_grid_hub_address");
+    public static final String browserstackServer = config.getString("browserstack_server");
 
     //FOR COMMON METHODs waitForElementClick and waitForButtonClickAngular
     public static int elementClickTimeoutMs = config.getInt("element_click_timeout_ms");
