@@ -1,9 +1,8 @@
 # cucumber.andon.yml
 pipelines:
   Cucumber:
-    environment_variables:
-   
-    group: Acceptance testing
+    #environment_variables:   
+    group: Acceptance_testing
     materials:
     stages:
       - acceptance_tests: # name of stage
