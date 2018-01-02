@@ -4,6 +4,13 @@ pipelines:
     #environment_variables:   
     group: Acceptance_testing
     materials:
+      cucumber:  # this is the name of material
+        # says about type of material and url at once
+        git: https://github.com/jaheikki/cucumber-selenide-allure.git
+        branch: master
+        destination: cucumber-selenide-allure
+        whitelist: # monitor changes only for this component
+          - cucumber.andon.yml/**/*.*
     stages:
       - acceptance_tests: # name of stage
           jobs:
