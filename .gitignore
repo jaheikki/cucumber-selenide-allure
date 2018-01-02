@@ -20,3 +20,4 @@ buildNumber.properties
 .allure
 .idea
 build
+browserstack.err

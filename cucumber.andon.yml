@@ -31,4 +31,4 @@ pipelines:
                    command: bash
                    arguments:
                     - "-c"
-                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install allure:report -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all\""
+                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install allure:report -Denv=remote -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all\""
