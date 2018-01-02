@@ -37,7 +37,7 @@ pipelines:
                    command: bash
                    arguments:
                     - "-c"
-                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dbrowser=marionette -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all\""
+                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dbrowser=chrome -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all\""
                - exec: # Printout env variables
                    run_if: passed
                    command: bash
