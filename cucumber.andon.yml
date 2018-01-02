@@ -32,12 +32,12 @@ pipelines:
                    arguments:
                     - "-c"
                     - "cd cucumber-selenide-allure/src/test/resources && docker-compose -f docker-compose.yml up -d"
-              - exec: # Add chromedriver dependencies
-                  run_if: passed
-                  command: bash
-                  arguments:
-                   - "-c"
-                   - "sudo apt-get install apt-file && apt-file update"
+               - exec: # Add chromedriver dependencies
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "sudo apt-get install apt-file && apt-file update"
                - exec:
                    run_if: passed
                    command: bash
