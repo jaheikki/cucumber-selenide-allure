@@ -1,0 +1,28 @@
+# cucumber.andon.yml
+pipelines:
+  Cucumber:
+    environment_variables:
+   
+    group: Acceptance testing
+    materials:
+    stages:
+      - acceptance_tests: # name of stage
+          jobs:
+            run_acceptance_tests: # name of the job
+              andon: # andon job configuration
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
+                #sonarqube: true
+              artifacts:
+               - test:
+                   source: cucumber-selenide-allure/target/site/allure-maven-plugin/
+               #- test:
+               #    source: ci/hus-ci-tests/target/hustests.log
+              tabs:
+                Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html 
+              tasks:
+               - exec: # Printout env variables
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install allure:report -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all\""
