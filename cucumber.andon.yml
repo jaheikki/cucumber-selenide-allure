@@ -37,7 +37,7 @@ pipelines:
                    command: bash
                    arguments:
                     - "-c"
-                    - "sudo apt-get -y install apt-file && apt-file update"
+                    - "sudo apt-get -y install libxi6 libgconf-2-4"
                - exec:
                    run_if: passed
                    command: bash
