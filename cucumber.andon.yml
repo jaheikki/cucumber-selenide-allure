@@ -43,7 +43,8 @@ pipelines:
                    command: bash
                    arguments:
                     - "-c"
-                    - "echo $BROWSERSTACK_USERNAME && echo $BROWSERSTACK_ACCESS_KEY"
+#                    - "echo $BROWSERSTACK_USERNAME && echo $BROWSERSTACK_ACCESS_KEY"
+                    - "sleep 240s"
                - exec:
                    run_if: passed
                    command: bash
