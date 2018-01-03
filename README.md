@@ -34,8 +34,8 @@ Preconditions:
     
 6. Run CucumberJVM tests:
     
-     - Run 'catalog' tests by default browser (Firefox may not work properly, so you need to use 'marionette'):
-       - mvn clean install -Dcucumber.options="--tags @catalog -Dbrowser=marionette"
+     - Run 'catalog' tests by default browser (Firefox will work, because selenide uses'marionette' inside):
+       - mvn clean install -Dcucumber.options="--tags @catalog -Dbrowser=firefox"
      - Run 'order' tests by chrome browser:
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
      - Run 'order' tests by chrome browser with mobile size (Apple iPhone 6 size):  
