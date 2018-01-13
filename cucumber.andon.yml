@@ -23,12 +23,17 @@ pipelines:
 #                  - BS_USER
 #                ui_def_variables:
 #                  - BS_USER
-              deploy_env:
-                docker_compose:
-                  - "src/test/resources/docker-compose.yml"
+                selenium_grid:
+                  version: "2.53.1"
+                  browsers:
+                    - chrome
+                    - firefox
+                deploy_env:
+                  docker_compose:
+                    - "src/test/resources/docker-compose.yml"
               artifacts:
                - test:
-                   source: cucumber-selenide-allure/target/site/allure-maven-plugin/
+                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
                #- test:
                #    source: ci/hus-ci-tests/target/hustests.log
               tabs:
