@@ -33,13 +33,13 @@ pipelines:
                #    source: ci/hus-ci-tests/target/hustests.log
               tabs:
                 Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html 
-              tasks:
-               - exec:
-                   run_if: passed
-                   command: bash
-                   arguments:
-                    - "-c"
-                    - "cd cucumber-selenide-allure/src/test/resources && docker-compose -f docker-compose.yml up -d"
+#              tasks:
+#               - exec:
+#                   run_if: passed
+#                   command: bash
+#                   arguments:
+#                    - "-c"
+#                    - "cd cucumber-selenide-allure/src/test/resources && docker-compose -f docker-compose.yml up -d"
                - exec: # Add chromedriver dependencies
                    run_if: passed
                    command: bash
