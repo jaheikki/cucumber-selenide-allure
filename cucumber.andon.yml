@@ -20,8 +20,9 @@ pipelines:
                 #sonarqube: true
                 ui_def_secure_variables:
                   - BS_PASSWORD
-                ui_def_variables:
                   - BS_USER
+#                ui_def_variables:
+#                  - BS_USER
               deploy_env:
                 docker_compose:
                   - "src/test/resources/docker-compose.yml"
@@ -50,7 +51,7 @@ pipelines:
                    command: bash
                    arguments:
                     - "-c"
-#                    - "echo $BROWSERSTACK_USERNAME && echo $BROWSERSTACK_ACCESS_KEY"
+                    - "echo $BROWSERSTACK_USERNAME && echo $BROWSERSTACK_ACCESS_KEY"
                     - "sleep 240s"
                - exec:
                    run_if: passed
