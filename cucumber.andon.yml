@@ -30,7 +30,7 @@ pipelines:
                     - firefox
                 deploy_env:
                   docker_compose:
-                    - "src/test/resources/docker-compose.yml"
+                    - "/Users/heikmjar/git/cucumber-selenide-allure/src/test/resources/docker-compose.yml"
               artifacts:
                - test:
                    source: cucumber-selen ide-allure/target/site/allure-maven-plugin/

@@ -14,3 +14,5 @@ CREATE TABLE IF NOT EXISTS customer (
 );
 
 INSERT INTO customer (lastname, firstname, email,street, city) VALUES ('Selanne', 'Teemu', 'Teemu@com', 'Manhattan', 'NY');
+INSERT INTO customer (lastname, firstname, email,street, city) VALUES ('Messi', 'Lionel', 'Lionel@com', 'Barcelona', 'Spain');
+INSERT INTO customer (lastname, firstname, email,street, city) VALUES ('Jong-un', 'Kim', 'Kim@com', ' Pjongjang', 'North Korea');
