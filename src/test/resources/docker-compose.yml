@@ -1,8 +1,8 @@
 version: '2'
-networks:
-  default:
-    external:
-      name: andon_andon-network
+#networks:
+#  default:
+#    external:
+#      name: andon_andon-network
 services:
   busybox:
     image: busybox
