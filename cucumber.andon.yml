@@ -58,14 +58,13 @@ pipelines:
                    arguments:
                     - "-c"
                     - "mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome -Dremote=http://hub:4444/wd/hub -Denv=remote"
-
-               - exec: # For debug
-                   run_if: passed
-                   command: bash
-                   arguments:
-                    - "-c"
-#                    - "echo $BROWSERSTACK_USERNAME && echo $BROWSERSTACK_ACCESS_KEY"
-                    - "sleep 240s"
+#               - exec: # For debug
+#                   run_if: passed
+#                   command: bash
+#                   arguments:
+#                    - "-c"
+##                    - "echo $BROWSERSTACK_USERNAME && echo $BROWSERSTACK_ACCESS_KEY"
+#                    - "sleep 240s"
 #               - exec:
 #                   run_if: passed
 #                   command: bash
