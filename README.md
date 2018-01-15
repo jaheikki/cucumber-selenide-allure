@@ -40,6 +40,8 @@ Preconditions:
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome
      - Run 'order' tests by chrome browser with mobile size (Apple iPhone 6 size):  
        - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=chrome -Dselenide.browser-size=375x667
+     - Run 'order' tests by Firefox in standalone debug grid container:
+       - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=firefox -Dremote=http://localhost:4444/wd/hub -    Denv=local-grid  
      - Run 'order' tests by custom firefox browser (from local page) in BrowserStack:   
        - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider -Dlocal
      - Run 'order' tests by custom mobile browser (from local page)  in BrowserStack:   
