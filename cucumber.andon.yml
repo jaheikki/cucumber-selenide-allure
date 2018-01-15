@@ -18,9 +18,9 @@ pipelines:
               andon: # andon job configuration
                 image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
                 #sonarqube: true
-#                ui_def_secure_variables:
-#                  - TEST_PASSWORD
-#                  - TEST_USER
+                ui_def_secure_variables:
+                  - TEST_PASSWORD
+                  - TEST_USER
                 ui_def_variables:
                   - TEST_USER
 #                selenium_grid:
@@ -28,9 +28,9 @@ pipelines:
 #                  browsers:
 #                    - chrome
 #                    - firefox
-                deploy_env:
-                  docker_compose:
-                    - "cucumber-selenide-allure/src/test/resources/docker-compose.yml"
+#                deploy_env:
+#                  docker_compose:
+#                    - "cucumber-selenide-allure/src/test/resources/docker-compose.yml"
               artifacts:
                - test:
                    source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
@@ -52,12 +52,12 @@ pipelines:
 #                   arguments:
 #                    - "-c"
 #                    - "sudo apt-get -y install libxi6 libgconf-2-4"
-               - exec: # For debug
-                   run_if: passed
-                   command: bash
-                   arguments:
-                    - "-c"
-                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Dcucumber.options=\"--tags @order\" -Dselenide.browser=chrome -Dremote=http://hub:4444/wd/hub -Denv=remote"
+#               - exec: # For debug
+#                   run_if: passed
+#                   command: bash
+#                   arguments:
+#                    - "-c"
+#                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Dcucumber.options=\"--tags @order\" -Dselenide.browser=chrome -Dremote=http://hub:4444/wd/hub -Denv=remote"
 #               - exec: # For debug
 #                   run_if: passed
 #                   command: bash
