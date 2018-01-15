@@ -20,7 +20,6 @@ pipelines:
                 #sonarqube: true
                 ui_def_secure_variables:
                   - TEST_PASSWORD
-                  - TEST_USER
                 ui_def_variables:
                   - TEST_USER
 #                selenium_grid:
