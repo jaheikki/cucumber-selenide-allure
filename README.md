@@ -42,7 +42,7 @@ Preconditions:
        - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=chrome -Dselenide.browser-size=375x667
      - Run 'order' tests by Firefox in standalone debug grid container (Selenide default Webriver capabilities):
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=firefox -Dremote=http://localhost:4444/wd/hub -    Denv=local-grid (Note: take session to localhost:5900 with VNCViewer with pw 'secret')
-       OR to run in grid with custom browser (customizable Webriver capabilities)
+       OR to run in grid with custom browser (customizable Webriver capabilities):
        - mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=microservice.browser.FirefoxLinuxGridDriverProvider -Denv=local-grid (Note: take session to localhost:5900 with VNCViewer with pw 'secret')
      - Run 'order' tests by custom firefox browser (from local page) in BrowserStack:   
        - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider -Dlocal
