@@ -19,15 +19,15 @@ pipelines:
                 image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
                 #sonarqube: true
 #                ui_def_secure_variables:
-#                  - BS_PASSWORD
-#                  - BS_USER
-#                ui_def_variables:
-#                  - BS_USER
-                selenium_grid:
-                  version: "2.53.1"
-                  browsers:
-                    - chrome
-                    - firefox
+#                  - TEST_PASSWORD
+#                  - TEST_USER
+                ui_def_variables:
+                  - TEST_USER
+#                selenium_grid:
+#                  version: "2.53.1"
+#                  browsers:
+#                    - chrome
+#                    - firefox
                 deploy_env:
                   docker_compose:
                     - "cucumber-selenide-allure/src/test/resources/docker-compose.yml"
@@ -44,7 +44,7 @@ pipelines:
                    command: bash
                    arguments:
                     - "-c"
-                    - "pwd;ls -ltr"
+                    - "pwd;ls -ltr;sleep 240s"
 #                    - "cd cucumber-selenide-allure/src/test/resources && docker-compose -f docker-compose.yml up -d"
 #               - exec: # Add chromedriver dependencies
 #                   run_if: passed
