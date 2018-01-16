@@ -76,7 +76,6 @@ pipelines:
                    arguments:
                     - "-c"
                     - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @simple_test\" -Dbrowser=microservice.browser.Chrome61MacRemoteDriverProvider"
-#                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @catalog\""
                - exec: # Printout env variables
                    run_if: any
                    command: bash
