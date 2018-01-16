@@ -69,7 +69,7 @@ pipelines:
                    arguments:
                     - "-c"
                     #- "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dbrowser=chrome -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all\""
-                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @order\" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider -Dlocal"
+                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=bs -Dcucumber.options=\"--tags @order\" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider -Dlocal"
 #               - exec: # Printout env variables
 #                   run_if: passed
 #                   command: bash
