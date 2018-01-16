@@ -32,7 +32,7 @@ pipelines:
 #                    - "cucumber-selenide-allure/src/test/resources/docker-compose.yml"
               artifacts:
                - test:
-                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
+                   source: cucumber-selenide-allure/target/site/allure-maven-plugin/
                #- test:
                #    source: ci/hus-ci-tests/target/hustests.log
               tabs:
@@ -66,7 +66,7 @@ pipelines:
                   - BROWSERSTACK_USERNAME
               artifacts:
                - test:
-                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
+                   source: cucumber-selenide-allure/target/site/allure-maven-plugin/
               tabs:
                 Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html
               tasks:
@@ -76,6 +76,7 @@ pipelines:
                    arguments:
                     - "-c"
                     - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @simple_test\" -Dbrowser=microservice.browser.Chrome61MacRemoteDriverProvider"
+#                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @catalog\""
                - exec: # Printout env variables
                    run_if: any
                    command: bash
@@ -92,7 +93,7 @@ pipelines:
                   - BROWSERSTACK_USERNAME
               artifacts:
                - test:
-                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
+                   source: cucumber-selenide-allure/target/site/allure-maven-plugin/
               tabs:
                 Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html
               tasks:
