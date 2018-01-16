@@ -1,6 +1,8 @@
-package microservice.testlibraries;
+package teststepdefinitions;
 
+import cucumber_dependency_injection.World;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -8,20 +10,29 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
-import java.io.IOException;
-
 import static com.codeborne.selenide.Selenide.$;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class SimpleTestStepDefinitions {
 
-    @Given("^browser should be open Wikipedia$")
-    public void browserShouldBeOpenWikipedia() throws IOException {
+
+    private World world;
+
+    public SimpleTestStepDefinitions(World world) {
+        this.world = world;
+
+    }
+
+    @Given("^browser should be open in Wikipedia page$")
+    public void browserShouldBeOpenWikipedia() {
         printMethodName();
 
         Selenide.open("https://en.wikipedia.org/wiki/Main_Page");
         $(By.xpath("//a[contains(@title,'Visit the main page')]")).shouldBe(Condition.visible);
-        Selenide.sleep(2000);
+        Selenide.sleep(500);
+
+        //Just prove that data structure can be reached accross stepdef classes through "World"
+        //world.msMainPage
 
     }
 
@@ -30,7 +41,7 @@ public class SimpleTestStepDefinitions {
         printMethodName();
 
         $(By.xpath("//input[contains(@placeholder,'Search Wikipedia')]")).shouldBe(Condition.visible).val(searchWord);
-        Selenide.sleep(1000);
+        Selenide.sleep(500);
 
     }
 
@@ -39,7 +50,7 @@ public class SimpleTestStepDefinitions {
         printMethodName();
 
         $(By.xpath("//input[contains(@placeholder,'Search Wikipedia')]")).shouldBe(Condition.visible).pressEnter();
-        Selenide.sleep(1000);
+        Selenide.sleep(500);
     }
 
     @Then("^i am able to see BrowserStack wikipedia page$")

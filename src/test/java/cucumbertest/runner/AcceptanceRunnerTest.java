@@ -16,7 +16,8 @@ import static microservice.helper.SeleniumHelper.*;
         //format = { "pretty", "html:target/cucumber" },
         //features = { "classpath:catalog/tests" },
         features = { "classpath:acceptance/tests" },
-        glue = {"microservice/testlibraries"}
+        glue = {"teststepdefinitions"}
+
 )
 
 public class AcceptanceRunnerTest {
@@ -33,7 +34,6 @@ public class AcceptanceRunnerTest {
 
         //If true, Selenide uses Javascript to click element -> can be used as temporary workaround if bugs related clicking (especially in Chrome)
         Configuration.clickViaJs = MsVariables.selenideClickElementByJavascript;
-
 
     }
 

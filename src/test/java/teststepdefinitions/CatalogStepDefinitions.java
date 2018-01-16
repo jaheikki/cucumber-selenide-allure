@@ -1,4 +1,4 @@
-package microservice.testlibraries;
+package teststepdefinitions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import cucumber.api.java.en.And;

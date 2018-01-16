@@ -27,6 +27,7 @@ public class CustomersPage {
         printMethodName();
 
         MyDatasource customerDatasource=new MyDatasource(mariaDBJDBCUrl,mariaDBJDBUser,mariaDBJDBCPassword);
+
         customerDatasource.runSqlScript("customer.sql");
 
         this.customerJDBCTemplate = new JdbcTemplate(customerDatasource.getDataSource());

@@ -1,16 +1,15 @@
-package microservice.testlibraries;
+package teststepdefinitions;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber_dependency_injection.World;
 import microservice.common.MsVariables;
 import microservice.pages.ProductsPage;
 import microservice.msrest.MsCatalogRest;
 import microservice.msrest.MsCustomerRest;
-import org.openqa.selenium.By;
 
 import java.io.IOException;
 
@@ -22,8 +21,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AcceptanceTestsStepDefinitions {
 
+    private ProductsPage mainPage;
+    private World world;
 
-    private ProductsPage msMainPage;
+    public AcceptanceTestsStepDefinitions(World world) {
+        this.world = world;
+
+        ProductsPage mainPage = world.msMainPage;
+        this.mainPage = mainPage;
+
+    }
+    //private ProductsPage msMainPage;
 
     @Given("^order by (.*) should not exist$")
     public void orderShouldNotExistByCustomer(String customer) throws IOException {
@@ -40,10 +48,12 @@ public class AcceptanceTestsStepDefinitions {
 //            e.printStackTrace();
 //        }
 
-        msMainPage = Selenide.open(MsVariables.microserviceHost, ProductsPage.class);
-        msMainPage.navigateToOrdersPage()
+
+        mainPage = Selenide.open(MsVariables.microserviceHost, ProductsPage.class);
+        mainPage.navigateToOrdersPage()
                 .deleteOrderByCustomer(customer)
                 .navigateBackToProductsPage();
+
     }
 
 
@@ -67,7 +77,7 @@ public class AcceptanceTestsStepDefinitions {
     public void productIsAddedToTheCatalog(String catalogItem, String catalogItemPrice) {
         printMethodName();
 
-        msMainPage.navigateToAddProductPage()
+        mainPage.navigateToAddProductPage()
                 .addCatalogItem(catalogItem, catalogItemPrice)
                 .navigateBackToProductsPage();
     }
@@ -76,7 +86,7 @@ public class AcceptanceTestsStepDefinitions {
     public void customerIsAdded(String firstname, String lastname) {
         printMethodName();
 
-        msMainPage.navigateToCustomersPage()
+        mainPage.navigateToCustomersPage()
                 .addCustomer(firstname,lastname)
                 .navigateBackToProductsPage();
     }
@@ -88,7 +98,7 @@ public class AcceptanceTestsStepDefinitions {
         //Remove this, just to get UI test to fail for a allure report and selenide screenshot
         //$(By.xpath("//h1[contains(text(),'Success')]")).shouldBe(Condition.visible);
 
-        msMainPage.navigateToOrdersPage()
+        mainPage.navigateToOrdersPage()
                 .addOrderByCustomer(catalogItem, customer)
                 .navigateBackToProductsPage();
 
@@ -98,7 +108,7 @@ public class AcceptanceTestsStepDefinitions {
     public void iCanVerifyMyOrder(String catalogItem, String price,String customer) {
         printMethodName();
 
-        msMainPage.navigateToOrdersPage()
+        mainPage.navigateToOrdersPage()
                 .verifyOrderByCustomer(customer,catalogItem, price)
                 .navigateBackToProductsPage();
 
