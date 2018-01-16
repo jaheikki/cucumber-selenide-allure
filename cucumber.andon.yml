@@ -49,62 +49,65 @@ pipelines:
                    command: bash
                    arguments:
                     - "-c"
-                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @simple_test\" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider"
+#                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @simple_test\" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider"
+                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @catalog\""
                - exec: # Printout env variables
                    run_if: passed
                    command: bash
                    arguments:
                     - "-c"
                     - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
-#            run_chrome_on_browserstack: # name of the job
-#              andon: # andon job configuration
-#                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
-#                #sonarqube: true
-#                ui_def_secure_variables:
-#                  - BROWSERSTACK_ACCESS_KEY
-#                ui_def_variables:
-#                  - BROWSERSTACK_USERNAME
-#              artifacts:
-#               - test:
-#                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
-#              tabs:
-#                Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html
-#              tasks:
-#               - exec:
-#                   run_if: passed
-#                   command: bash
-#                   arguments:
-#                    - "-c"
+            run_chrome_on_browserstack: # name of the job
+              andon: # andon job configuration
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
+                #sonarqube: true
+                ui_def_secure_variables:
+                  - BROWSERSTACK_ACCESS_KEY
+                ui_def_variables:
+                  - BROWSERSTACK_USERNAME
+              artifacts:
+               - test:
+                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
+              tabs:
+                Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html
+              tasks:
+               - exec:
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
 #                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @simple_test\" -Dbrowser=microservice.browser.Chrome61MacRemoteDriverProvider"
-#               - exec: # Printout env variables
-#                   run_if: passed
-#                   command: bash
-#                   arguments:
-#                    - "-c"
-#                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
-#            run_samsung_mobile_on_browserstack: # name of the job
-#              andon: # andon job configuration
-#                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
-#                #sonarqube: true
-#                ui_def_secure_variables:
-#                  - BROWSERSTACK_ACCESS_KEY
-#                ui_def_variables:
-#                  - BROWSERSTACK_USERNAME
-#              artifacts:
-#               - test:
-#                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
-#              tabs:
-#                Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html
-#              tasks:
-#               - exec:
-#                   run_if: passed
-#                   command: bash
-#                   arguments:
-#                    - "-c"
+                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @catalog\""
+               - exec: # Printout env variables
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
+            run_samsung_mobile_on_browserstack: # name of the job
+              andon: # andon job configuration
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
+                #sonarqube: true
+                ui_def_secure_variables:
+                  - BROWSERSTACK_ACCESS_KEY
+                ui_def_variables:
+                  - BROWSERSTACK_USERNAME
+              artifacts:
+               - test:
+                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
+              tabs:
+                Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html
+              tasks:
+               - exec:
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
 #                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @simple_test\" -Dbrowser=microservice.browser.SamsungGalaxyS7_V6_0_RemoteDriverProvider"
-#               - exec: # Printout env variables
-#                   run_if: passed
-#                   command: bash
-#                   arguments:
-#                    - "-c"
-#                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
+                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @catalog\""
+               - exec: # Printout env variables
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
