@@ -14,7 +14,7 @@ pipelines:
     stages:
       - acceptance_tests: # name of stage
           jobs:
-            run_acceptance_tests: # name of the job
+            run_firefox_on_browserstack: # name of the job
               andon: # andon job configuration
                 image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
                 #sonarqube: true
@@ -38,25 +38,13 @@ pipelines:
               tabs:
                 Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html 
               tasks:
-               - exec:
+               - exec: #Sleep 2minutes to get E-commerce microservice containers up
                    run_if: passed
                    command: bash
                    arguments:
                     - "-c"
-                    - "pwd;ls -ltr"
+                    - "pwd;ls -ltr;sleep 120s"
 #                    - "cd cucumber-selenide-allure/src/test/resources && docker-compose -f docker-compose.yml up -d"
-#               - exec: # Add chromedriver dependencies
-#                   run_if: passed
-#                   command: bash
-#                   arguments:
-#                    - "-c"
-#                    - "sudo apt-get -y install libxi6 libgconf-2-4"
-#               - exec: # For debug
-#                   run_if: passed
-#                   command: bash
-#                   arguments:
-#                    - "-c"
-#                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Dcucumber.options=\"--tags @order\" -Dselenide.browser=chrome -Dremote=http://hub:4444/wd/hub -Denv=remote"
                - exec: # For debug
                    run_if: passed
                    command: bash
@@ -68,11 +56,80 @@ pipelines:
                    command: bash
                    arguments:
                     - "-c"
-                    #- "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dbrowser=chrome -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all\""
-                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @order\" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider -Dlocal"
-#               - exec: # Printout env variables
-#                   run_if: passed
-#                   command: bash
-#                   arguments:
-#                    - "-c"
-#                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
+                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @bs_test\" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider -Dlocal"
+               - exec: # Printout env variables
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
+            run_chrome_on_browserstack: # name of the job
+              andon: # andon job configuration
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
+                #sonarqube: true
+                ui_def_secure_variables:
+                  - BROWSERSTACK_ACCESS_KEY
+                ui_def_variables:
+                  - BROWSERSTACK_USERNAME
+                deploy_env:
+                  docker_compose:
+                    - "cucumber-selenide-allure/src/test/resources/docker-compose.yml"
+              artifacts:
+               - test:
+                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
+              tabs:
+                Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html
+              tasks:
+               - exec: #Sleep 2minutes to get E-commerce microservice containers up
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "pwd;ls -ltr;sleep 120s"
+               - exec:
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @bs_test\" -Dbrowser=microservice.browser.Chrome61MacRemoteDriverProvider -Dlocal"
+               - exec: # Printout env variables
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
+            run_samsung_mobile_on_browserstack: # name of the job
+              andon: # andon job configuration
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
+                #sonarqube: true
+                ui_def_secure_variables:
+                  - BROWSERSTACK_ACCESS_KEY
+                ui_def_variables:
+                  - BROWSERSTACK_USERNAME
+                deploy_env:
+                  docker_compose:
+                    - "cucumber-selenide-allure/src/test/resources/docker-compose.yml"
+              artifacts:
+               - test:
+                   source: cucumber-selen ide-allure/target/site/allure-maven-plugin/
+              tabs:
+                Report: cucumber-selenide-allure/target/site/allure-maven-plugin/index.html
+              tasks:
+               - exec: #Sleep 2minutes to get E-commerce microservice containers up
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "pwd;ls -ltr;sleep 120s"
+               - exec:
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--tags @bs_test\" -Dbrowser=microservice.browser.SamsungGalaxyS7_V6_0_RemoteDriverProvider -Dlocal"
+               - exec: # Printout env variables
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn allure:report"
