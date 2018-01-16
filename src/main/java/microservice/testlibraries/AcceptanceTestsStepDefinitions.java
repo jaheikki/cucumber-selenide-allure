@@ -1,5 +1,6 @@
 package microservice.testlibraries;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -9,6 +10,7 @@ import microservice.common.MsVariables;
 import microservice.pages.ProductsPage;
 import microservice.msrest.MsCatalogRest;
 import microservice.msrest.MsCustomerRest;
+import org.openqa.selenium.By;
 
 import java.io.IOException;
 
@@ -43,6 +45,7 @@ public class AcceptanceTestsStepDefinitions {
                 .deleteOrderByCustomer(customer)
                 .navigateBackToProductsPage();
     }
+
 
     @And("product (.*) should not be in the catalog through REST API")
     public void productShouldNotBeInTheCatalogThroughRESTAPI( String catalogItemName) {
