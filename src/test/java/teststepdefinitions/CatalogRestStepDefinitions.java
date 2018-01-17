@@ -19,47 +19,6 @@ public class CatalogRestStepDefinitions {
     @Given("^catalog item exists at the database$")
     public void catalogItemExistsAtTheDatabase() throws InterruptedException {
 
-//        //SSH key based authentication
-//        SSHService ssh = new SSHService("192.168.50.4", "vagrant", "",new File("/Users/jariheikkila/.ssh/id_rsa"),"");
-//
-//        //Password based authentication
-//        //SSHService ssh = new SSHService("192.168.50.4", "vagrant", "vagrant",new File(""),"");
-//
-//        String localFolder = "/Users/jariheikkila/Downloads/temp/";
-//        String remoteFolder = "/home/vagrant/";
-//        String[] remotefiles = new String[] {remoteFolder+"test1-remote.txt", remoteFolder+"test2-remote.txt", remoteFolder+"test3-remote.txt"};
-//        String[] localfiles = new String[] {localFolder+"test1-local.txt", localFolder+"test2-local.txt", localFolder+"test3-local.txt"};
-//
-//        String response = ssh.writeToShell("sshKeyAuth", "ifconfig");
-//        //String response = ssh.writeToShell("passwordAuth", "ifconfig");
-//        System.out.println("resp: "+response);
-//
-//        //delete remote files from local folder
-//        final File folder = new File(localFolder);
-//        for(File f: folder.listFiles())
-//            if(f.getName().endsWith("-remote.txt"))
-//                f.delete();
-//
-//        //delete local files from remote folder
-//        String cmd = "rm "+remoteFolder + "test*-local.txt";
-//        ssh.executeCommand("sshKeyAuth",cmd);
-//        //ssh.executeCommand("passwordAuth",cmd);
-//
-//        //upload file and rename
-//        ssh.uploadFile("sshKeyAuth",localFolder+"iloveme-local.txt","iloveme-remote.txt","/home/vagrant","0755");
-//        //ssh.uploadFile("passwordAuth",localFolder+"iloveme-local.txt","iloveme-remote.txt","/home/vagrant","0755");
-//
-//        //upload files
-//        ssh.uploadFiles("sshKeyAuth",remoteFolder, "0700", localfiles);
-//        //ssh.uploadFiles("passwordAuth",remoteFolder, "0700", localfiles);
-//
-//        //download file
-//        ssh.downloadFile("sshKeyAuth", remoteFolder+"iloveme-remote.txt", localFolder);
-//        //ssh.downloadFile("passwordAuth", remoteFolder+"iloveme-remote.txt", localFolder);
-//
-//        //download files
-//        ssh.downloadFiles("sshKeyAuth", localFolder, remotefiles);
-//        //ssh.downloadFiles("passwordAuth", localFolder, remotefiles);
     }
 
     @When("i get the catalog item from rest")

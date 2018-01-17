@@ -1,4 +1,4 @@
-package cucumbertest.runner;
+package tmp;
 
 import io.qameta.allure.Link;
 import io.qameta.allure.Issue;
