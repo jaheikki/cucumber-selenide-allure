@@ -31,9 +31,6 @@ public class SimpleTestStepDefinitions {
         $(By.xpath("//a[contains(@title,'Visit the main page')]")).shouldBe(Condition.visible);
         Selenide.sleep(500);
 
-        //Just prove that data structure can be reached accross stepdef classes through "World"
-        //world.msMainPage
-
     }
 
     @When("^i write (.*) to search field$")

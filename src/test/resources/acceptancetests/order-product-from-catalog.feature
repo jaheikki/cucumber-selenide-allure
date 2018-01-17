@@ -4,7 +4,8 @@
 Feature: Microservice acceptance tests
 
   Scenario: Order a product from a catalog
-    Given order by Teemu Selanne should not exist
+    Given E-commerce Manager ui should be open
+     And order by Teemu Selanne should not exist
      And product Torspo should not be in the catalog through REST API
      And customer Teemu Selanne should not exist through REST API
      And product Torspo is added to the catalog with price 119.0
