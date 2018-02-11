@@ -3,7 +3,6 @@ package microservice.helper;
 import com.jcraft.jsch.*;
 
 
-
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -52,6 +51,7 @@ public class SFTPUpload {
     }
 
     public String getCurrentDirectory() {
+        log.info(printMethodName());
 
         String currentDirectory = "";
         try {
@@ -65,6 +65,7 @@ public class SFTPUpload {
     }
 
     public String goToDirectory(String goToDirectoryPath) {
+        log.info(printMethodName());
 
         System.out.println("CurrentDirectory: "+getCurrentDirectory());
 
@@ -86,6 +87,7 @@ public class SFTPUpload {
 
     //public String createDirectory(String createNewDirectoryPath, String chmod) {
     public String createDirectory(String createNewDirectoryPath) {
+        log.info(printMethodName());
 
         System.out.println("CurrentDirectory: "+getCurrentDirectory());
         String newCurrentDirectory="";
@@ -103,6 +105,7 @@ public class SFTPUpload {
     }
 
     public boolean uploadFiles(String remoteFolder, String... localFiles) {
+        log.info(printMethodName());
 
         for (String file:localFiles) {
             try {
@@ -121,6 +124,7 @@ public class SFTPUpload {
     }
 
     public boolean changeFilesAccessPermissions(String chmod, String remoteFolder, String... localFiles) {
+        log.info(printMethodName());
 
         for (String file:localFiles) {
             try {
@@ -140,6 +144,7 @@ public class SFTPUpload {
     }
 
     public boolean changeFolderAccessPermissions(String chmod, String... remoteFolders) {
+        log.info(printMethodName());
 
         for (String folder:remoteFolders) {
             try {
@@ -161,6 +166,7 @@ public class SFTPUpload {
 
 
     public boolean removeFiles(String remoteFolder, String... remoteFiles)  {
+        log.info(printMethodName());
 
         for (String file : remoteFiles) {
             try {
@@ -182,26 +188,37 @@ public class SFTPUpload {
         return true;
     }
 
-    public boolean removeFolder(String remoteFolder)  {
+    /*Removes just folder if it is empty*/
+    public boolean removeFolder(String remoteFolder) {
+        log.info(printMethodName());
+
+        boolean remoteDirExists = true;
 
         try {
-            if (channelSftp.ls(remoteFolder).size() > 0) {
+            channelSftp.ls(remoteFolder).isEmpty();
+        } catch (SftpException e) {
+            //e.printStackTrace();
+            System.out.println("No such directory: "+ remoteFolder);
+            remoteDirExists = false;
+        }
+
+        try {
+            if (remoteDirExists == true) {
                 channelSftp.rmdir(remoteFolder);
-            } else {
-                System.out.println("No directory: "+ remoteFolder);
-                return false;
+                System.out.println("Successfully removed following directory "+ remoteFolder + ": ");
+                return true;
             }
         } catch (SftpException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to remove directory: " + remoteFolder + "!");
         }
 
-        System.out.println("Successfully removed following directory "+ remoteFolder + ": ");
-
-        return true;
+        return false;
     }
 
+    /*Removes folder and subfolders including files in them recursively*/
     public boolean removeFolderRecursively(String remoteFolder) throws SftpException {
+        log.info(printMethodName());
 
         try {
             channelSftp.ls(remoteFolder).size();

@@ -50,7 +50,7 @@ pipelines:
                    arguments:
                     - "-c"
                     - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @simple_test\" -Dbrowser=microservice.browser.Firefox53WindowsRemoteDriverProvider"
-               - exec: # Printout env variables
+               - exec: # Generate test report
                    run_if: any
                    command: bash
                    arguments:
@@ -76,7 +76,7 @@ pipelines:
                    arguments:
                     - "-c"
                     - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @simple_test\" -Dbrowser=microservice.browser.Chrome61MacRemoteDriverProvider"
-               - exec: # Printout env variables
+               - exec: # Generate test report
                    run_if: any
                    command: bash
                    arguments:
@@ -102,7 +102,7 @@ pipelines:
                    arguments:
                     - "-c"
                     - "export BROWSERSTACK_USERNAME && export BROWSERSTACK_ACCESS_KEY && cd cucumber-selenide-allure&&ls -ltr&&pwd&&mvn clean install -Denv=remote -Dcucumber.options=\"--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @simple_test\" -Dbrowser=microservice.browser.SamsungGalaxyS7_V6_0_RemoteDriverProvider"
-               - exec: # Printout env variables
+               - exec: # Generate test report
                    run_if: any
                    command: bash
                    arguments:

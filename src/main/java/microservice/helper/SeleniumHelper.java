@@ -110,13 +110,19 @@ public class SeleniumHelper {
 
     }
 
-    public static void printMethodName() {
+
+    public static String printMethodName() {
         String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-        System.out.println("\n*******************************************");
-        System.out.println("***** Method: " + methodName + " *****");
-        System.out.println("*******************************************");
-        System.out.println(new DateTime());
+        String line1 = ("\n*******************************************\n");
+        String line2 = ("***** Method: " + methodName + " *****\n");
+        String line3 = ("*******************************************\n");
+        String line4 = (new DateTime()).toString();
+        String printout = line1+line2+line3+line4;
+        System.out.println(printout);
+        return printout;
+
     }
+
 
     public static String changeTimeFormatForFilenameUse()  {
         printMethodName();
