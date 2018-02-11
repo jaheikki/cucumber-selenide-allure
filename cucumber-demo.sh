@@ -16,18 +16,11 @@ pause 'Press [Enter] to run: mvn clean install -Dcucumber.options="--tags @catal
 mvn clean install -Dcucumber.options="--tags @catalog"
 echo ""
 
-echo "--------------------------------------------"
-echo "Run 'Order' test in Demo UI:"
-echo "--------------------------------------------"
-pause 'Press [Enter] to run: mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=firefox'
-mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=firefox
-echo ""
-
-echo "--------------------------------------------"
-echo "Run all tests & generate Allure test report:"
-echo "--------------------------------------------"
-pause 'Press [Enter] to run: mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm" -Dselenide.browser=firefox'
-mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm" -Dselenide.browser=firefox
+echo "----------------------------------------------------------"
+echo "Run 'Order' test in Demo UI & generate Allure test report:"
+echo "----------------------------------------------------------"
+pause 'Press [Enter] to run: mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @order" -Dbrowser=firefox'
+mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @order" -Dbrowser=firefox
 echo ""
 pause 'Press [Enter] to run: mvn allure:report'
 mvn allure:report
@@ -41,7 +34,7 @@ mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=firefox -Dselenid
 echo ""
 
 echo "-----------------------------------------------------------------------"
-echo "Run 'Order' test in Demo UI by CHROME in local Selenium grid container:"
+echo "Run 'Order' test in Demo UI by CHROME browser in local Selenium grid container:"
 echo "-----------------------------------------------------------------------"
 pause 'Press [Enter] to run: mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome -Dremote=http://localhost:4445/wd/hub -Denv=local-grid'
 mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome -Dremote=http://localhost:4445/wd/hub -Denv=local-grid
