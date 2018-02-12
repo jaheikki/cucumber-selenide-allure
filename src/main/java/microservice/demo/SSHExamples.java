@@ -1,5 +1,7 @@
 package microservice.demo;
 
+import com.jcraft.jsch.SftpException;
+import microservice.helper.SFTPUpload;
 import microservice.helper.SSHService;
 import org.apache.log4j.Logger;
 
@@ -61,5 +63,23 @@ public class SSHExamples {
 
     }
 
+    public void iTransferCSVFilesToSFTPServer() throws SftpException {
+        log.info(printMethodName());
 
+        String remoteCSVDir = "/csvdir/csvfiles";
+        SFTPUpload sftp = new SFTPUpload("sshuser", "192.168.0.10", 22, "privateKeyFile");
+
+        //delete old folder if exists
+        sftp.removeFolderRecursively(remoteCSVDir);
+
+        //create new directory for csv files
+        sftp.createDirectory(remoteCSVDir);
+
+        //upload new files
+        sftp.uploadFiles(remoteCSVDir, "src/test/resources/mycsvfile1",
+                "src/test/resources/mycsvfile2"
+        );
+
+        sftp.exit();
+    }
 }
