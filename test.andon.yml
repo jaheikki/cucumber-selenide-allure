@@ -1,0 +1,28 @@
+# test.andon.yml
+pipelines:
+  Testpipeline:
+    #environment_variables:   
+    group: Test
+    materials:
+      cucumber:  # this is the name of material
+        # says about type of material and url at once
+        git: https://github.com/jaheikki/cucumber-selenide-allure.git
+        branch: master
+        destination: test
+        whitelist: # monitor changes only for this component
+          - test.andon.yml/**/*.*
+    stages:
+      - build: # name of stage
+          jobs:
+            testjob: # name of the job
+              andon: # andon job configuration
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
+                #sonarqube: true
+              tasks:
+               - exec: # For debug
+                   run_if: passed
+                   command: bash
+                   arguments:
+                    - "-c"
+                    - "pwd;ls -ltr;whoami"
+
