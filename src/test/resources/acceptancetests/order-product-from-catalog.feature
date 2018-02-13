@@ -1,8 +1,14 @@
 @order
 @all
-@ISTHISGOOD...
+@link.mylink=jvm
 Feature: Microservice acceptance tests
 
+  This test suite verifies that ordering a product from E-commerce Manager UI
+  is executed successfully with a new customer.
+
+  @severity=blocker
+  @tmsLink=REQ-405
+  @link=https://yle.fi/
   Scenario: Order a product from a catalog
     Given E-commerce Manager ui should be open
      And order by Teemu Selanne should not exist
@@ -13,8 +19,11 @@ Feature: Microservice acceptance tests
     When I order product Torspo as customer Teemu Selanne
     Then I can verify my order of Torspo with price 119.0 by customer Teemu Selanne
 
+  @severity=minor
+  @issue=BUG-371
+  @link=https://www.mtv.fi/
   Scenario: get catalog item
     Given catalog item exists at the database
     When i get the catalog item from rest
     Then catalog item name should be iPod touch
-    And catalog item price should be 21.0
+    And catalog item price should be 900.0
