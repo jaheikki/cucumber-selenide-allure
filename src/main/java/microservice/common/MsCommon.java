@@ -242,6 +242,9 @@ public class MsCommon {
         $(By.cssSelector("#tab-products")).shouldBe(visible).shouldBe(enabled).click();
         $(By.xpath("//span[contains(text(),'Products')]")).shouldBe(visible).shouldBe(enabled).click();
 
+        //FOR TESTING FAILED UI CASE IN ALLURE REPORT
+        //$(By.xpath("//span[contains(text(),'Failure')]")).shouldBe(visible).shouldBe(enabled).click();
+
     }
 
     /*User of this method needs to 'grep' success of executed command from returned map entries stdout and stderr*/
