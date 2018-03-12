@@ -1,6 +1,6 @@
+@link.mylink=jvm
 @order
 @all
-@link.mylink=jvm
 Feature: Microservice acceptance tests
 
   This test suite verifies that ordering a product from E-commerce Manager UI
@@ -9,6 +9,7 @@ Feature: Microservice acceptance tests
   @severity=blocker
   @tmsLink=REQ-405
   @link=https://yle.fi/
+  @order1
   Scenario: Order a product from a catalog
     Given E-commerce Manager ui should be open
      And order by Teemu Selanne should not exist
@@ -22,6 +23,7 @@ Feature: Microservice acceptance tests
   @severity=minor
   @issue=BUG-371
   @link=https://www.mtv.fi/
+  @order2
   Scenario: get catalog item
     Given catalog item exists at the database
     When i get the catalog item from rest

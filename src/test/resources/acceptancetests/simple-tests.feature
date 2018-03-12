@@ -1,3 +1,4 @@
+@all
 @simple_test
 Feature: SimpleTests
 

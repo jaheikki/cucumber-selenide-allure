@@ -2,6 +2,7 @@ package microservice.common;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import cucumber.api.Scenario;
 import microservice.helper.SeleniumHelper;
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -287,5 +289,22 @@ public class MsCommon {
         return stdOutErrMap;
 
     }
+
+
+    public static String printScenarioStartedText(Scenario scenario)  {
+        List<String> testCaseStartedList = new ArrayList<>();
+
+        testCaseStartedList.add("*********************************************************************");
+        testCaseStartedList.add("*********************************************************************");
+        testCaseStartedList.add("TEST CASE (SCENARIO): "+scenario.getName());
+        testCaseStartedList.add("*********************************************************************");
+        testCaseStartedList.add("*********************************************************************");
+
+        String testCaseStartedText = String.join("\n", testCaseStartedList);
+        System.out.println(testCaseStartedText);
+
+        return testCaseStartedText;
+    }
+
 
 }

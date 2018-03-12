@@ -9,14 +9,14 @@ import java.util.Vector;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 
-public class SFTPUpload {
+public class SFTPService {
 
     static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(
-            SFTPUpload.class.getName());
+            SFTPService.class.getName());
 
     public ChannelSftp channelSftp;
 
-    public SFTPUpload(String user, String host, int port, String sshPrivatekeyFilePath) {
+    public SFTPService(String user, String host, int port, String sshPrivatekeyFilePath) {
 
         try {
             JSch jsch = new JSch();

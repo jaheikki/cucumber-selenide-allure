@@ -15,7 +15,6 @@ import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class SimpleTestStepDefinitions {
 
-
     private World world;
 
     public SimpleTestStepDefinitions(World world) {

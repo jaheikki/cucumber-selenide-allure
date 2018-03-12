@@ -1,7 +1,7 @@
 package microservice.demo;
 
 import com.jcraft.jsch.SftpException;
-import microservice.helper.SFTPUpload;
+import microservice.helper.SFTPService;
 import microservice.helper.SSHService;
 import org.apache.log4j.Logger;
 
@@ -67,7 +67,7 @@ public class SSHExamples {
         log.info(printMethodName());
 
         String remoteCSVDir = "/csvdir/csvfiles";
-        SFTPUpload sftp = new SFTPUpload("sshuser", "192.168.0.10", 22, "privateKeyFile");
+        SFTPService sftp = new SFTPService("sshuser", "192.168.0.10", 22, "privateKeyFile");
 
         //delete old folder if exists
         sftp.removeFolderRecursively(remoteCSVDir);

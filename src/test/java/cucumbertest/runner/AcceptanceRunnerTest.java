@@ -12,7 +12,6 @@ import static microservice.helper.SeleniumHelper.*;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-//        features = { "classpath:acceptance/tests" },
         features = { "classpath:acceptancetests" },
         glue = {"teststepdefinitions"}
 )
