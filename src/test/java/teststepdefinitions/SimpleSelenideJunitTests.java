@@ -26,6 +26,7 @@
 //        $(By.xpath("//input[contains(@placeholder,'Search Wikipedia')]")).shouldBe(Condition.visible).pressEnter();
 //        Selenide.sleep(500);
 //
+////        $(By.xpath("//h1[contains(text(),'BrowserStack2')]")).shouldBe(Condition.visible); //for test Selenide screenshots
 //        $(By.xpath("//h1[contains(text(),'BrowserStack')]")).shouldBe(Condition.visible);
 //        Selenide.sleep(2000);
 //
