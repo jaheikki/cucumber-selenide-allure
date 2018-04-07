@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -291,12 +292,12 @@ public class MsCommon {
     }
 
 
-    public static String printScenarioStartedText(Scenario scenario)  {
+    public static String printScenarioPhaseText(Scenario scenario, String phase)  {
         List<String> testCaseStartedList = new ArrayList<>();
 
         testCaseStartedList.add("*********************************************************************");
         testCaseStartedList.add("*********************************************************************");
-        testCaseStartedList.add("TEST CASE (SCENARIO): "+scenario.getName());
+        testCaseStartedList.add(phase + " OF TEST CASE (SCENARIO): "+scenario.getName());
         testCaseStartedList.add("*********************************************************************");
         testCaseStartedList.add("*********************************************************************");
 
@@ -304,6 +305,61 @@ public class MsCommon {
         System.out.println(testCaseStartedText);
 
         return testCaseStartedText;
+    }
+
+
+    public static void waitUntilMethodSucceeds(Runnable runnable, int timeoutMs, int retryIntervalMs)
+    {
+        printMethodName();
+
+        System.out.println("Method name: "+runnable.getClass().getName());
+
+        DateTime timeoutTime = new DateTime().plusMillis(timeoutMs);
+        while (timeoutTime.isAfterNow()) {
+            try {
+
+                runnable.run();
+
+                return;
+
+            } catch (Throwable e) {
+                System.out.println(new DateTime());
+                System.out.println("Got exception: " + e);
+
+                sleep(retryIntervalMs);
+            } finally {
+                System.out.println(new DateTime());
+            }
+        }
+        throw new RuntimeException("Running method failed after " + timeoutMs + " milliseconds.");
+
+    }
+
+    public static Object waitUntilMethodCallSucceedsAndReturnValue(Callable callable, int timeoutMs, int retryIntervalMs)
+    {
+        printMethodName();
+
+        System.out.println("Method name: "+callable.getClass().getName());
+
+        DateTime timeoutTime = new DateTime().plusMillis(timeoutMs);
+        while (timeoutTime.isAfterNow()) {
+            try {
+
+                Object object = callable.call();
+
+                return object;
+
+            } catch (Throwable e) {
+                System.out.println(new DateTime());
+                System.out.println("Got exception: " + e);
+
+                sleep(retryIntervalMs);
+            } finally {
+                System.out.println(new DateTime());
+            }
+        }
+        throw new RuntimeException("Calling method failed after " + timeoutMs + " milliseconds.");
+
     }
 
 
