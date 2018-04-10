@@ -13,7 +13,8 @@ import static microservice.helper.SeleniumHelper.*;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = { "classpath:acceptancetests" },
-        glue = {"teststepdefinitions"}
+        glue = {"teststepdefinitions"},
+        plugin = {"io.qameta.allure.cucumberjvm.AllureCucumberJvm"}
 )
 
 public class AcceptanceRunnerTest {
