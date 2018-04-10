@@ -14,6 +14,7 @@ import static microservice.helper.SeleniumHelper.printMethodName;
         glue = {"teststepdefinitions"},
         plugin = {"io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm"}
 //        tags = {"@order1"}
+
         )
 
 public class AcceptanceRunnerTest extends AbstractTestNGCucumberTests {
