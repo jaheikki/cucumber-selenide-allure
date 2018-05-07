@@ -1,3 +1,5 @@
+#USAGE: mvn clean install -Dcucumber.options=“--tags @order”
+
 @link.mylink=jvm
 @order
 @all
