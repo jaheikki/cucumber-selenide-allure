@@ -175,7 +175,7 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/acceptance_testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <testFailureIgnore>true</testFailureIgnore>
+                    <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                          <!-- -Dcucumber.options=io.qameta.allure.cucumber3jvm.AllureCucumber3Jvm-->
