@@ -70,8 +70,15 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber2-jvm</artifactId>
-            <version>2.0-BETA22</version>
+            <version>2.7.0</version>
         </dependency>
+        <!-- guava for allure-cucumber2-jvm onwards 2.7.0 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>26.0-jre</version>
+        </dependency>
+
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
@@ -135,7 +142,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
-            <version>2.0-BETA22</version>
+            <version>2.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -144,7 +151,6 @@
             <version>1.2.5</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
     <build>
         <plugins>
@@ -217,7 +223,7 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.9</version>
                 <configuration>
-                    <reportVersion>2.3.1</reportVersion>
+                    <reportVersion>2.7.0</reportVersion>
                     <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                     <propertiesFilePath>src/test/resources/allure.properties</propertiesFilePath>
                     <!--<properties>-->
