@@ -40,12 +40,12 @@ pause 'Press [Enter] to run: mvn clean install -Dcucumber.options="--tags @order
 mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=chrome -Dremote=http://localhost:4445/wd/hub -Denv=local-grid
 echo ""
 
-echo "---------------------------------------------------------------------------------------"
-echo "Run 'Order' test in Demo UI by CUSTOM FIREFOX browser in local Selenium grid container:"
-echo "---------------------------------------------------------------------------------------"
-pause 'Press [Enter] to run: mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=microservice.browser.FirefoxLinuxGridDriverProvider -Denv=local-grid'
-mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=microservice.browser.FirefoxLinuxGridDriverProvider -Denv=local-grid
-echo ""
+#echo "---------------------------------------------------------------------------------------"
+#echo "Run 'Order' test in Demo UI by CUSTOM FIREFOX browser in local Selenium grid container:"
+#echo "---------------------------------------------------------------------------------------"
+#pause 'Press [Enter] to run: mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=microservice.browser.FirefoxLinuxGridDriverProvider -Denv=local-grid'
+#mvn clean install -Dcucumber.options="--tags @order" -Dselenide.browser=microservice.browser.FirefoxLinuxGridDriverProvider -Denv=local-grid
+#echo ""
 
 echo "---------------------------------------------------------------------------------------"
 echo "Run 'Order' test in LOCAL Demo UI by CUSTOM FIREFOX browser in BROWSERSTACK:"

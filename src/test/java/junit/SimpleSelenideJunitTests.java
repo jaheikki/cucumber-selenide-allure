@@ -1,4 +1,4 @@
-//package teststepdefinitions;
+//package junit;
 //
 //import com.codeborne.selenide.*;
 //import org.junit.Test;
@@ -29,11 +29,12 @@
 //        $(By.xpath("//a[contains(@title,'Visit the main page')]")).shouldBe(Condition.visible);
 //
 //        $(By.xpath("//input[contains(@placeholder,'Search Wikipedia')]")).shouldBe(Condition.visible).val(searchWord);
+//        $(By.xpath("//input[contains(@placeholder,'Search Wikipedia')]")).shouldBe(Condition.visible).val(searchWord);
 //
 //        $(By.xpath("//input[contains(@placeholder,'Search Wikipedia')]")).shouldBe(Condition.visible).pressEnter();
 //
-//        //$(By.xpath("//h1[contains(text(),'BrowserStack2')]")).shouldBe(Condition.visible); //for test Selenide screenshots
-//        $(By.xpath("//h1[contains(text(),'BrowserStack')]")).shouldBe(Condition.visible);
+//        $(By.xpath("//h1[contains(text(),'BrowserStack2')]")).shouldBe(Condition.visible); //for test Selenide screenshots
+////        $(By.xpath("//h1[contains(text(),'BrowserStack')]")).shouldBe(Condition.visible);
 //        Selenide.sleep(2000);
 //
 //    }
