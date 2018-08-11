@@ -12,7 +12,7 @@ import static microservice.helper.SeleniumHelper.printMethodName;
 @CucumberOptions(
         features = {"src/test/resources/acceptancetests/"},
         glue = {"teststepdefinitions"},
-        plugin = {"io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm"}
+        plugin = {"io.qameta.allure.cucumber3jvm.AllureCucumber3Jvm"}
 //        tags = {"@order1"}
 
         )
