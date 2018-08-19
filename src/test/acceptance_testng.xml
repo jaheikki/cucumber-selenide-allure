@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Acceptance Test Suite" verbose="1" parallel="tests" thread-count="1" configfailurepolicy="continue">
+
+    <test name="Acceptance test">
+        <!--<parameter name="param1" value="param1_value" />-->
+        <classes>
+            <class name="cucumbertest.runner.AcceptanceRunnerTest"/>
+        </classes>
+    </test>
+
+</suite>
