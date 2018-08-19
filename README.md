@@ -49,7 +49,7 @@ Preconditions:
      - Run 'order' tests by custom mobile browser (from local page)  in BrowserStack:   
        - mvn clean install -Dcucumber.options="--tags @order" -Dbrowser=microservice.browser.SamsungGalaxyS7_V6_0_RemoteDriverProvider -            Dlocal
      - Run 'all' tests (catalog&order) and generate Allure test report files:
-       - mvn clean install -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm --tags @all" -Dselenide.browser=chrome
+       - mvn clean install -Dcucumber.options="--tags @all" -Dselenide.browser=chrome
        - Generate the HTML report by: mvn allure:report
        - Open the test report ('Open in Browswer' in IntelliJ IDEA IDE project) from <project_dir>/target/site/allure-maven-plugin/index.html
        <img src="https://raw.githubusercontent.com/jaheikki/cucumber-selenide-allure/master/readme_images/allure-report.png" width="800" height="300">
