@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>4.11.2</version>
+            <version>4.13.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>ch.qos.logback</groupId>
@@ -191,7 +191,7 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/acceptance_testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <testFailureIgnore>true</testFailureIgnore>
+                    <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         <!-- -Dcucumber.options=io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm-->
