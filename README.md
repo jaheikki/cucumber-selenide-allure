@@ -1,7 +1,9 @@
 # Cucumber & Selenide & Allure demo
 
-NEW 21.8.2018: Upgraded to Cucumber Java release 2 and TestNG (previously jUnit)!
+Latest news:
+21.8.2018: Upgraded to Cucumber Java release 2 and TestNG (previously jUnit)!
 Note: Could not upgrade yet to Cucumber Java release 3 since it has changes that are not backward compatible.
+
 
 This is fully working example how run Web UI tests easily with Java with Selenide library (http://selenide.org/). In this example the demo application (copy from https://github.com/tieto-devops-demos) is set up by docker and docker-compose. The tests will be run by Cucumber Java framework to be able to use Gherkin (BDD) style as testcase descriptions (see https://docs.cucumber.io/bdd/overview and https://cucumber.io/blog/2017/08/29/announcing-cucumber-jvm-2-0-0 and ). And as cherry on top of a cake we use here Allure2 framework for producing world class test report (see https://github.com/allure-framework/allure2 and https://github.com/allure-framework/allure-java). 
 
