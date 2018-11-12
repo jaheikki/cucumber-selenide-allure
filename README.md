@@ -1,6 +1,7 @@
 # Cucumber & Selenide & Allure demo
 
-Latest news:
+## Latest news:
+
 21.8.2018: Upgraded to Cucumber Java release 2 and TestNG (previously jUnit)!
 Note: Could not upgrade yet to Cucumber Java release 3 since it has changes that are not backward compatible.
 
@@ -10,8 +11,7 @@ This is fully working example how run Web UI tests easily with Java with Selenid
 (Notice that 'allure-cucumber2-jvm' Maven dependency brings the Cucumber Java dependencies included, see pom.xml).
 
 
-
-Preconditions:
+##Preconditions:
 - Install docker for Mac: https://docs.docker.com/docker-for-mac/install/ 
 - or install docker for Windows 10 Pro: https://docs.docker.com/docker-for-windows/install/
   - Note: only Windows 10 Pro with latest updates work. Use only PowerShell for docker commands.
@@ -19,6 +19,7 @@ Preconditions:
 - Install JDK8, Maven3 and Git.
 - Optional: Download free IntelliJ IDEA IDE Community Edition (https://www.jetbrains.com/idea) and install 'Cucumber For Java' plugin in IDE. This allows you to develop and debug Cucumber/Java tests easily (works fully in both Mac and Windows).
 
+## Steps
 
 1. Clone this repository (e.g. in ~/git dir): 
    - git clone https://github.com/jaheikki/cucumber-selenide-allure.git
