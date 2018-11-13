@@ -6,36 +6,47 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 //import gherkin.lexer.Th;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
+import io.restassured.response.ResponseBodyExtractionOptions;
 import microservice.helper.RESTService;
 import org.joda.time.DateTime;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
+import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.given;
 import static microservice.helper.SeleniumHelper.printMethodName;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 
 public class MsCatalogRest {
 
-    public static void addCatalogItem(final String service, final String uri, final String itemName, final String itemPrice) {
+    public static void addCatalogItem(final String service, final String uri, final String id, final String itemName, final String itemPrice) {
         printMethodName();
 
         try {
-
             //String json = "{ \"name\" : \"kimmo\", \"price\" : \"99.0\" }";
 
+            String jsonTemplate = "{ \"id\" : \"${CATALOG_ID}\", \"name\" : \"${CATALOG_ITEM}\", \"price\" : \"${CATALOG_PRICE}\" }";
             String userDir = System.getProperty("user.dir");
 
-            String catalog_template = new String(Files.readAllBytes(Paths.get(userDir + "/microservice-demo-acceptance-tests/src/main/resources/acceptance-tests/catalog_template.json")));
+//            String catalog_template = new String(Files.readAllBytes(Paths.get(userDir + "/microservice-demo-acceptance-tests/src/main/resources/acceptance-tests/catalog_template.json")));
+            //String catalog_template = new String(Files.readAllBytes(Paths.get("/Users/heikmjar/git/microservice-demo-acceptance-tests-copy/src/main/resources/acceptance-tests/catalog.json")));
 
             ObjectMapper objectMapper = new ObjectMapper();
 
             //create Json Root Node
-            JsonNode rootNode = objectMapper.readTree(catalog_template);
+            JsonNode rootNode = objectMapper.readTree(jsonTemplate);
+
+            //update JSON data
+            ((ObjectNode) rootNode).put("id", id);
 
             //update JSON data
             ((ObjectNode) rootNode).put("name", itemName);
@@ -185,6 +196,36 @@ public class MsCatalogRest {
         }
     }
 
+    public static void deleteCatalogItemByRestAssured(final String serviceUrl, final String uri, String catalogItemName) {
+        printMethodName();
+
+        MsCatalogRest.addCatalogItem(serviceUrl,uri,"10","Termo", "34");
+        MsCatalogRest.addCatalogItem(serviceUrl,uri,"11","Termo", "35");
+        MsCatalogRest.addCatalogItem(serviceUrl,uri,"12","Termo", "36");
+
+        try {
+            RestAssured.baseURI = serviceUrl + "/" + uri;
+
+            while (true) {
+                Response response = get();
+
+                Integer id = response.path("_embedded.catalog.find { it.name == '"+catalogItemName+"' }.id");
+
+                if (id == null) {
+                    System.out.println("No catalog item "+catalogItemName+" found.");
+                    break;
+                }
+
+                given().delete ("/"+id)
+                .then().statusCode(204).log().all();
+
+                System.out.println("Catalog item "+catalogItemName+" deleted.");
+
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete existing catalog item " + serviceUrl +"/"+ uri +" "+ catalogItemName , e);
+        }
+    }
 
 
     public static String findCatalogItemNameById(final String service, final String uri, String catalogId) {

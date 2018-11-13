@@ -13,14 +13,15 @@ Feature: Microservice acceptance tests
   @link=https://yle.fi/
   @order1
   Scenario: Order a product from a catalog
-    Given E-commerce Manager ui should be open
-     And order by Teemu Selanne should not exist
-     And product Torspo should not be in the catalog through REST API
-     And customer Teemu Selanne should not exist through REST API
-     And product Torspo is added to the catalog with price 119.0
-     And customer Teemu Selanne is added
-    When I order product Torspo as customer Teemu Selanne
-    Then I can verify my order of Torspo with price 119.0 by customer Teemu Selanne
+#    Given E-commerce Manager ui should be open
+#     And order by Teemu Selanne should not exist
+     And product Termo should not be in the catalog through REST API
+#     And product Termo should not be in the catalog through REST API
+#     And customer Teemu Selanne should not exist through REST API
+#     And product Torspo is added to the catalog with price 119.0
+#     And customer Teemu Selanne is added
+#    When I order product Torspo as customer Teemu Selanne
+#    Then I can verify my order of Torspo with price 119.0 by customer Teemu Selanne
 
   @severity=minor
   @issue=BUG-371
