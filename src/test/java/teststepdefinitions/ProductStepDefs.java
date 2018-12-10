@@ -31,7 +31,7 @@ public class ProductStepDefs {
     public void eCommerceManagerUiShouldBeOpen() {
         log.info(printMethodName());
 
-        //world.msMainPage = Selenide.open(MsVariables.microserviceHost, ProductsPage.class);
+        world.msMainPage = Selenide.open(MsVariables.microserviceHost, ProductsPage.class);
 
     }
 
@@ -39,8 +39,13 @@ public class ProductStepDefs {
     public void productShouldNotBeInTheCatalogThroughRESTAPI( String catalogItemName) {
         log.info(printMethodName());
 
+        //Delete by Jersey and Jackson libs
         //MsCatalogRest.deleteCatalogItemByName(MsVariables.catalogServiceUrl, MsVariables.catalogURI,catalogItemName);
+
+        //Delete by Rest Assured
         MsCatalogRest.deleteCatalogItemByRestAssured(MsVariables.catalogServiceUrl, MsVariables.catalogURI,catalogItemName);
+
+
     }
 
     @And("product (.*) is added to the catalog with price (.*)")

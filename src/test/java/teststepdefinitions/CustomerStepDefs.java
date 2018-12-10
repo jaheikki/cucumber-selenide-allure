@@ -49,11 +49,15 @@ public class CustomerStepDefs {
 //
 //    }
 
-    @And("customer (.*) should not exist through REST API")
-    public void customerShouldNotExistThroughRESTAPI(String customer) {
+    @And("customer (.*) having email (.*) should not exist through REST API")
+    public void customerShouldNotExistThroughRESTAPI(String customer, String customerEmail) {
         printMethodName();
 
-        MsCustomerRest.deleteCustomerByName(MsVariables.customerServiceUrl, MsVariables.customerURI,customer);
+        //By Jersey & Jackson
+        //MsCustomerRest.deleteCustomerByName(MsVariables.customerServiceUrl, MsVariables.customerURI,customer);
+
+        //By Rest Assured
+        MsCustomerRest.deleteCustomerByNameByRestAssured(MsVariables.customerServiceUrl, MsVariables.customerURI,customerEmail);
 
     }
 

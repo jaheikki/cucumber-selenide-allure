@@ -2,12 +2,16 @@ package microservice.msrest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import microservice.helper.RESTService;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.given;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class MsCustomerRest {
@@ -28,6 +32,34 @@ public class MsCustomerRest {
 
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete existing customer from: " + service +"/"+ uri +" "+ itemName , e);
+        }
+    }
+
+    public static void deleteCustomerByNameByRestAssured(final String serviceUrl, final String uri, String customerEmail) {
+        printMethodName();
+
+        try {
+            RestAssured.baseURI = serviceUrl + "/" + uri;
+
+            while (true) {
+                Response response = get();
+
+                //Get customer entry id by searching by email
+                Integer id = response.path("_embedded.customer.find { it.email == '"+customerEmail+"' }.id");
+
+                if (id == null) {
+                    System.out.println("No customer by email "+customerEmail+" found.");
+                    break;
+                }
+
+                given().delete ("/"+id)
+                        .then().statusCode(204).log().all();
+
+                System.out.println("Customer by email "+customerEmail+" deleted.");
+
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete existing catalog item " + serviceUrl +"/"+ uri +" "+ customerEmail , e);
         }
     }
 

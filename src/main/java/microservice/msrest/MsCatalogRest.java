@@ -10,11 +10,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.response.ResponseBodyExtractionOptions;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
 import microservice.helper.RESTService;
 import org.joda.time.DateTime;
+import org.json.simple.JSONObject;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,6 +28,8 @@ import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static microservice.helper.SeleniumHelper.printMethodName;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.Matchers.is;
 
 
 public class MsCatalogRest {
@@ -60,6 +66,34 @@ public class MsCatalogRest {
 
         } catch (Exception e) {
             throw new RuntimeException("Failed to add catalog item " + service + "/" + uri, e);
+        }
+    }
+
+    public static void addCatalogItemByRestAssured(final String service, final String uri, final String id, final String itemName, final String itemPrice) {
+        printMethodName();
+
+        try {
+
+            RestAssured.baseURI = service;
+            RequestSpecification request = RestAssured.given();
+
+            JSONObject requestParams = new JSONObject();
+            requestParams.put("id", id);
+            requestParams.put("name", itemName);
+            requestParams.put("price", itemPrice);
+
+            // Add a header stating the Request body is a JSON
+            request.header("Content-Type", "application/json");
+
+            // Add the Json to the body of the request
+            request.body(requestParams.toJSONString());
+
+            // Post the request and check the response
+            Response response = request.post("/"+uri);
+
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to add catalog item by RestAssured" + service + "/" + uri, e);
         }
     }
 
@@ -179,9 +213,15 @@ public class MsCatalogRest {
     public static void deleteCatalogItemByName(final String service, final String uri, String catalogItemName) {
         printMethodName();
 
+        //Just for testing:
+        //MsCatalogRest.addCatalogItem(serviceUrl,uri,"10","Termo", "34");
+        //MsCatalogRest.addCatalogItem(serviceUrl,uri,"11","Termo", "35");
+        //MsCatalogRest.addCatalogItem(serviceUrl,uri,"12","Termo", "36");
+
         try {
             Map<String, String> catalogItemsMap = getCatalogItemIdsAndNamesThroughRestApi(service, uri);
 
+            //Looping to delete all duplicate (if exist) catalogitems
             Iterator it = catalogItemsMap.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry)it.next();
@@ -199,17 +239,30 @@ public class MsCatalogRest {
     public static void deleteCatalogItemByRestAssured(final String serviceUrl, final String uri, String catalogItemName) {
         printMethodName();
 
-        MsCatalogRest.addCatalogItem(serviceUrl,uri,"10","Termo", "34");
-        MsCatalogRest.addCatalogItem(serviceUrl,uri,"11","Termo", "35");
-        MsCatalogRest.addCatalogItem(serviceUrl,uri,"12","Termo", "36");
+
+        //Just for testing:
+        MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"15","Torspo", "99");
+        //MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"16","Goose", "100");
+        //MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"17","Goose", "101");
 
         try {
             RestAssured.baseURI = serviceUrl + "/" + uri;
 
+            //Looping to delete all duplicate (if exist) catalogitems
             while (true) {
                 Response response = get();
 
+           //      String xx = response.jsonPath().get("_embedded.catalog.name");
+//                ResponseBody body = response.getBody();
+
+//                String name = JsonPath.with(body()).getString("$[?(@.age == 26 && @.likes eq 'Pizza')].id");
+
+               //Integer id = null;
+               //response.then().root("find { it.name == '\"+catalogItemName+\"' }.id").body("id", is(1));
+                //JsonPath xx = response.jsonPath();
                 Integer id = response.path("_embedded.catalog.find { it.name == '"+catalogItemName+"' }.id");
+               // Integer id = response.path("*.find { it.name == '"+catalogItemName+"' }.id");
+
 
                 if (id == null) {
                     System.out.println("No catalog item "+catalogItemName+" found.");
