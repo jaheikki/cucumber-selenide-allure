@@ -35,33 +35,33 @@ public class MsCustomerRest {
         }
     }
 
-    public static void deleteCustomerByNameByRestAssured(final String serviceUrl, final String uri, String customerEmail) {
-        printMethodName();
-
-        try {
-            RestAssured.baseURI = serviceUrl + "/" + uri;
-
-            while (true) {
-                Response response = get();
-
-                //Get customer entry id by searching by email
-                Integer id = response.path("_embedded.customer.find { it.email == '"+customerEmail+"' }.id");
-
-                if (id == null) {
-                    System.out.println("No customer by email "+customerEmail+" found.");
-                    break;
-                }
-
-                given().delete ("/"+id)
-                        .then().statusCode(204).log().all();
-
-                System.out.println("Customer by email "+customerEmail+" deleted.");
-
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to delete existing catalog item " + serviceUrl +"/"+ uri +" "+ customerEmail , e);
-        }
-    }
+//    public static void deleteCustomerByNameByRestAssured(final String serviceUrl, final String uri, String customerEmail) {
+//        printMethodName();
+//
+//        try {
+//
+//            RestAssured.baseURI = serviceUrl;
+//
+//            while (true) {
+//                Response response = given().get(uri).then().log().ifError().extract().response();
+//
+//                //Get customer entry id by searching by email
+//                Integer id = response.path("_embedded.customer.find { it.email == '"+customerEmail+"' }.id");
+//
+//                if (id == null) {
+//                    System.out.println("No customer by email "+customerEmail+" found.");
+//                    break;
+//                }
+//
+//                given().delete (uri+"/"+id).then().log().ifError().statusCode(204).log().all();
+//
+//                System.out.println("Customer by email "+customerEmail+" deleted.");
+//
+//            }
+//        } catch (Exception e) {
+//            throw new RuntimeException("Failed to delete existing catalog item " + serviceUrl +"/"+ uri +" "+ customerEmail , e);
+//        }
+//    }
 
     public static Map<String, String> getCustomerIdsAndNamesThroughRestApi(final String service, final String uri) {
         printMethodName();

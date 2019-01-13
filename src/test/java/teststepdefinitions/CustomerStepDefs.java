@@ -6,6 +6,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber_dependency_injection.World;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import microservice.common.MsVariables;
 import microservice.msrest.MsCatalogRest;
 import microservice.msrest.MsCustomerRest;
@@ -13,6 +15,7 @@ import microservice.pages.ProductsPage;
 
 import java.io.IOException;
 
+import static io.restassured.RestAssured.given;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 
@@ -57,8 +60,25 @@ public class CustomerStepDefs {
         //MsCustomerRest.deleteCustomerByName(MsVariables.customerServiceUrl, MsVariables.customerURI,customer);
 
         //By Rest Assured
-        MsCustomerRest.deleteCustomerByNameByRestAssured(MsVariables.customerServiceUrl, MsVariables.customerURI,customerEmail);
+        RestAssured.baseURI = MsVariables.customerServiceUrl;
 
+        while (true) {
+            Response response = given().get( MsVariables.customerURI).then().log().ifError().extract().response();
+
+            //Get customer entry id by searching by email
+            Integer id = response.path("_embedded.customer.find { it.email == '" + customerEmail + "' }.id");
+
+
+            if (id == null) {
+                System.out.println("No customer by email " + customerEmail + " found.");
+                break;
+            }
+
+            given().delete( MsVariables.customerURI + "/" + id).then().log().ifError().statusCode(204).log().all();
+
+            System.out.println("Customer by email " + customerEmail + " deleted.");
+
+        }
     }
 
     @And("customer (.*) (.*) is added")

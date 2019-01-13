@@ -2,6 +2,8 @@
 
 ## Latest news:
 
+13.1.2019: Taking REST-assured in use and thus replacing Jersey&Jackson use in Rest methods (Jersey&Jackson examples still exist in code)  
+
 21.8.2018: Upgraded to Cucumber Java release 2 and TestNG (previously jUnit)!
 Note: Could not upgrade yet to Cucumber Java release 3 since it has changes that are not backward compatible.
 

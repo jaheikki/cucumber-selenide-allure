@@ -3,12 +3,15 @@ package teststepdefinitions;
 import com.codeborne.selenide.Selenide;
 import cucumber.api.java.en.And;
 import cucumber_dependency_injection.World;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import microservice.common.MsVariables;
 import microservice.helper.SFTPService;
 import microservice.pages.ProductsPage;
 import microservice.msrest.MsCatalogRest;
 
 import static com.codeborne.selenide.Selenide.$;
+import static io.restassured.RestAssured.given;
 import static microservice.helper.SeleniumHelper.printMethodName;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -42,9 +45,24 @@ public class ProductStepDefs {
         //Delete by Jersey and Jackson libs
         //MsCatalogRest.deleteCatalogItemByName(MsVariables.catalogServiceUrl, MsVariables.catalogURI,catalogItemName);
 
-        //Delete by Rest Assured
-        MsCatalogRest.deleteCatalogItemByRestAssured(MsVariables.catalogServiceUrl, MsVariables.catalogURI,catalogItemName);
+        //By Rest Assured
+        RestAssured.baseURI = MsVariables.catalogServiceUrl;
 
+        //Looping to delete all duplicate (if exist) catalogitems
+        while (true) {
+            Response response  = given().get(MsVariables.catalogURI).then().log().ifError().extract().response();
+
+            Integer id = response.path("_embedded.catalog.find { it.name == '"+catalogItemName+"' }.id");
+
+            if (id == null) {
+                System.out.println("No catalog item "+catalogItemName+" found.");
+                break;
+            }
+
+            given().delete (MsVariables.catalogURI +"/"+id).then().log().ifError().statusCode(204).log().all();
+
+            System.out.println("Catalog item "+catalogItemName+" deleted.");
+        }
 
     }
 

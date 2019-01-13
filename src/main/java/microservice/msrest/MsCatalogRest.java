@@ -43,9 +43,6 @@ public class MsCatalogRest {
             String jsonTemplate = "{ \"id\" : \"${CATALOG_ID}\", \"name\" : \"${CATALOG_ITEM}\", \"price\" : \"${CATALOG_PRICE}\" }";
             String userDir = System.getProperty("user.dir");
 
-//            String catalog_template = new String(Files.readAllBytes(Paths.get(userDir + "/microservice-demo-acceptance-tests/src/main/resources/acceptance-tests/catalog_template.json")));
-            //String catalog_template = new String(Files.readAllBytes(Paths.get("/Users/heikmjar/git/microservice-demo-acceptance-tests-copy/src/main/resources/acceptance-tests/catalog.json")));
-
             ObjectMapper objectMapper = new ObjectMapper();
 
             //create Json Root Node
@@ -236,49 +233,35 @@ public class MsCatalogRest {
         }
     }
 
-    public static void deleteCatalogItemByRestAssured(final String serviceUrl, final String uri, String catalogItemName) {
-        printMethodName();
-
-
-        //Just for testing:
-        MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"15","Torspo", "99");
-        //MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"16","Goose", "100");
-        //MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"17","Goose", "101");
-
-        try {
-            RestAssured.baseURI = serviceUrl + "/" + uri;
-
-            //Looping to delete all duplicate (if exist) catalogitems
-            while (true) {
-                Response response = get();
-
-           //      String xx = response.jsonPath().get("_embedded.catalog.name");
-//                ResponseBody body = response.getBody();
-
-//                String name = JsonPath.with(body()).getString("$[?(@.age == 26 && @.likes eq 'Pizza')].id");
-
-               //Integer id = null;
-               //response.then().root("find { it.name == '\"+catalogItemName+\"' }.id").body("id", is(1));
-                //JsonPath xx = response.jsonPath();
-                Integer id = response.path("_embedded.catalog.find { it.name == '"+catalogItemName+"' }.id");
-               // Integer id = response.path("*.find { it.name == '"+catalogItemName+"' }.id");
-
-
-                if (id == null) {
-                    System.out.println("No catalog item "+catalogItemName+" found.");
-                    break;
-                }
-
-                given().delete ("/"+id)
-                .then().statusCode(204).log().all();
-
-                System.out.println("Catalog item "+catalogItemName+" deleted.");
-
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to delete existing catalog item " + serviceUrl +"/"+ uri +" "+ catalogItemName , e);
-        }
-    }
+//    public static void deleteCatalogItemByRestAssured(final String serviceUrl, final String uri, String catalogItemName) {
+//        printMethodName();
+//
+//        //Just for testing this method:
+//        //MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"15","Torspo", "99");
+//        //MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"16","Goose", "100");
+//        //MsCatalogRest.addCatalogItemByRestAssured(serviceUrl,uri,"17","Goose", "101");
+//        try {
+//            RestAssured.baseURI = serviceUrl;
+//
+//            //Looping to delete all duplicate (if exist) catalogitems
+//            while (true) {
+//                Response response  = given().get(uri).then().log().ifError().extract().response();
+//
+//                Integer id = response.path("_embedded.catalog.find { it.name == '"+catalogItemName+"' }.id");
+//
+//                if (id == null) {
+//                    System.out.println("No catalog item "+catalogItemName+" found.");
+//                    break;
+//                }
+//
+//                given().delete (uri +"/"+id).then().log().ifError().statusCode(204).log().all();
+//
+//                System.out.println("Catalog item "+catalogItemName+" deleted.");
+//            }
+//        } catch (Exception e) {
+//            throw new RuntimeException("Failed to delete existing catalog item " + serviceUrl +"/"+ uri +" "+ catalogItemName , e);
+//        }
+//    }
 
 
     public static String findCatalogItemNameById(final String service, final String uri, String catalogId) {
