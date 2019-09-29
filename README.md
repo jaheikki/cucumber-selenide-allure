@@ -4,7 +4,7 @@
 
 27.9.2019: Upgrade to Cucumber 4: https://cucumber.io/blog/announcing-cucumber-jvm-4-0-0
 Note 1: this project does not use new Cucumber 4 features, but there's now an option to use them.
-Note 2: use data tables when you deliver e.g. list or map from feature file to step definition (conversion is automatic).
+Note 2: use data tables when you deliver e.g. list or map from feature file to step definition (conversion is then automatic).
 
 13.1.2019: Taking REST-assured in use and thus replacing Jersey&Jackson use in Rest methods (Jersey&Jackson examples still exist in code)  
 
@@ -12,7 +12,7 @@ Note 2: use data tables when you deliver e.g. list or map from feature file to s
 Note: Could not upgrade yet to Cucumber Java release 3 since it has changes that are not backward compatible.
 
 ## Purpose of this project
-This is fully working example how run Web UI tests easily with Java with Selenide library (http://selenide.org/). In this example the demo application is set up by docker and docker-compose. The tests will be run by Cucumber Java framework to be able to use Gherkin (BDD) style as testcase descriptions (see https://docs.cucumber.io/bdd/overview and https://cucumber.io/blog/2017/08/29/announcing-cucumber-jvm-2-0-0 and ). And as cherry on top of a cake we use here Allure2 framework for producing world class test report (see https://github.com/allure-framework/allure2 and https://github.com/allure-framework/allure-java). There's also a small DB usage example in CustomersPage class method addCustomer, it uses Spring JDBC template to do some simple DB tasks. It's worth to mention that this example project is kept very simple on purpose so that basically everyone is able to understand the demo. With help of this "project template" you are able to develop more advanced tests, regarless if it is UI, REST or DB test or all of them. Also with help of SSH libraries included you can operate on Linux servers in e2e automated system tests.
+This is fully working example how run Web UI tests easily with Java with Selenide library (http://selenide.org/). In this example the demo application is set up by docker and docker-compose. The tests will be run by Cucumber Java framework to be able to use Gherkin (BDD) style as testcase descriptions (see https://docs.cucumber.io/bdd/overview and https://cucumber.io/blog/2017/08/29/announcing-cucumber-jvm-2-0-0 and ). And as cherry on top of a cake we use here Allure2 framework for producing world class test report (see https://github.com/allure-framework/allure2 and https://github.com/allure-framework/allure-java). There's also a small DB usage example in CustomersPage class method addCustomer, it uses Spring JDBC template to do some simple DB tasks. It's worth to mention that this example project is kept very simple on purpose so that basically everyone is able to understand the demo. With help of this "project template" you are able to develop more advanced tests, regarless if it is UI, REST or DB test or all of them. Also with help of SSH libraries included you can operate on Linux servers in e2e automated system tests. See included pdf document for more information.
 
 ## Preconditions:
 - Install docker for Mac: https://docs.docker.com/docker-for-mac/install/ 
