@@ -10,6 +10,8 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.LoggingFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.MediaType;
 
@@ -21,8 +23,10 @@ import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class RESTService {
 
+    private static final Logger log = LoggerFactory.getLogger(RESTService.class);
+
     public static String getJsonFromUrl(final String url) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
 
@@ -36,7 +40,7 @@ public class RESTService {
 
             ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
-            System.out.println("Response status:" + response.getStatus());
+            log.info("Response status:" + response.getStatus());
 
             if (response.getStatus() != 200) {
                 throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
@@ -50,7 +54,7 @@ public class RESTService {
     }
 
     public static void postJsonToUrl(final String service, final String uri,final String json) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
 
@@ -78,7 +82,7 @@ public class RESTService {
     }
 
     public static void deleteFromUrl(final String service, final String uri) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
 

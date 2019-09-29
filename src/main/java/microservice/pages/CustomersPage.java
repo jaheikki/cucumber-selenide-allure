@@ -7,6 +7,8 @@ import jdbc.SQLCommon;
 import microservice.common.MsCommon;
 import microservice.helper.SeleniumHelper;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.HashMap;
@@ -19,6 +21,8 @@ import static microservice.common.MsVariables.mariaDBJDBUser;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class CustomersPage {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomersPage.class);
 
     private MyDatasource customerDatasource;
     private JdbcTemplate customerJDBCTemplate;
@@ -44,7 +48,7 @@ public class CustomersPage {
         $(By.xpath("//button[contains(text(),'Save')]")).shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
         $(By.xpath("//h1[contains(text(),'Success')]")).shouldBe(Condition.visible);
 
-        System.out.println("Successfully added customer: "+firstname+" "+lastname);
+        log.info("Successfully added customer: "+firstname+" "+lastname);
 
         return page(CustomersPage.class);
     }

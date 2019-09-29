@@ -12,6 +12,8 @@ import microservice.common.MsVariables;
 import microservice.msrest.MsCatalogRest;
 import microservice.msrest.MsCustomerRest;
 import microservice.pages.ProductsPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -20,6 +22,8 @@ import static microservice.helper.SeleniumHelper.printMethodName;
 
 
 public class CustomerStepDefs {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomerStepDefs.class);
 
     private ProductsPage mainPage;
     private World world;
@@ -54,7 +58,7 @@ public class CustomerStepDefs {
 
     @And("customer (.*) having email (.*) should not exist through REST API")
     public void customerShouldNotExistThroughRESTAPI(String customer, String customerEmail) {
-        printMethodName();
+        log.info(printMethodName());
 
         //By Jersey & Jackson
         //MsCustomerRest.deleteCustomerByName(MsVariables.customerServiceUrl, MsVariables.customerURI,customer);
@@ -70,20 +74,20 @@ public class CustomerStepDefs {
 
 
             if (id == null) {
-                System.out.println("No customer by email " + customerEmail + " found.");
+                log.info("No customer by email " + customerEmail + " found.");
                 break;
             }
 
             given().delete( MsVariables.customerURI + "/" + id).then().log().ifError().statusCode(204).log().all();
 
-            System.out.println("Customer by email " + customerEmail + " deleted.");
+            log.info("Customer by email " + customerEmail + " deleted.");
 
         }
     }
 
     @And("customer (.*) (.*) is added")
     public void customerIsAdded(String firstname, String lastname) {
-        printMethodName();
+        log.info(printMethodName());
 
         world.msMainPage.navigateToCustomersPage()
                 .addCustomer(firstname,lastname)

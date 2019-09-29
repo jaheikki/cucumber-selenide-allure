@@ -1,6 +1,7 @@
 package jdbc;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Connection;
@@ -14,8 +15,7 @@ import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class SQLCommon {
 
-    static Logger log = Logger.getLogger(
-            SQLCommon.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(SQLCommon.class);
 
 
     public static List<String> getColumnNames(Connection conn, String table) throws SQLException {
@@ -35,14 +35,14 @@ public class SQLCommon {
     }
 
     public static int getTotalDBRowCountFromTable(JdbcTemplate jdbcTemplate,String db, String tableName) {
-        printMethodName();
+        log.info(printMethodName());
 
         String text = "get total row count from "+db+"."+tableName+" START";
-        System.out.println(text);
+        log.info(text);
         log.info(text);
 
         int rowCount = jdbcTemplate.queryForObject("select count(*) from "+db+ "." +tableName, Integer.class);
-        System.out.println("rowCount: "+rowCount);
+        log.info("rowCount: "+rowCount);
         log.info("rowCount: "+rowCount);
 
         return rowCount;
@@ -50,21 +50,21 @@ public class SQLCommon {
     }
 
     public static String sqlQueryForString(JdbcTemplate jdbcTemplate,String SQL) {
-        printMethodName();
+        log.info(printMethodName());
 
         String result = jdbcTemplate.queryForObject(SQL,String.class);
-        System.out.println("SQL command result: "+result);
+        log.info("SQL command result: "+result);
         return result;
     }
 
     public static List<String> showDatabases(JdbcTemplate jdbcTemplate) {
-        printMethodName();
+        log.info(printMethodName());
 
         String SQL = "show databases";
 
         List<String> databaseList = jdbcTemplate.queryForList(SQL, String.class);
 
-        System.out.println("databaseList: "+databaseList);
+        log.info("databaseList: "+databaseList);
         log.info("databaseList: "+databaseList);
 
         return databaseList;
@@ -72,27 +72,27 @@ public class SQLCommon {
     }
 
     public static void databaseMustNotExist(String dbName, List<String> databases) {
-        printMethodName();
+        log.info(printMethodName());
 
-        System.out.println("Searched db: "+dbName);
+        log.info("Searched db: "+dbName);
         for (String database:databases) {
-            //System.out.println("database: "+database);
+            //log.info("database: "+database);
             if (database.equals(dbName)) {
                 throw new RuntimeException("Database ["+dbName+"] should not be found");
             }
         }
-        System.out.println("Success.");
+        log.info("Success.");
     }
 
     public static int updateSQLCommand(JdbcTemplate jdbcTemplate,String SQL) {
-        printMethodName();
+        log.info(printMethodName());
 
         String text = "Execute sql command "+SQL+" START";
-        System.out.println(text);
+        log.info(text);
         log.info(text);
 
         int rowsAffected = jdbcTemplate.update(SQL);
-        System.out.println("rowsAffected: "+rowsAffected);
+        log.info("rowsAffected: "+rowsAffected);
         log.info("rowsAffected: "+rowsAffected);
 
         return rowsAffected;

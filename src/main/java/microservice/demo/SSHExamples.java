@@ -3,7 +3,9 @@ package microservice.demo;
 import com.jcraft.jsch.SftpException;
 import microservice.helper.SFTPService;
 import microservice.helper.SSHService;
-import org.apache.log4j.Logger;
+import microservice.msrest.MsCatalogRest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
@@ -13,8 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SSHExamples {
 
-    static Logger log = Logger.getLogger(
-            SSHExamples.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(SSHExamples.class);
 
     public void scpExample() {
 
@@ -32,7 +33,7 @@ public class SSHExamples {
         String response = ssh.writeToShell("sshKeyAuth", "ifconfig");
         //String response = ssh.writeToShell("passwordAuth", "ifconfig");
 
-        System.out.println("resp: "+response);
+        log.info("resp: "+response);
 
         //delete remote files from local folder
         final File folder = new File(localFolder);
@@ -64,7 +65,7 @@ public class SSHExamples {
     }
 
     public void iTransferCSVFilesToSFTPServer() throws SftpException {
-        log.info(printMethodName());
+       // log.info(printMethodName());
 
         String remoteCSVDir = "/csvdir/csvfiles";
         SFTPService sftp = new SFTPService("sshuser", "192.168.0.10", 22, "privateKeyFile");

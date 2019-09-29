@@ -2,9 +2,11 @@
 
 ## Latest news:
 
+27.9.2019: Replaced log4j with logback + simple DataTable example in feature file (Scenario: Order a product from a catalog)
+
 27.9.2019: Upgrade to Cucumber 4: https://cucumber.io/blog/announcing-cucumber-jvm-4-0-0
 Note 1: this project does not use new Cucumber 4 features, but there's now an option to use them.
-Note 2: use data tables when you deliver e.g. list or map from feature file to step definition (conversion is then automatic).
+Note 2: use DataTable when you deliver e.g. list or map from feature file to step definition (conversion is then automatic).
 
 13.1.2019: Taking REST-assured in use and thus replacing Jersey&Jackson use in Rest methods (Jersey&Jackson examples still exist in code)  
 

@@ -23,7 +23,8 @@ Feature: Microservice acceptance tests
      And product Torspo is added to the catalog with price 119.0
      And customer Teemu Selanne is added
     When I order product Torspo as customer Teemu Selanne
-    Then I can verify my order of Torspo with price 119.0 by customer Teemu Selanne
+    Then I can verify Teemu Selanne order with details:
+      |  Torspo | 119.0 |
 
   @severity=minor
   @issue=BUG-371

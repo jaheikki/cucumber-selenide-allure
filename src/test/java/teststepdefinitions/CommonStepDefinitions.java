@@ -7,8 +7,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber_dependency_injection.World;
+import jdbc.SQLCommon;
 import microservice.common.MsCommon;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.SQLException;
@@ -25,13 +27,12 @@ public class CommonStepDefinitions {
         this.world = world;
 
     }
-    static Logger log = Logger.getLogger(
-            CommonStepDefinitions.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(CommonStepDefinitions.class);
 
 
     @Before()
     public void before(Scenario scenario) {
-        printMethodName();
+        log.info(printMethodName());
 
         this.scenario = scenario;
 
@@ -41,7 +42,7 @@ public class CommonStepDefinitions {
 
     @After()
     public void after(Scenario scenario) {
-        printMethodName();
+        log.info(printMethodName());
 
         this.scenario = scenario;
 

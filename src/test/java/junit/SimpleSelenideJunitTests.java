@@ -94,7 +94,7 @@
 //                }
 //            }
 //        } catch (WebDriverException e) {
-//            System.out.println("#mp-right cannot be found from second row, so therefore exception needs to catched: "+e);
+//            log.info("#mp-right cannot be found from second row, so therefore exception needs to catched: "+e);
 //        }
 //
 //    }

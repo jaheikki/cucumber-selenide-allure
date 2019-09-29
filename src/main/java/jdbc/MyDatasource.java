@@ -1,5 +1,8 @@
 package jdbc;
 
+import microservice.helper.BrowserHelpper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 
 import javax.sql.DataSource;
@@ -9,6 +12,8 @@ import java.sql.SQLException;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class MyDatasource {
+
+    private static final Logger log = LoggerFactory.getLogger(MyDatasource.class);
 
     private final DataSourceInitializer dataSourceInitializer;
     private final DataSource dataSource;
@@ -27,7 +32,7 @@ public class MyDatasource {
     public void runSqlScript(String sqlScript) {
         printMethodName();
 
-        System.out.println("About to run script: "+sqlScript);
+        log.info("About to run script: "+sqlScript);
         DatabasePopulatorUtils.execute(dataSourceInitializer.createDatabasePopulator(sqlScript), dataSource);
 
     }

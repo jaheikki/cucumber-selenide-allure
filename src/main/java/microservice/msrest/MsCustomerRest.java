@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import microservice.helper.RESTService;
+import microservice.helper.SeleniumHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,8 +18,11 @@ import static io.restassured.RestAssured.given;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class MsCustomerRest {
+
+    private static final Logger log = LoggerFactory.getLogger(MsCustomerRest.class);
+
     public static void deleteCustomerByName(final String service, final String uri, String itemName) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
             Map<String, String> restItemMap = getCustomerIdsAndNamesThroughRestApi(service, uri);
@@ -24,7 +30,7 @@ public class MsCustomerRest {
             Iterator it = restItemMap.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry)it.next();
-                System.out.println("Map entry: "+pair.getKey() + " = " + pair.getValue());
+                log.info("Map entry: "+pair.getKey() + " = " + pair.getValue());
                 if (pair.getValue().equals(itemName)) {
                     RESTService.deleteFromUrl(service, uri+"/"+pair.getKey());
                 }
@@ -49,13 +55,13 @@ public class MsCustomerRest {
 //                Integer id = response.path("_embedded.customer.find { it.email == '"+customerEmail+"' }.id");
 //
 //                if (id == null) {
-//                    System.out.println("No customer by email "+customerEmail+" found.");
+//                    log.info("No customer by email "+customerEmail+" found.");
 //                    break;
 //                }
 //
 //                given().delete (uri+"/"+id).then().log().ifError().statusCode(204).log().all();
 //
-//                System.out.println("Customer by email "+customerEmail+" deleted.");
+//                log.info("Customer by email "+customerEmail+" deleted.");
 //
 //            }
 //        } catch (Exception e) {
@@ -64,14 +70,14 @@ public class MsCustomerRest {
 //    }
 
     public static Map<String, String> getCustomerIdsAndNamesThroughRestApi(final String service, final String uri) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
 
             Map<String,String> itemMap = new HashMap<>();
 
-            System.out.println("service: "+service);
-            System.out.println("uri: "+uri);
+            log.info("service: "+service);
+            log.info("uri: "+uri);
 
             String jsonString = RESTService.getJsonFromUrl(service+ "/" + uri);
 

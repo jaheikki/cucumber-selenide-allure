@@ -4,6 +4,8 @@ import com.trilead.ssh2.Connection;
 import com.trilead.ssh2.SCPClient;
 import com.trilead.ssh2.Session;
 import com.trilead.ssh2.StreamGobbler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.Arrays;
@@ -16,6 +18,8 @@ public class SSHService {
     private final String password;
     private final File keyfile;
     private final String keyPassphrase;
+
+    private static final Logger log = LoggerFactory.getLogger(SSHService.class);
 
     /* USAGE: Two options for authentication:
      * Password based authentication:
@@ -35,7 +39,7 @@ public class SSHService {
     }
 
     public String executeCommand(String authenticationMethod, String command) {
-        printMethodName();
+        log.info(printMethodName());
 
         Connection connection = getConnectionBasedOnAuthenticationMethod(authenticationMethod);
 
@@ -53,7 +57,7 @@ public class SSHService {
                 lines = lines +line;
             }
             session.close();
-            System.out.println("Successfully executed command: "+ command + " to host " +hostname);
+            log.info("Successfully executed command: "+ command + " to host " +hostname);
 
         }
         catch (IOException e){
@@ -67,7 +71,7 @@ public class SSHService {
 
 
     public String writeToShell(String authenticationMethod, String command) {
-        printMethodName();
+        log.info(printMethodName());
 
         Connection connection = getConnectionBasedOnAuthenticationMethod(authenticationMethod);
 
@@ -88,7 +92,7 @@ public class SSHService {
                 if (line == null)
                     break;
                 lines = lines +"\n"+ line;
-//                System.out.println(line);
+//                log.info(line);
             }
             session.close();
 
@@ -107,7 +111,7 @@ public class SSHService {
     sshService.downloadFile("passwordAuth","/home/omaeladm/xstartup","/Users/jaheikki");
     Suggesting still to use downloadFiles method*/
     public void downloadFile(String authenticationMethod, String remoteFile,String localFolder) {
-        printMethodName();
+        log.info(printMethodName());
 
         Connection connection = getConnectionBasedOnAuthenticationMethod(authenticationMethod);
 
@@ -117,7 +121,7 @@ public class SSHService {
         } catch (IOException e) {
             throw new RuntimeException("Failed to download file: " + remoteFile + " to " + localFolder + " from " + connection.getHostname(), e);
         } finally {
-            System.out.println("Successfully downloaded file: "+ remoteFile + " to folder " + localFolder);
+            log.info("Successfully downloaded file: "+ remoteFile + " to folder " + localFolder);
             connection.close();
         }
     }
@@ -131,7 +135,7 @@ public class SSHService {
     downloadFiles("passwordAuth",localFolder, files);
     * Note: "..." notation creates array automatically*/
     public void downloadFiles(String authenticationMethod, String localFolder,String... remoteFiles) {
-        printMethodName();
+        log.info(printMethodName());
 
         Connection connection = getConnectionBasedOnAuthenticationMethod(authenticationMethod);
 
@@ -139,28 +143,28 @@ public class SSHService {
         try {
             client.get(remoteFiles, localFolder);
         } catch (IOException e) {
-            System.out.println("Tried to download following files:");
-            Arrays.asList(remoteFiles).stream().forEach(s -> System.out.println(s));
+            log.info("Tried to download following files:");
+            Arrays.asList(remoteFiles).stream().forEach(s -> log.info(s));
             throw new RuntimeException("Failed to download files to " + localFolder + " from " + connection.getHostname(), e);
         } finally {
-            System.out.println("Successfully downloaded files: "+ remoteFiles + " to folder " + localFolder);
+            log.info("Successfully downloaded files: "+ remoteFiles + " to folder " + localFolder);
             connection.close();
         }
-        System.out.println("Successfully downloaded following files to "+ localFolder + " from " + connection.getHostname());
-        Arrays.asList(remoteFiles).stream().forEach(s -> System.out.println(s));
+        log.info("Successfully downloaded following files to "+ localFolder + " from " + connection.getHostname());
+        Arrays.asList(remoteFiles).stream().forEach(s -> log.info(s));
 
     }
 
     /*Upload single file to server allowing to rename transferred files. Otherwise proposing to use uploadFilesWithDefaultPermission methods*/
     public void uploadFile(String authenticationMethod, String localFile,String remoteFile,String remoteFolder,String permission) {
-        printMethodName();
+        log.info(printMethodName());
 
         Connection connection = getConnectionBasedOnAuthenticationMethod(authenticationMethod);
 
         SCPClient client=new SCPClient(connection);
         try {
             client.put(localFile,remoteFile,remoteFolder,permission);
-            System.out.println("Successfully uploaded file: "+ localFile + " to folder " + remoteFolder + " as "+remoteFile);
+            log.info("Successfully uploaded file: "+ localFile + " to folder " + remoteFolder + " as "+remoteFile);
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload file: " + localFile + " to " + remoteFolder + " to " + connection.getHostname(), e);
         } finally {
@@ -176,7 +180,7 @@ public class SSHService {
     *uploadFilesWithDefaultPermission("sshKeyAuth",remoteFolder, files);
     * Note: "..." notation creates array automatically*/
     public void uploadFilesWithDefaultPermission(String authenticationMethod, String remoteFolder, String... localFiles) {
-        printMethodName();
+        log.info(printMethodName());
 
         Connection connection = getConnectionBasedOnAuthenticationMethod(authenticationMethod);
 
@@ -184,14 +188,14 @@ public class SSHService {
         try {
             client.put(localFiles,remoteFolder);
         } catch (IOException e) {
-            System.out.println("Tried to upload following files:");
-            Arrays.asList(localFiles).forEach(s -> System.out.println(s));
+            log.info("Tried to upload following files:");
+            Arrays.asList(localFiles).forEach(s -> log.info(s));
             throw new RuntimeException("Failed to upload files to " + remoteFolder + " to " + connection.getHostname(), e);
         } finally {
             connection.close();
         }
-        System.out.println("Successfully uploaded following files to "+ remoteFolder + " to " + connection.getHostname());
-        Arrays.asList(localFiles).forEach(s -> System.out.println(s));
+        log.info("Successfully uploaded following files to "+ remoteFolder + " to " + connection.getHostname());
+        Arrays.asList(localFiles).forEach(s -> log.info(s));
     }
 
     /**Upload file or files, with custom permision, examples
@@ -202,7 +206,7 @@ public class SSHService {
     *String[] files = new String[] {"test1.txt", "test2.txt", "test3.txt"};
     *uploadFilesWithDefaultPermission("sshKeyAuth",remoteFolder, "0755", files);*/
     public void uploadFiles(String authenticationMethod, String remoteFolder, String permission, String... localFiles) {
-        printMethodName();
+        log.info(printMethodName());
 
         Connection connection = getConnectionBasedOnAuthenticationMethod(authenticationMethod);
 
@@ -210,15 +214,15 @@ public class SSHService {
         try {
             client.put(localFiles,remoteFolder,permission);
         } catch (IOException e) {
-            System.out.println("Tried to upload following files:");
-            Arrays.asList(localFiles).stream().forEach(s -> System.out.println(s));
+            log.info("Tried to upload following files:");
+            Arrays.asList(localFiles).stream().forEach(s -> log.info(s));
             throw new RuntimeException("Failed to upload files to " + remoteFolder + " to " + connection.getHostname(), e);
 
         } finally {
             connection.close();
         }
-        System.out.println("Successfully uploaded following files to "+ remoteFolder + " to " + connection.getHostname());
-        Arrays.asList(localFiles).stream().forEach(s -> System.out.println(s));
+        log.info("Successfully uploaded following files to "+ remoteFolder + " to " + connection.getHostname());
+        Arrays.asList(localFiles).stream().forEach(s -> log.info(s));
 
     }
 

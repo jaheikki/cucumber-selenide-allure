@@ -4,6 +4,8 @@ import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,18 +17,19 @@ import java.util.Properties;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class JSCH {
+    private static final Logger log = LoggerFactory.getLogger(JSCH.class);
 
     /* Use example:
      * resp = JSCH.executeShellCmdSSHAndReturnResp(<host>, <user>,<password or>, <private key file>, sshCmd);
-     * System.out.println(resp.entrySet().stream().findFirst());
+     * log.info(resp.entrySet().stream().findFirst());
     */
     public static HashMap<Integer, String> executeShellCmdSSHAndReturnResp(String host, String user, String password, String privateKey, String command){
-        System.out.println(printMethodName());
+        log.info(printMethodName());
 
         try{
 
-            System.out.println("Running command started, wait...");
-            System.out.println("Command: "+command);
+            log.info("Running command started, wait...");
+            log.info("Command: "+command);
 
             String lines = new String();
             HashMap<Integer, String> hmap = new HashMap();
@@ -50,7 +53,7 @@ public class JSCH {
             InputStream input = channel.getInputStream();
             channel.connect();
 
-            System.out.println("SSH channel Connected to machine " + host);
+            log.info("SSH channel Connected to machine " + host);
 
             int exitStatus = 0;
             try{
@@ -59,7 +62,7 @@ public class JSCH {
                 String line = null;
 
                 while((line = bufferedReader.readLine()) != null){
-                    System.out.println(line);
+                    log.info(line);
                     lines = lines +"\n"+ line;
                 }
                 exitStatus = channel.getExitStatus();

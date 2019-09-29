@@ -6,6 +6,8 @@ import microservice.common.MsCommon;
 import microservice.common.MsVariables;
 import microservice.helper.SeleniumHelper;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
@@ -14,6 +16,8 @@ import static microservice.helper.SeleniumHelper.printMethodName;
 
 
 public class ProductsPage {
+
+    private static final Logger log = LoggerFactory.getLogger(ProductsPage.class);
 
     public AddProductPage navigateToAddProductPage() {
         printMethodName();

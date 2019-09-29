@@ -17,8 +17,11 @@ import io.restassured.response.ResponseBodyExtractionOptions;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import microservice.helper.RESTService;
+import microservice.helper.SeleniumHelper;
 import org.joda.time.DateTime;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -34,8 +37,10 @@ import static org.hamcrest.Matchers.is;
 
 public class MsCatalogRest {
 
+    private static final Logger log = LoggerFactory.getLogger(MsCatalogRest.class);
+
     public static void addCatalogItem(final String service, final String uri, final String id, final String itemName, final String itemPrice) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
             //String json = "{ \"name\" : \"kimmo\", \"price\" : \"99.0\" }";
@@ -67,7 +72,7 @@ public class MsCatalogRest {
     }
 
     public static void addCatalogItemByRestAssured(final String service, final String uri, final String id, final String itemName, final String itemPrice) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
 
@@ -95,7 +100,7 @@ public class MsCatalogRest {
     }
 
     public static JsonNode getSingleCatalogItemWithId(final String service, final String uri, final String id) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
             String jsonString = RESTService.getJsonFromUrl(service+"/"+uri+"/"+id);
@@ -110,7 +115,7 @@ public class MsCatalogRest {
     }
 
     public static JsonNode waitForGetSingleCatalogItemWithId(Integer timeout, Integer retryInterval, final String service, final String uri, final String id)  {
-        printMethodName();
+        log.info(printMethodName());
 
         DateTime timeoutTime = new DateTime().plusSeconds(timeout);
         while (timeoutTime.isAfterNow()) {
@@ -119,8 +124,8 @@ public class MsCatalogRest {
                 return getSingleCatalogItemWithId (service,uri,id);
 
             } catch (Throwable e) {
-                System.out.println("Got exception: " + e);
-                System.out.println("Retry sleeping " + (retryInterval) + " seconds");
+                log.info("Got exception: " + e);
+                log.info("Retry sleeping " + (retryInterval) + " seconds");
                 Selenide.sleep(retryInterval * 1000);
 
             }
@@ -131,7 +136,7 @@ public class MsCatalogRest {
 
 
     public static ArrayList getCatalogItemIdsThroughRestApi(final String service, final String uri) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
 
@@ -145,7 +150,7 @@ public class MsCatalogRest {
             JsonNode rootNode = objectMapper.readTree(jsonString);
             JsonNode ctl = rootNode.findPath("catalog");
 
-            System.out.println("\n==> Ids...");
+            log.info("\n==> Ids...");
             Iterator<JsonNode> cltList = ctl.elements();
             while (cltList.hasNext()) {
                 al.add(cltList.next().get("id"));
@@ -158,15 +163,15 @@ public class MsCatalogRest {
     }
 
     public static Map<String, String> getCatalogItemIdsAndNamesThroughRestApi(final String service, final String uri) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
 
             Map<String,String> catalogIdNameMap = new HashMap<>();
 
 
-            System.out.println("service: "+service);
-            System.out.println("uri: "+uri);
+            log.info("service: "+service);
+            log.info("uri: "+uri);
 
             String jsonString = RESTService.getJsonFromUrl(service+ "/" + uri);
 
@@ -191,14 +196,14 @@ public class MsCatalogRest {
 
 
     public static void deleteExistingCatalogItems(final String service, final String uri) {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
 
             ArrayList catalogIds = getCatalogItemIdsThroughRestApi(service, uri);
 
             for (Object id : catalogIds) {
-                //System.out.println(getJsonFromUrl(service+uri+"/"+id));
+                //log.info(getJsonFromUrl(service+uri+"/"+id));
                 RESTService.deleteFromUrl(service, uri+"/"+id);
             }
 
@@ -208,7 +213,7 @@ public class MsCatalogRest {
     }
 
     public static void deleteCatalogItemByName(final String service, final String uri, String catalogItemName) {
-        printMethodName();
+        log.info(printMethodName());
 
         //Just for testing:
         //MsCatalogRest.addCatalogItem(serviceUrl,uri,"10","Termo", "34");
@@ -222,7 +227,7 @@ public class MsCatalogRest {
             Iterator it = catalogItemsMap.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry)it.next();
-                System.out.println("Map entry: "+pair.getKey() + " = " + pair.getValue());
+                log.info("Map entry: "+pair.getKey() + " = " + pair.getValue());
                 if (pair.getValue().equals(catalogItemName)) {
                     RESTService.deleteFromUrl(service, uri+"/"+pair.getKey());
                 }
@@ -250,13 +255,13 @@ public class MsCatalogRest {
 //                Integer id = response.path("_embedded.catalog.find { it.name == '"+catalogItemName+"' }.id");
 //
 //                if (id == null) {
-//                    System.out.println("No catalog item "+catalogItemName+" found.");
+//                    log.info("No catalog item "+catalogItemName+" found.");
 //                    break;
 //                }
 //
 //                given().delete (uri +"/"+id).then().log().ifError().statusCode(204).log().all();
 //
-//                System.out.println("Catalog item "+catalogItemName+" deleted.");
+//                log.info("Catalog item "+catalogItemName+" deleted.");
 //            }
 //        } catch (Exception e) {
 //            throw new RuntimeException("Failed to delete existing catalog item " + serviceUrl +"/"+ uri +" "+ catalogItemName , e);
@@ -265,12 +270,13 @@ public class MsCatalogRest {
 
 
     public static String findCatalogItemNameById(final String service, final String uri, String catalogId) {
-        printMethodName();
+        log.info(printMethodName());
+
         try {
 
             JsonNode jsonNode = MsCatalogRest.getSingleCatalogItemWithId(service, uri, catalogId);
             String catalogName = jsonNode.get("name").asText();
-            System.out.println(catalogName);
+            log.info(catalogName);
 
             return catalogName;
 

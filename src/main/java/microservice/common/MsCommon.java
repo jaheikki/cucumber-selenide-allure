@@ -3,6 +3,7 @@ package microservice.common;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import cucumber.api.Scenario;
+import microservice.demo.SSHExamples;
 import microservice.helper.SeleniumHelper;
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
@@ -10,6 +11,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +32,8 @@ import static microservice.common.MsVariables.*;
 import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class MsCommon {
+
+    private static final Logger log = LoggerFactory.getLogger(MsCommon.class);
 
     public static void setUp() throws Exception {
 
@@ -51,7 +56,7 @@ public class MsCommon {
     }
 
     public static void waitForElementClick(String clickLocator, String verifyLocator)  {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
             waitForElementClick(elementClickTimeoutMs, elementClickRetryIntervalMs, elementClickXpathWaitTimeoutMs, elementClickAngularWaitTimeoutMs, -150, false, clickLocator, verifyLocator, doRefreshOnFailure);
@@ -61,7 +66,7 @@ public class MsCommon {
     }
 
     public static void waitForElementClick(String clickLocator, String verifyLocator, boolean isAngular)  {
-        printMethodName();
+        log.info(printMethodName());
 
         try {
             waitForElementClick(elementClickTimeoutMs, elementClickRetryIntervalMs, elementClickXpathWaitTimeoutMs, elementClickAngularWaitTimeoutMs, -150, isAngular, clickLocator, verifyLocator,doRefreshOnFailure);
@@ -84,7 +89,7 @@ public class MsCommon {
 
         */
     public static void waitForElementClick(int timeoutMs, int retryIntervalMs, int locatorWaitTimeoutMs, int angularWaitTimeoutMs, int yAxisPixelsMove, boolean isAngular, String clickLocator, String verifyLocator, boolean doRefreshOnFailure)  {
-        printMethodName();
+        log.info(printMethodName());
 
         boolean verifyLocatorIsEmpty=false;
         if (verifyLocator.equals("")) {
@@ -109,21 +114,21 @@ public class MsCommon {
                     if (verifyLocatorIsEmpty) { //clickLocator should not be visible anymore if verifyLocatorIsEmpty = true
                         verifyElementNotVisible(clickLocator);
                     } else {
-                        System.out.println("Current selenide timeout ms: " +Configuration.timeout);
+                        log.info("Current selenide timeout ms: " +Configuration.timeout);
                         verifyElement(verifyLocator);
                     }
                 } else {
-                    System.out.println("Already in correct page: "+verifyLocator);
+                    log.info("Already in correct page: "+verifyLocator);
                 }
                 return;
             } catch (Throwable e) {
-                System.out.println(new DateTime());
-                System.out.println("Got exception: " + e);
-                System.out.println("Sleeping " + (retryIntervalMs) + " milliseconds");
+                log.info(new DateTime().toString());
+                log.info("Got exception: " + e);
+                log.info("Sleeping " + (retryIntervalMs) + " milliseconds");
                 sleep(retryIntervalMs);
                 if (doRefreshOnFailure) Selenide.refresh();
             } finally {
-                System.out.println(new DateTime());
+                log.info(new DateTime().toString());
                 Configuration.timeout = MsVariables.commonSelenideTimeout; //force return original configuration timeout
             }
         }
@@ -132,19 +137,19 @@ public class MsCommon {
 
     /* Normally scrolled only with y-axis direction, e.g. set yAxisPixelsMove = -150 means scrolling little above the element */
     public static void scrollNearElement(int xAxisPixelsMove,int yAxisPixelsMove, String clickLocator)  {
-        printMethodName();
+        log.info(printMethodName());
 
         if (xAxisPixelsMove != 0 || yAxisPixelsMove != 0)   {
-            System.out.println("Now scrolling near element");
+            log.info("Now scrolling near element");
             SeleniumHelper.myFindElementAndScrollWindow(clickLocator, xAxisPixelsMove, yAxisPixelsMove);
         }
     }
 
     /*Can be used with xpath and cssSelector*/
     public static void clickElement(String clickLocator) {
-        printMethodName();
+        log.info(printMethodName());
 
-        System.out.println("About to click element: " + clickLocator);
+        log.info("About to click element: " + clickLocator);
 
         if(clickLocator.startsWith("//")) {
             $(By.xpath(clickLocator)).shouldBe(visible).shouldBe(enabled).click();
@@ -152,14 +157,14 @@ public class MsCommon {
         } else {
             $(By.cssSelector(clickLocator)).shouldBe(visible).shouldBe(enabled).click();
         }
-        System.out.println("Click done.");
+        log.info("Click done.");
     }
 
     /*Can be used with xpath and cssSelector*/
     public static void verifyElement(String verifyLocator) {
-        printMethodName();
+        log.info(printMethodName());
 
-        System.out.println("Waiting for verifyLocator: " + verifyLocator);
+        log.info("Waiting for verifyLocator: " + verifyLocator);
 
         if(verifyLocator.contains("//")) {
             $(By.xpath(verifyLocator)).shouldBe(visible);
@@ -168,14 +173,14 @@ public class MsCommon {
             $(By.cssSelector(verifyLocator)).shouldBe(visible);
         }
 
-        System.out.println("Waiting for verifyLocator done.");
+        log.info("Waiting for verifyLocator done.");
     }
 
     /*Can be used with xpath and cssSelector*/
     public static void verifyElementNotVisible(String verifyLocator) {
-        printMethodName();
+        log.info(printMethodName());
 
-        System.out.println("Waiting for verifyLocator not visible: " + verifyLocator);
+        log.info("Waiting for verifyLocator not visible: " + verifyLocator);
 
         if(verifyLocator.contains("//")) {
             $(By.xpath(verifyLocator)).shouldNotBe(visible);
@@ -184,7 +189,7 @@ public class MsCommon {
             $(By.cssSelector(verifyLocator)).shouldNotBe(visible);
         }
 
-        System.out.println("Waiting for verifyLocator done.");
+        log.info("Waiting for verifyLocator done.");
     }
 
 
@@ -199,8 +204,8 @@ public class MsCommon {
 
         DateTime date;
 
-        System.out.println("*** waitforAngularJS() start ***");
-        System.out.println(new DateTime());
+        log.info("*** waitforAngularJS() start ***");
+        log.info(new DateTime().toString());
 
         WebDriver driver = getWebDriver();
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -222,7 +227,7 @@ public class MsCommon {
                 @Override
                 public Boolean apply(WebDriver driver) {
                     Object noAjaxRequests = jsExecutor.executeScript("return window.angularFinished;");
-                    System.out.println("noAjaxRequests: "+noAjaxRequests.toString());
+                    log.info("noAjaxRequests: "+noAjaxRequests.toString());
                     return "1".equals(noAjaxRequests.toString());
 
                 }
@@ -231,10 +236,10 @@ public class MsCommon {
             String ErrorMsg =
                     "Failed wait for no angular JS request within timeout of : " + timeout + " seconds  at url:"
                             + driver.getCurrentUrl();
-            System.out.println(ErrorMsg);
+            log.info(ErrorMsg);
         }
-        System.out.println("*** waitforAngularJS() end ***");
-        System.out.println(new DateTime());
+        log.info("*** waitforAngularJS() end ***");
+        log.info(new DateTime().toString());
 
 
     }
@@ -254,7 +259,7 @@ public class MsCommon {
     public static HashMap<String, ArrayList<String>> executeSystemCommandAndReturnStdOutAndStdErr(String command, boolean debug) throws IOException {
         printMethodName();
 
-        System.out.println("Executing command: "+command);
+        log.info("Executing command: "+command);
         ArrayList<String> stdOut = new ArrayList<String>();
         ArrayList<String> stdErr = new ArrayList<String>();
 
@@ -268,18 +273,18 @@ public class MsCommon {
                 InputStreamReader(proc.getErrorStream()));
 
         // read the output from the command
-        if (debug) System.out.println("Here is the standard output of the command:\n");
+        if (debug) log.info("Here is the standard output of the command:\n");
         String s = null;
         while ((s = stdInput.readLine()) != null) {
-            if (debug) System.out.println(s);
+            if (debug) log.info(s);
             stdOut.add(s);
 
         }
 
         // read any errors from the attempted command
-        if (debug) System.out.println("Here is the standard error of the command (if any):\n");
+        if (debug) log.info("Here is the standard error of the command (if any):\n");
         while ((s = stdError.readLine()) != null) {
-            if (debug) System.out.println(s);
+            if (debug) log.info(s);
             stdErr.add(s);
         }
 
@@ -302,7 +307,6 @@ public class MsCommon {
         testCaseStartedList.add("*********************************************************************");
 
         String testCaseStartedText = String.join("\n", testCaseStartedList);
-        System.out.println(testCaseStartedText);
 
         return testCaseStartedText;
     }
@@ -312,7 +316,7 @@ public class MsCommon {
     {
         printMethodName();
 
-        System.out.println("Method name: "+runnable.getClass().getName());
+        log.info("Method name: "+runnable.getClass().getName());
 
         DateTime timeoutTime = new DateTime().plusMillis(timeoutMs);
         while (timeoutTime.isAfterNow()) {
@@ -323,12 +327,12 @@ public class MsCommon {
                 return;
 
             } catch (Throwable e) {
-                System.out.println(new DateTime());
-                System.out.println("Got exception: " + e);
+                log.info(new DateTime().toString());
+                log.info("Got exception: " + e);
 
                 sleep(retryIntervalMs);
             } finally {
-                System.out.println(new DateTime());
+                log.info(new DateTime().toString());
             }
         }
         throw new RuntimeException("Running method failed after " + timeoutMs + " milliseconds.");
@@ -339,7 +343,7 @@ public class MsCommon {
     {
         printMethodName();
 
-        System.out.println("Method name: "+callable.getClass().getName());
+        log.info("Method name: "+callable.getClass().getName());
 
         DateTime timeoutTime = new DateTime().plusMillis(timeoutMs);
         while (timeoutTime.isAfterNow()) {
@@ -350,12 +354,12 @@ public class MsCommon {
                 return object;
 
             } catch (Throwable e) {
-                System.out.println(new DateTime());
-                System.out.println("Got exception: " + e);
+                log.info(new DateTime().toString());
+                log.info("Got exception: " + e);
 
                 sleep(retryIntervalMs);
             } finally {
-                System.out.println(new DateTime());
+                log.info(new DateTime().toString());
             }
         }
         throw new RuntimeException("Calling method failed after " + timeoutMs + " milliseconds.");

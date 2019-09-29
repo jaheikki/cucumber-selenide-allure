@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +23,8 @@ import static java.lang.Thread.sleep;
 
 
 public class SeleniumHelper {
+
+    private static final Logger log = LoggerFactory.getLogger(SeleniumHelper.class);
 
     public static String getOneSubstringOutOfStringByRegexp(String regexp, String findText)  {
         printMethodName();
@@ -37,7 +41,7 @@ public class SeleniumHelper {
 
     /*Both xpath and cssSelector can be used as locator*/
     public static void myFindElementAndScrollWindow(String locator, int x, int y)  {
-        printMethodName();
+        log.info(printMethodName());
         WebDriver driver = getWebDriver();
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
@@ -49,7 +53,7 @@ public class SeleniumHelper {
     }
 
     public static void myFindSelenideElementAndScrollWindow(SelenideElement locator, int x, int y)  {
-        printMethodName();
+        log.info(printMethodName());
         WebDriver driver = getWebDriver();
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
@@ -84,14 +88,14 @@ public class SeleniumHelper {
     }
 
     public static boolean myWaitUntilElementIsVisible(SelenideElement element, int timeoutMs)  {
-        printMethodName();
+        log.info(printMethodName());
         try {
             element.waitUntil(Condition.visible,timeoutMs);
-            System.out.println("Found element: "+element.text());
+            log.info("Found element: "+element.text());
             return true;
 
         } catch (Throwable e) {
-            System.out.println("Could not find searched element.");
+            log.info("Could not find searched element.");
             return false;
         }
     }
@@ -109,8 +113,6 @@ public class SeleniumHelper {
         }
 
     }
-
-
     public static String printMethodName() {
         String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
         String line1 = ("\n*******************************************\n");
@@ -118,27 +120,26 @@ public class SeleniumHelper {
         String line3 = ("*******************************************\n");
         String line4 = (new DateTime()).toString();
         String printout = line1+line2+line3+line4;
-        System.out.println(printout);
         return printout;
 
     }
 
 
     public static String changeTimeFormatForFilenameUse()  {
-        printMethodName();
+        log.info(printMethodName());
         DateTimeFormatter fmt = DateTimeFormat.forPattern("ddMMyyyykkmmss");
         String time = new DateTime().toString(fmt);
-        System.out.println(time);
-        System.out.println("Changed time format: " + time);
+        log.info(time);
+        log.info("Changed time format: " + time);
         return time;
     }
 
     public static String changeTimeFormatForUsernameUse()  {
-        printMethodName();
+        log.info(printMethodName());
         DateTimeFormatter fmt = DateTimeFormat.forPattern("ddMMkkmmss");
         String time = new DateTime().toString(fmt);
-        System.out.println(time);
-        System.out.println("Changed time format: " + time);
+        log.info(time);
+        log.info("Changed time format: " + time);
         return time;
     }
 

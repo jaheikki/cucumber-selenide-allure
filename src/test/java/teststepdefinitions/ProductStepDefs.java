@@ -9,6 +9,8 @@ import microservice.common.MsVariables;
 import microservice.helper.SFTPService;
 import microservice.pages.ProductsPage;
 import microservice.msrest.MsCatalogRest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Selenide.$;
 import static io.restassured.RestAssured.given;
@@ -27,8 +29,7 @@ public class ProductStepDefs {
 
     }
 
-    static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(
-            SFTPService.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(ProductStepDefs.class);
 
     @And("E-commerce Manager ui should be open")
     public void eCommerceManagerUiShouldBeOpen() {
@@ -47,6 +48,7 @@ public class ProductStepDefs {
 
         //By Rest Assured
         RestAssured.baseURI = MsVariables.catalogServiceUrl;
+        log.debug("RestAssured.baseURI: "+RestAssured.baseURI);
 
         //Looping to delete all duplicate (if exist) catalogitems
         while (true) {
@@ -55,13 +57,13 @@ public class ProductStepDefs {
             Integer id = response.path("_embedded.catalog.find { it.name == '"+catalogItemName+"' }.id");
 
             if (id == null) {
-                System.out.println("No catalog item "+catalogItemName+" found.");
+                log.info("No catalog item "+catalogItemName+" found.");
                 break;
             }
 
             given().delete (MsVariables.catalogURI +"/"+id).then().log().ifError().statusCode(204).log().all();
 
-            System.out.println("Catalog item "+catalogItemName+" deleted.");
+            log.info("Catalog item "+catalogItemName+" deleted.");
         }
 
     }

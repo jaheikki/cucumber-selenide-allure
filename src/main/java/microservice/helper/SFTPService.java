@@ -1,6 +1,8 @@
 package microservice.helper;
 
 import com.jcraft.jsch.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.Arrays;
@@ -11,8 +13,8 @@ import static microservice.helper.SeleniumHelper.printMethodName;
 
 public class SFTPService {
 
-    static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(
-            SFTPService.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(SFTPService.class);
+
 
     public ChannelSftp channelSftp;
 
@@ -22,10 +24,10 @@ public class SFTPService {
             JSch jsch = new JSch();
 
             jsch.addIdentity(sshPrivatekeyFilePath);
-            System.out.println("identity added ");
+            log.info("identity added ");
 
             Session session = jsch.getSession(user, host, port);
-            System.out.println("session created.");
+            log.info("session created.");
 
             // disabling StrictHostKeyChecking may help to make connection but makes it insecure
             // see http://stackoverflow.com/questions/30178936/jsch-sftp-security-with-session-setconfigstricthostkeychecking-no
@@ -34,13 +36,13 @@ public class SFTPService {
             session.setConfig(config);
 
             session.connect();
-            System.out.println("session connected.....");
+            log.info("session connected.....");
 
             Channel channel = session.openChannel("sftp");
             channel.setInputStream(System.in);
             channel.setOutputStream(System.out);
             channel.connect();
-            System.out.println("shell channel connected....");
+            log.info("shell channel connected....");
 
             ChannelSftp channelSftp = (ChannelSftp) channel;
 
@@ -51,12 +53,12 @@ public class SFTPService {
     }
 
     public String getCurrentDirectory() {
-        log.info(printMethodName());
+        //log.info(printMethodName());
 
         String currentDirectory = "";
         try {
             currentDirectory=channelSftp.pwd();
-            System.out.println("CurrentDirectory: "+currentDirectory);
+            log.info("CurrentDirectory: "+currentDirectory);
         } catch (SftpException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to get current directory");
@@ -65,13 +67,13 @@ public class SFTPService {
     }
 
     public String goToDirectory(String goToDirectoryPath) {
-        log.info(printMethodName());
+        //log.info(printMethodName());
 
-        System.out.println("CurrentDirectory: "+getCurrentDirectory());
+        log.info("CurrentDirectory: "+getCurrentDirectory());
 
         String currentDirectory = "";
         try {
-            System.out.println("About to navigate to directory: "+goToDirectoryPath);
+            log.info("About to navigate to directory: "+goToDirectoryPath);
             channelSftp.cd(goToDirectoryPath);
 
         } catch (SftpException e) {
@@ -80,7 +82,7 @@ public class SFTPService {
         }
 
         String newCurrentDirectory = getCurrentDirectory();
-        System.out.println("New currentDirectory: "+newCurrentDirectory);
+        log.info("New currentDirectory: "+newCurrentDirectory);
 
         return newCurrentDirectory;
     }
@@ -89,14 +91,14 @@ public class SFTPService {
     public String createDirectory(String createNewDirectoryPath) {
         log.info(printMethodName());
 
-        System.out.println("CurrentDirectory: "+getCurrentDirectory());
+        log.info("CurrentDirectory: "+getCurrentDirectory());
         String newCurrentDirectory="";
         try {
-            System.out.println("About to create directory: "+createNewDirectoryPath);
+            log.info("About to create directory: "+createNewDirectoryPath);
             //mkdirs(createNewDirectoryPath, chmod);
             mkdirs(createNewDirectoryPath);
             newCurrentDirectory = goToDirectory(createNewDirectoryPath);
-            System.out.println("New currentDirectory:"+ newCurrentDirectory);
+            log.info("New currentDirectory:"+ newCurrentDirectory);
         } catch (Throwable e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to create directory "+createNewDirectoryPath);
@@ -116,8 +118,8 @@ public class SFTPService {
             }
         }
 
-        System.out.println("Successfully uploaded following files to "+ remoteFolder + ": ");
-        Arrays.asList(localFiles).forEach(s -> System.out.println(s));
+        log.info("Successfully uploaded following files to "+ remoteFolder + ": ");
+        Arrays.asList(localFiles).forEach(s -> log.info(s));
 
         return true;
 
@@ -136,8 +138,8 @@ public class SFTPService {
             }
         }
 
-        System.out.println("Successfully CHMOD:ed following files in "+ remoteFolder + ": ");
-        Arrays.asList(localFiles).forEach(s -> System.out.println(s));
+        log.info("Successfully CHMOD:ed following files in "+ remoteFolder + ": ");
+        Arrays.asList(localFiles).forEach(s -> log.info(s));
 
         return true;
 
@@ -156,8 +158,8 @@ public class SFTPService {
             }
         }
 
-        System.out.println("Successfully CHMOD:ed following folders: ");
-        Arrays.asList(remoteFolders).forEach(s -> System.out.println(s));
+        log.info("Successfully CHMOD:ed following folders: ");
+        Arrays.asList(remoteFolders).forEach(s -> log.info(s));
 
         return true;
 
@@ -173,7 +175,7 @@ public class SFTPService {
                 if (channelSftp.ls(remoteFolder + "/" + file).size() > 0) {
                     channelSftp.rm(remoteFolder + "/" + file);
                 } else {
-                    System.out.println("No file '"+file+"' found from "+ remoteFolder);
+                    log.info("No file '"+file+"' found from "+ remoteFolder);
                     return false;
                 }
             } catch (SftpException e) {
@@ -182,8 +184,8 @@ public class SFTPService {
             }
         }
 
-        System.out.println("Successfully removed following files from "+ remoteFolder + ": ");
-        Arrays.asList(remoteFiles).forEach(s -> System.out.println(s));
+        log.info("Successfully removed following files from "+ remoteFolder + ": ");
+        Arrays.asList(remoteFiles).forEach(s -> log.info(s));
 
         return true;
     }
@@ -198,14 +200,14 @@ public class SFTPService {
             channelSftp.ls(remoteFolder).isEmpty();
         } catch (SftpException e) {
             //e.printStackTrace();
-            System.out.println("No such directory: "+ remoteFolder);
+            log.info("No such directory: "+ remoteFolder);
             remoteDirExists = false;
         }
 
         try {
             if (remoteDirExists == true) {
                 channelSftp.rmdir(remoteFolder);
-                System.out.println("Successfully removed following directory "+ remoteFolder + ": ");
+                log.info("Successfully removed following directory "+ remoteFolder + ": ");
                 return true;
             }
         } catch (SftpException e) {
@@ -224,7 +226,7 @@ public class SFTPService {
             channelSftp.ls(remoteFolder).size();
         } catch (Throwable e) {
             if (e.getMessage().contains("No such file")) {
-                System.out.println("No such folder: "+ remoteFolder);
+                log.info("No such folder: "+ remoteFolder);
                 return false;
             }
         }
@@ -252,7 +254,7 @@ public class SFTPService {
             }
         }
         channelSftp.rmdir(remoteFolder); // delete the parent directory after empty
-        System.out.println("Successfully removed following directory: "+ remoteFolder);
+        log.info("Successfully removed following directory: "+ remoteFolder);
 
         return true;
     }

@@ -3,6 +3,8 @@ package microservice.helper;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -11,6 +13,8 @@ import static com.codeborne.selenide.Selenide.switchTo;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class BrowserHelpper implements Closeable {
+
+    private static final Logger log = LoggerFactory.getLogger(BrowserHelpper.class);
 
     private WebDriver driver;
     private final String parentHandle;
@@ -44,7 +48,7 @@ public class BrowserHelpper implements Closeable {
                     notFound=false;
                 }
                 else {
-                    System.out.println("No new window found yet! Keep waiting");
+                    log.info("No new window found yet! Keep waiting");
                     Thread.sleep(1000);
                     counter++;
                 }
@@ -59,7 +63,7 @@ public class BrowserHelpper implements Closeable {
             switchTo().window(parentHandle); //switch to main window
         }
         else {
-            System.out.println("No new window found for closing. Maybe already closed.");
+            log.info("No new window found for closing. Maybe already closed.");
         }
     }
 
