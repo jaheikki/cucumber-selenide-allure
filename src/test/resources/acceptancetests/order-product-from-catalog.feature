@@ -1,4 +1,7 @@
-#USAGE: mvn clean install -Dcucumber.options=“--tags @order”
+#Maven USAGE: mvn clean install -Dcucumber.options=“--tags @order”
+
+# NOTE: Scenario @order2 fails on purpose -> to demonstrate failing case in allure report
+# Generate allure-report: mvn allure:report
 
 @link.mylink=jvm
 @order

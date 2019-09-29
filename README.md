@@ -2,6 +2,10 @@
 
 ## Latest news:
 
+27.9.2019: Upgrade to Cucumber 4: https://cucumber.io/blog/announcing-cucumber-jvm-4-0-0
+Note 1: this project does not use new Cucumber 4 features, but there's now an option to use them.
+Note 2: use data tables when you deliver e.g. list or map from feature file to step definition (conversion is automatic).
+
 13.1.2019: Taking REST-assured in use and thus replacing Jersey&Jackson use in Rest methods (Jersey&Jackson examples still exist in code)  
 
 21.8.2018: Upgraded to Cucumber Java release 2 and TestNG (previously jUnit)!

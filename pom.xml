@@ -14,6 +14,7 @@
 
     <properties>
         <aspectj.version>1.8.12</aspectj.version>
+        <cucumber.version>4.2.4</cucumber.version>
     </properties>
 
     <dependencies>
@@ -72,15 +73,28 @@
             <artifactId>config</artifactId>
             <version>1.2.0</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>io.qameta.allure</groupId>-->
-            <!--<artifactId>allure-cucumber-jvm</artifactId>-->
-            <!--<version>2.0-BETA22</version>-->
-        <!--</dependency>-->
+
+        <!-- allure & cucumber4 dependencies -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber2-jvm</artifactId>
+            <artifactId>allure-cucumber4-jvm</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
             <version>2.7.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
         </dependency>
         <!-- guava for allure-cucumber2-jvm onwards 2.7.0 -->
         <dependency>
@@ -88,11 +102,7 @@
             <artifactId>guava</artifactId>
             <version>26.0-jre</version>
         </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
-            <version>2.3.1</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -123,11 +133,6 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.25</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>log4j</groupId>-->
-            <!--<artifactId>log4j</artifactId>-->
-            <!--<version>1.2.17</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -152,23 +157,6 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit4</artifactId>
-            <version>2.7.0</version>
-            <scope>test</scope>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>info.cukes</groupId>-->
-            <!--<artifactId>cucumber-picocontainer</artifactId>-->
-            <!--<version>1.2.5</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-            <version>2.3.1</version>
         </dependency>
       <dependency>
         <groupId>io.rest-assured</groupId>
