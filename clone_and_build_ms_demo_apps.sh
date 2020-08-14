@@ -1,5 +1,11 @@
 #!/bin/bash
 
+rm -rf ~/git/microservice-demo-order-copy
+rm -rf ~/git/microservice-demo-zuul-server-copy
+rm -rf ~/git/microservice-demo-eureka-server-copy
+rm -rf ~/git/microservice-demo-customer-copy
+rm -rf ~/git/microservice-demo-catalog-copy
+
 mkdir -p ~/git
 cd ~/git
 git clone https://github.com/jaheikki/microservice-demo-order-copy.git
