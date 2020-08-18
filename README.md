@@ -3,6 +3,7 @@
 ## Latest news:
 
 18.8.2020 Upgrade to Cucumber 5. NOTE: unfortunately the demo UI has become unstable due to some mandatory dockerfile changes so makes this repo less useful in demo sense :( :( :(
+          
           All code should still work and simple example works still:  mvn clean install -Dcucumber.filter.tags="@simple_test" -Dselenide.browser=firefox
   
 27.9.2019: Replaced log4j with logback + simple DataTable example in feature file (Scenario: Order a product from a catalog)
