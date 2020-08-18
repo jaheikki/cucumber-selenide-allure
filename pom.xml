@@ -273,20 +273,20 @@
     </profiles>
 
 
-    <repositories>
-        <repository>
-            <id>mvnrepository</id>
-            <name>mvnrepository</name>
-            <url>http://www.mvnrepository.com</url>
-        </repository>
-        <repository>
-            <id>Maven Central</id>
-            <url>http://search.maven.org/</url>
-        </repository>
-        <repository>
-            <id>Maven Central 2</id>
-            <url>http://repo1.maven.org/maven2/</url>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>mvnrepository</id>-->
+<!--            <name>mvnrepository</name>-->
+<!--            <url>http://www.mvnrepository.com</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>Maven Central</id>-->
+<!--            <url>http://search.maven.org/</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>Maven Central 2</id>-->
+<!--            <url>http://repo1.maven.org/maven2/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
 </project>
