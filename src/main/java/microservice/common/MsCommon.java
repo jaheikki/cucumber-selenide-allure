@@ -2,7 +2,7 @@ package microservice.common;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import cucumber.api.Scenario;
+import io.cucumber.java.Scenario;
 import microservice.demo.SSHExamples;
 import microservice.helper.SeleniumHelper;
 import org.joda.time.DateTime;
@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

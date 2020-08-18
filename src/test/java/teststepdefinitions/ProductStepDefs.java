@@ -1,8 +1,8 @@
 package teststepdefinitions;
 
 import com.codeborne.selenide.Selenide;
-import cucumber.api.java.en.And;
 import cucumber_dependency_injection.World;
+import io.cucumber.java.en.And;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import microservice.common.MsVariables;

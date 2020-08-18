@@ -14,14 +14,15 @@
 
     <properties>
         <aspectj.version>1.8.12</aspectj.version>
-        <cucumber.version>4.2.4</cucumber.version>
+<!--        <cucumber.version>4.2.4</cucumber.version>-->
+        <cucumber.version>5.7.0</cucumber.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>5.0.1</version>
+            <version>5.13.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -85,16 +86,26 @@
         </dependency>
 
         <!-- allure & cucumber4 dependencies -->
+<!--        <dependency>-->
+<!--            <groupId>io.qameta.allure</groupId>-->
+<!--            <artifactId>allure-cucumber4-jvm</artifactId>-->
+<!--            <version>2.12.1</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber4-jvm</artifactId>
-            <version>2.12.1</version>
+            <artifactId>allure-cucumber5-jvm</artifactId>
+            <version>2.13.5</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
-            <version>2.7.0</version>
+            <version>2.13.5</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -106,6 +117,11 @@
             <artifactId>cucumber-picocontainer</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.cucumber</groupId>-->
+<!--            <artifactId>gherkin</artifactId>-->
+<!--            <version>15.0.1</version>-->
+<!--        </dependency>-->
         <!-- guava for allure-cucumber2-jvm onwards 2.7.0 -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -273,20 +289,20 @@
     </profiles>
 
 
-    <repositories>
-        <repository>
-            <id>mvnrepository</id>
-            <name>mvnrepository</name>
-            <url>http://www.mvnrepository.com</url>
-        </repository>
-        <repository>
-            <id>Maven Central</id>
-            <url>http://search.maven.org/</url>
-        </repository>
-        <repository>
-            <id>Maven Central 2</id>
-            <url>http://repo1.maven.org/maven2/</url>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>mvnrepository</id>-->
+<!--            <name>mvnrepository</name>-->
+<!--            <url>http://www.mvnrepository.com</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>Maven Central</id>-->
+<!--            <url>http://search.maven.org/</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>Maven Central 2</id>-->
+<!--            <url>http://repo1.maven.org/maven2/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
 </project>

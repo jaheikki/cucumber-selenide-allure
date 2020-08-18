@@ -1,8 +1,10 @@
 package cucumbertest.runner;
 
 import com.codeborne.selenide.Configuration;
-import cucumber.api.CucumberOptions;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
+//import cucumber.api.CucumberOptions;
+//import cucumber.api.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 import microservice.common.MsVariables;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -12,8 +14,11 @@ import static microservice.helper.SeleniumHelper.printMethodName;
 @CucumberOptions(
         features = {"src/test/resources/acceptancetests/"},
         glue = {"teststepdefinitions"},
-        plugin = {"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"}
-//        tags = {"@order1"}
+        //tags = "@simple_test"
+        //plugin = {"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"}
+        //
+        plugin = {"io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"}
+//        tags = {"@simple_test"
 
         )
 

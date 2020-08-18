@@ -2,6 +2,8 @@
 
 ## Latest news:
 
+18.8.2020 Upgrade to Cucumber 5. NOTE: unfortunately the demo UI has become unstable due to some mandatory dockerfile changes so makes this repo less useful in demo sense.
+  
 27.9.2019: Replaced log4j with logback + simple DataTable example in feature file (Scenario: Order a product from a catalog)
 
 27.9.2019: Upgrade to Cucumber 4: https://cucumber.io/blog/announcing-cucumber-jvm-4-0-0
